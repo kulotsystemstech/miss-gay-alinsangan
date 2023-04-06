@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2023 at 03:29 PM
+-- Generation Time: Apr 06, 2023 at 04:07 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fobi`
+-- Database: `bbsv-buhi`
 --
 
 -- --------------------------------------------------------
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `number`, `name`, `avatar`, `username`, `password`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', '2023-03-18 06:13:38', '2023-02-19 07:36:32', '2023-03-18 06:44:17');
+(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', '2023-04-06 14:07:28', '2023-02-19 07:36:32', '2023-04-06 14:07:28');
 
 -- --------------------------------------------------------
 
@@ -81,8 +81,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `competition_id`, `slug`, `title`, `created_at`, `updated_at`) VALUES
-(1, 1, 'attire', 'Attire', '2023-03-16 01:01:23', '2023-03-16 01:01:23'),
-(2, 2, 'pageant-night', 'Pageant Night', '2023-03-18 06:14:24', '2023-03-18 06:14:24');
+(1, 1, 'pageant-night', 'Pageant Night', '2023-04-06 13:25:10', '2023-04-06 13:25:10');
 
 -- --------------------------------------------------------
 
@@ -103,8 +102,7 @@ CREATE TABLE `competitions` (
 --
 
 INSERT INTO `competitions` (`id`, `slug`, `title`, `created_at`, `updated_at`) VALUES
-(1, 'preliminary', 'Preliminary Competitions', '2023-03-16 01:00:44', '2023-03-16 01:00:44'),
-(2, 'pageant', 'Pageant Night', '2023-03-18 06:13:54', '2023-03-18 06:13:54');
+(1, 'bbsv-buhi-2023', 'Binibining San Vicente 2023', '2023-04-06 13:24:04', '2023-04-06 13:24:04');
 
 -- --------------------------------------------------------
 
@@ -126,30 +124,25 @@ CREATE TABLE `criteria` (
 --
 
 INSERT INTO `criteria` (`id`, `event_id`, `title`, `percentage`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Visual Impact', 30, '2023-03-16 01:03:50', '2023-03-16 01:03:50'),
-(2, 1, 'Overall Presentation', 30, '2023-03-16 01:04:03', '2023-03-16 01:04:03'),
-(3, 1, 'Walking Technique', 20, '2023-03-16 01:04:15', '2023-03-16 01:04:15'),
-(4, 1, 'Stage Presence', 20, '2023-03-16 01:04:31', '2023-03-16 01:04:31'),
-(5, 2, 'Visual Impact', 30, '2023-03-16 01:04:57', '2023-03-16 01:04:57'),
-(6, 2, 'Overall Presentation', 30, '2023-03-16 01:05:09', '2023-03-16 01:05:09'),
-(7, 2, 'Walking Technique', 20, '2023-03-16 01:05:22', '2023-03-16 01:05:22'),
-(8, 2, 'Stage Presence', 20, '2023-03-16 01:05:37', '2023-03-16 01:05:37'),
-(9, 3, 'Physique', 30, '2023-03-18 06:17:04', '2023-03-18 06:17:04'),
-(10, 3, 'Overall Presentation', 30, '2023-03-18 06:17:21', '2023-03-18 06:17:21'),
-(11, 3, 'Walking Technique', 20, '2023-03-18 06:17:35', '2023-03-18 06:17:35'),
-(12, 3, 'Stage Presence', 20, '2023-03-18 06:17:53', '2023-03-18 06:17:53'),
-(13, 4, 'Visual Impact', 30, '2023-03-18 06:18:25', '2023-03-18 06:19:38'),
-(14, 4, 'Overall Presentation', 30, '2023-03-18 06:18:40', '2023-03-18 06:18:40'),
-(15, 4, 'Walking Technique', 20, '2023-03-18 06:18:53', '2023-03-18 06:18:53'),
-(16, 4, 'Stage Presence', 20, '2023-03-18 06:19:07', '2023-03-18 06:19:07'),
-(17, 5, 'Poise, Posture, and Confidence', 50, '2023-03-18 06:20:35', '2023-03-18 06:20:35'),
-(18, 5, 'Speech and Clarity of Voice', 25, '2023-03-18 06:20:53', '2023-03-18 06:20:53'),
-(19, 5, 'Validity of Opinion', 25, '2023-03-18 06:21:06', '2023-03-18 06:21:06'),
-(20, 6, 'Value', 100, '2023-03-18 06:28:14', '2023-03-18 06:28:14'),
-(21, 7, 'Preliminary', 60, '2023-03-18 06:29:21', '2023-03-18 06:29:21'),
-(22, 7, 'Swimsuit', 10, '2023-03-18 06:29:37', '2023-03-18 06:29:37'),
-(23, 7, 'Evening Gown', 10, '2023-03-18 06:29:56', '2023-03-18 06:29:56'),
-(24, 7, 'Q & A', 20, '2023-03-18 06:30:09', '2023-03-18 06:30:09');
+(1, 1, 'Beauty of the Face', 30, '2023-04-06 13:30:46', '2023-04-06 13:30:46'),
+(2, 1, 'Mastery', 30, '2023-04-06 13:30:54', '2023-04-06 13:30:54'),
+(3, 1, 'Stage Presence', 30, '2023-04-06 13:31:05', '2023-04-06 13:31:05'),
+(4, 1, 'Over-all Impact', 10, '2023-04-06 13:31:15', '2023-04-06 13:31:15'),
+(5, 2, 'Beauty of the Face', 30, '2023-04-06 13:31:43', '2023-04-06 13:31:43'),
+(6, 2, 'Body Proportion', 30, '2023-04-06 13:31:54', '2023-04-06 13:31:54'),
+(7, 2, 'Stage Presence', 30, '2023-04-06 13:32:04', '2023-04-06 13:32:04'),
+(8, 2, 'Over-all Impact', 10, '2023-04-06 13:32:13', '2023-04-06 13:32:13'),
+(9, 3, 'Beauty of the Face', 30, '2023-04-06 13:32:33', '2023-04-06 13:32:33'),
+(10, 3, 'Content of the Answer', 30, '2023-04-06 13:32:45', '2023-04-06 13:32:45'),
+(11, 3, 'Delivery', 30, '2023-04-06 13:35:25', '2023-04-06 13:35:25'),
+(12, 3, 'Over-all Impact', 10, '2023-04-06 13:36:18', '2023-04-06 13:36:18'),
+(13, 4, 'Beauty of the Face', 30, '2023-04-06 13:36:49', '2023-04-06 13:36:49'),
+(14, 4, 'Poise and Bearing', 30, '2023-04-06 13:37:01', '2023-04-06 13:37:01'),
+(15, 4, 'Over-all Design', 30, '2023-04-06 13:37:10', '2023-04-06 13:37:10'),
+(16, 4, 'Over-all Impact', 10, '2023-04-06 13:37:19', '2023-04-06 13:37:19'),
+(17, 5, 'Intelligence', 40, '2023-04-06 13:37:34', '2023-04-06 13:37:34'),
+(18, 5, 'Beauty of the Face', 30, '2023-04-06 13:37:45', '2023-04-06 13:37:45'),
+(19, 5, 'Poise and Bearing', 30, '2023-04-06 13:37:56', '2023-04-06 13:37:56');
 
 -- --------------------------------------------------------
 
@@ -182,6 +175,24 @@ CREATE TABLE `eliminations` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `eliminations`
+--
+
+INSERT INTO `eliminations` (`id`, `event_id`, `team_id`, `created_at`, `updated_at`) VALUES
+(1, 5, 1, '2023-04-06 13:56:12', '2023-04-06 13:56:12'),
+(2, 5, 2, '2023-04-06 13:56:13', '2023-04-06 13:56:13'),
+(3, 5, 3, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
+(4, 5, 4, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
+(5, 5, 5, '2023-04-06 13:56:15', '2023-04-06 13:56:15'),
+(6, 5, 6, '2023-04-06 13:56:16', '2023-04-06 13:56:16'),
+(7, 5, 7, '2023-04-06 13:56:17', '2023-04-06 13:56:17'),
+(9, 5, 8, '2023-04-06 13:56:23', '2023-04-06 13:56:23'),
+(10, 5, 9, '2023-04-06 13:56:24', '2023-04-06 13:56:24'),
+(11, 5, 10, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
+(12, 5, 11, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
+(13, 5, 12, '2023-04-06 13:56:26', '2023-04-06 13:56:26');
+
 -- --------------------------------------------------------
 
 --
@@ -202,13 +213,11 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `category_id`, `slug`, `title`, `created_at`, `updated_at`) VALUES
-(1, 1, 'national-costume', 'National Costume', '2023-03-16 01:01:44', '2023-03-16 01:11:45'),
-(2, 1, 'evening-gown', 'Evening Gown', '2023-03-16 01:01:58', '2023-03-16 01:11:48'),
-(3, 2, 'swimsuit-2', 'Swimsuit', '2023-03-18 06:15:42', '2023-03-18 06:36:00'),
-(4, 2, 'evening-gown-2', 'Evening Gown', '2023-03-18 06:16:04', '2023-03-18 06:36:05'),
-(5, 2, 'qa', 'Q & A', '2023-03-18 06:16:17', '2023-03-18 06:16:17'),
-(6, 2, 'prelim', 'Preliminary', '2023-03-18 06:28:03', '2023-03-18 06:28:03'),
-(7, 2, 'final', 'Final Result', '2023-03-18 06:29:00', '2023-03-18 06:29:00');
+(1, 1, 'production', 'Production', '2023-04-06 13:25:37', '2023-04-06 14:07:37'),
+(2, 1, 'swimwear', 'Swimwear', '2023-04-06 13:26:05', '2023-04-06 14:07:42'),
+(3, 1, 'advocacy', 'Advocacy Speech', '2023-04-06 13:26:30', '2023-04-06 13:28:50'),
+(4, 1, 'evening-gown', 'Evening Gown', '2023-04-06 13:29:04', '2023-04-06 14:07:48'),
+(5, 1, 'final-qa', 'Final Q & A', '2023-04-06 13:29:53', '2023-04-06 13:29:53');
 
 -- --------------------------------------------------------
 
@@ -233,25 +242,11 @@ CREATE TABLE `judges` (
 --
 
 INSERT INTO `judges` (`id`, `number`, `name`, `avatar`, `username`, `password`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'JUDGE 01', 'no-avatar.jpg', 'judge01', 'judge01', '2023-03-18 06:50:09', '2023-02-19 08:58:05', '2023-03-18 06:50:09'),
-(2, 2, 'JUDGE 02', 'no-avatar.jpg', 'judge02', 'judge02', '2023-03-16 15:21:23', '2023-02-19 08:58:16', '2023-03-18 06:42:37'),
-(3, 3, 'JUDGE 03', 'no-avatar.jpg', 'judge03', 'judge03', '2023-03-16 15:30:00', '2023-02-19 08:58:32', '2023-03-18 06:42:43'),
-(4, 4, 'JUDGE 04', 'no-avatar.jpg', 'judge04', 'judge04', '2023-03-16 15:30:00', '2023-02-21 05:32:22', '2023-03-18 06:42:46'),
-(5, 5, 'JUDGE 05', 'no-avatar.jpg', 'judge05', 'judge05', '2023-03-16 15:30:03', '2023-02-21 05:32:22', '2023-03-18 06:42:49'),
-(6, 6, 'JUDGE 06', 'no-avatar.jpg', 'judge06', 'judge06', '2023-03-16 15:30:00', '2023-03-16 01:06:51', '2023-03-18 06:42:52'),
-(7, 7, 'JUDGE 07', 'no-avatar.jpg', 'judge07', 'judge07', '2023-03-16 15:30:00', '2023-03-16 01:07:07', '2023-03-18 06:42:56'),
-(8, 8, 'JUDGE 08', 'no-avatar.jpg', 'judge08', 'judge08', '2023-03-16 15:30:01', '2023-03-16 01:07:16', '2023-03-18 06:43:00'),
-(9, 1, 'PAGEANT 01', 'no-avatar.jpg', 'pageant01', 'pageant01', NULL, '2023-03-18 06:22:48', '2023-03-18 06:43:17'),
-(10, 2, 'PAGEANT 02', 'no-avatar.jpg', 'pageant02', 'pageant02', NULL, '2023-03-18 06:22:52', '2023-03-18 06:41:30'),
-(11, 3, 'PAGEANT 03', 'no-avatar.jpg', 'pageant03', 'pageant03', NULL, '2023-03-18 06:22:57', '2023-03-18 06:41:34'),
-(12, 4, 'PAGEANT 04', 'no-avatar.jpg', 'pageant04', 'pageant04', NULL, '2023-03-18 06:23:02', '2023-03-18 06:41:38'),
-(13, 5, 'PAGEANT 05', 'no-avatar.jpg', 'pageant05', 'pageant05', NULL, '2023-03-18 06:23:06', '2023-03-18 06:41:42'),
-(14, 6, 'PAGEANT 06', 'no-avatar.jpg', 'pageant06', 'pageant06', NULL, '2023-03-18 06:23:10', '2023-03-18 06:41:47'),
-(15, 7, 'PAGEANT 07', 'no-avatar.jpg', 'pageant07', 'pageant07', NULL, '2023-03-18 06:23:13', '2023-03-18 06:41:56'),
-(16, 8, 'PAGEANT 08', 'no-avatar.jpg', 'pageant08', 'pageant08', NULL, '2023-03-18 06:23:16', '2023-03-18 06:42:01'),
-(17, 9, 'PAGEANT 09', 'no-avatar.jpg', 'pageant09', 'pageant09', NULL, '2023-03-18 06:23:24', '2023-03-18 06:42:05'),
-(18, 1, 'PRELIMINARY 01', 'no-avatar.jpg', 'prelim01', 'prelim01', NULL, '2023-03-18 06:23:28', '2023-03-18 06:42:09'),
-(19, 1, 'RESULT 01', 'no-avatar.jpg', 'result01', 'result01', NULL, '2023-03-18 06:23:32', '2023-03-18 06:42:14');
+(1, 1, 'Judge 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, '2023-04-06 13:58:11', '2023-04-06 13:58:11'),
+(2, 2, 'Judge 02', 'no-avatar.jpg', 'judge02', 'judge02', NULL, '2023-04-06 13:58:28', '2023-04-06 13:58:28'),
+(3, 3, 'Judge 03', 'no-avatar.jpg', 'judge03', 'judge03', NULL, '2023-04-06 13:58:42', '2023-04-06 13:58:42'),
+(4, 4, 'Judge 04', 'no-avatar.jpg', 'judge04', 'judge04', NULL, '2023-04-06 13:59:26', '2023-04-06 13:59:26'),
+(5, 5, 'Judge 05', 'no-avatar.jpg', 'judge05', 'judge05', NULL, '2023-04-06 14:00:00', '2023-04-06 14:00:00');
 
 -- --------------------------------------------------------
 
@@ -273,49 +268,31 @@ CREATE TABLE `judge_event` (
 --
 
 INSERT INTO `judge_event` (`id`, `judge_id`, `event_id`, `is_chairman`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '2023-03-16 01:12:42', '2023-03-18 06:46:40'),
-(2, 1, 2, 1, '2023-03-16 01:12:42', '2023-03-18 06:46:42'),
-(3, 2, 1, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(4, 2, 2, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(5, 3, 1, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(6, 3, 2, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(9, 5, 1, 0, '2023-03-16 01:12:42', '2023-03-18 06:46:32'),
-(10, 5, 2, 0, '2023-03-16 01:12:42', '2023-03-18 06:46:35'),
-(11, 6, 1, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(12, 6, 2, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(13, 7, 1, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(14, 7, 2, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(15, 8, 1, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(16, 8, 2, 0, '2023-03-16 01:12:42', '2023-03-16 01:12:42'),
-(21, 18, 6, 0, '2023-03-18 06:30:58', '2023-03-18 06:30:58'),
-(22, 19, 7, 0, '2023-03-18 06:31:09', '2023-03-18 06:31:09'),
-(23, 9, 3, 0, '2023-03-18 06:32:09', '2023-03-18 06:32:09'),
-(24, 9, 4, 0, '2023-03-18 06:32:15', '2023-03-18 06:32:15'),
-(25, 9, 5, 0, '2023-03-18 06:32:18', '2023-03-18 06:32:18'),
-(26, 10, 3, 0, '2023-03-18 06:32:24', '2023-03-18 06:32:24'),
-(27, 10, 4, 0, '2023-03-18 06:32:27', '2023-03-18 06:32:27'),
-(28, 10, 5, 0, '2023-03-18 06:32:31', '2023-03-18 06:32:31'),
-(29, 11, 3, 0, '2023-03-18 06:32:38', '2023-03-18 06:32:38'),
-(30, 11, 4, 0, '2023-03-18 06:32:40', '2023-03-18 06:32:40'),
-(31, 11, 5, 0, '2023-03-18 06:32:43', '2023-03-18 06:32:43'),
-(32, 12, 3, 0, '2023-03-18 06:32:51', '2023-03-18 06:32:51'),
-(33, 12, 4, 0, '2023-03-18 06:32:54', '2023-03-18 06:32:54'),
-(34, 12, 5, 0, '2023-03-18 06:32:56', '2023-03-18 06:32:56'),
-(35, 13, 3, 0, '2023-03-18 06:33:04', '2023-03-18 06:33:04'),
-(36, 13, 4, 0, '2023-03-18 06:33:07', '2023-03-18 06:33:07'),
-(37, 13, 5, 0, '2023-03-18 06:33:10', '2023-03-18 06:33:10'),
-(38, 14, 3, 0, '2023-03-18 06:33:29', '2023-03-18 06:33:29'),
-(39, 14, 4, 0, '2023-03-18 06:33:32', '2023-03-18 06:33:32'),
-(40, 14, 5, 0, '2023-03-18 06:33:34', '2023-03-18 06:33:34'),
-(41, 15, 3, 0, '2023-03-18 06:34:43', '2023-03-18 06:34:43'),
-(42, 15, 4, 0, '2023-03-18 06:34:47', '2023-03-18 06:34:47'),
-(43, 15, 5, 0, '2023-03-18 06:34:51', '2023-03-18 06:34:51'),
-(44, 16, 3, 0, '2023-03-18 06:34:57', '2023-03-18 06:34:57'),
-(45, 16, 4, 0, '2023-03-18 06:35:00', '2023-03-18 06:35:00'),
-(46, 16, 5, 0, '2023-03-18 06:35:04', '2023-03-18 06:35:04'),
-(47, 17, 3, 0, '2023-03-18 06:35:10', '2023-03-18 06:35:10'),
-(48, 17, 4, 0, '2023-03-18 06:35:13', '2023-03-18 06:35:13'),
-(49, 17, 5, 0, '2023-03-18 06:35:16', '2023-03-18 06:35:16');
+(1, 1, 1, 0, '2023-04-06 14:00:46', '2023-04-06 14:00:46'),
+(2, 1, 2, 0, '2023-04-06 14:00:48', '2023-04-06 14:00:48'),
+(3, 1, 3, 0, '2023-04-06 14:00:51', '2023-04-06 14:00:51'),
+(4, 1, 4, 0, '2023-04-06 14:00:53', '2023-04-06 14:00:53'),
+(5, 1, 5, 0, '2023-04-06 14:00:55', '2023-04-06 14:00:55'),
+(6, 2, 1, 0, '2023-04-06 14:01:01', '2023-04-06 14:01:01'),
+(7, 2, 2, 0, '2023-04-06 14:01:03', '2023-04-06 14:01:03'),
+(8, 2, 3, 0, '2023-04-06 14:01:06', '2023-04-06 14:01:06'),
+(9, 2, 4, 0, '2023-04-06 14:01:08', '2023-04-06 14:01:08'),
+(10, 2, 5, 0, '2023-04-06 14:01:10', '2023-04-06 14:01:10'),
+(11, 3, 1, 0, '2023-04-06 14:01:14', '2023-04-06 14:01:14'),
+(12, 3, 2, 0, '2023-04-06 14:01:16', '2023-04-06 14:01:16'),
+(13, 3, 3, 0, '2023-04-06 14:01:19', '2023-04-06 14:01:19'),
+(14, 3, 4, 0, '2023-04-06 14:01:21', '2023-04-06 14:01:21'),
+(15, 3, 5, 0, '2023-04-06 14:01:23', '2023-04-06 14:01:23'),
+(16, 4, 1, 0, '2023-04-06 14:01:28', '2023-04-06 14:01:28'),
+(17, 4, 2, 0, '2023-04-06 14:01:30', '2023-04-06 14:01:30'),
+(18, 4, 3, 0, '2023-04-06 14:01:33', '2023-04-06 14:01:33'),
+(19, 4, 4, 0, '2023-04-06 14:01:36', '2023-04-06 14:01:36'),
+(20, 4, 5, 0, '2023-04-06 14:01:38', '2023-04-06 14:01:38'),
+(21, 5, 1, 0, '2023-04-06 14:01:42', '2023-04-06 14:01:42'),
+(22, 5, 2, 0, '2023-04-06 14:01:45', '2023-04-06 14:01:45'),
+(23, 5, 3, 0, '2023-04-06 14:01:47', '2023-04-06 14:01:47'),
+(24, 5, 4, 0, '2023-04-06 14:01:49', '2023-04-06 14:01:49'),
+(25, 5, 5, 0, '2023-04-06 14:01:52', '2023-04-06 14:01:52');
 
 -- --------------------------------------------------------
 
@@ -391,8 +368,9 @@ CREATE TABLE `ratings` (
 
 CREATE TABLE `teams` (
   `id` tinyint(3) UNSIGNED NOT NULL,
+  `number` tinyint(4) NOT NULL DEFAULT 0,
   `name` varchar(255) NOT NULL,
-  `country` varchar(32) NOT NULL,
+  `location` varchar(32) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -402,34 +380,19 @@ CREATE TABLE `teams` (
 -- Dumping data for table `teams`
 --
 
-INSERT INTO `teams` (`id`, `name`, `country`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 'Maria Enriquez', 'Australia', 'australia.jpg', '2023-03-16 00:20:45', '2023-03-16 00:45:04'),
-(2, 'Mira Fatullaeva', 'Azerbaijan', 'azerbaijan.jpg', '2023-03-16 00:21:08', '2023-03-16 00:45:20'),
-(3, 'Anastasia Karitskaya', 'Belarus', 'belarus.jpg', '2023-03-16 00:21:34', '2023-03-16 00:45:34'),
-(4, 'Stephanie Somers', 'Belgium', 'belgium.jpg', '2023-03-16 00:22:43', '2023-03-16 00:45:38'),
-(5, 'Lili Vanhoolst', 'Benelux', 'benelux.jpg', '2023-03-16 00:22:58', '2023-03-16 00:45:41'),
-(6, 'Caroline Dias', 'Brazil', 'brazil.jpg', '2023-03-16 00:23:12', '2023-03-16 00:45:46'),
-(7, 'Aya Ehab Moussa Sharkawy', 'Egypt', 'egypt.jpg', '2023-03-16 00:23:33', '2023-03-16 00:45:50'),
-(8, 'Tess Aleyia', 'Ethiopia', 'no-avatar.jpg', '2023-03-16 00:27:50', '2023-03-16 00:45:55'),
-(9, 'Gitali Ram', 'Fiji', 'fiji.jpg', '2023-03-16 00:28:53', '2023-03-16 00:46:00'),
-(10, 'Melissa Myllyoja', 'Finland', 'finland.jpg', '2023-03-16 00:29:13', '2023-03-16 00:46:04'),
-(11, 'Kanako Hirayama', 'Japan', 'japan.jpg', '2023-03-16 00:29:32', '2023-03-16 00:46:09'),
-(12, 'Cynthia Gloria Orengo', 'Kenya', 'kenya.jpg', '2023-03-16 00:34:20', '2023-03-16 00:46:14'),
-(13, 'Seohyeong Pyo', 'Korea', 'korea.jpg', '2023-03-16 00:34:51', '2023-03-16 00:46:17'),
-(14, 'Tan Ming Ching', 'Malaysia', 'malaysia.jpg', '2023-03-16 00:35:07', '2023-03-16 00:46:22'),
-(15, 'Kaing Zar Thant', 'Myanmar', 'myanmar.jpg', '2023-03-16 00:35:42', '2023-03-16 00:46:28'),
-(16, 'Jaylani Turner', 'New Zealand', 'new-zealand.jpg', '2023-03-16 00:36:03', '2023-03-16 00:54:40'),
-(17, 'Janna Eloisa Lanuzga', 'Philippines', 'philippines.jpg', '2023-03-16 00:36:34', '2023-03-16 00:46:36'),
-(18, 'Teresa Beatriz Pina', 'Portugal', 'no-avatar.jpg', '2023-03-16 00:37:25', '2023-03-16 00:46:42'),
-(19, 'Alina But', 'Russia', 'russia.jpg', '2023-03-16 00:37:55', '2023-03-16 00:46:46'),
-(20, 'Tashana Opelu', 'Samoa', 'samoa.jpg', '2023-03-16 00:38:14', '2023-03-16 00:46:49'),
-(21, 'Sofia Lushchenko', 'Siberia', 'siberia.jpg', '2023-03-16 00:38:30', '2023-03-16 00:46:53'),
-(22, 'Karleen Gueho', 'Solomon Islands', 'solomon-island.jpg', '2023-03-16 00:38:47', '2023-03-16 00:46:58'),
-(23, 'Rose Esther Thema', 'South Africa', 'south-africa.jpg', '2023-03-16 00:39:10', '2023-03-16 00:47:02'),
-(24, 'Chia-Pei Chen', 'Taiwan', 'taiwan.jpg', '2023-03-16 00:39:51', '2023-03-16 00:47:06'),
-(25, 'Athita Payak', 'Thailand', 'thailand.jpg', '2023-03-16 00:40:09', '2023-03-16 00:47:09'),
-(26, 'Vesalua Tupou', 'Tonga', 'tonga.jpg', '2023-03-16 00:40:25', '2023-03-16 00:47:13'),
-(27, 'Precious Soko', 'Zambia', 'no-avatar.jpg', '2023-03-16 00:40:52', '2023-03-16 00:47:29');
+INSERT INTO `teams` (`id`, `number`, `name`, `location`, `avatar`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Hanna Grace A. Clavillas', 'San Isidro, Buhi', '01.jpg', '2023-04-06 13:42:20', '2023-04-06 13:54:35'),
+(2, 2, 'Neoli Kryss Angeline L. Abarientos', 'San Miguel, Nabua', '02.jpg', '2023-04-06 13:43:02', '2023-04-06 13:54:35'),
+(3, 3, 'Mara Monte', 'Sta. Justina, Buhi', '03.jpg', '2023-04-06 13:45:57', '2023-04-06 13:54:35'),
+(4, 4, 'Aaliyah Mae S. Mariscotes', 'San Vicente, Buhi', '04.jpg', '2023-04-06 13:46:35', '2023-04-06 13:54:35'),
+(5, 5, 'Lian Shaine Naparato', 'Sta. Justina, Buhi', '05.jpg', '2023-04-06 13:47:09', '2023-04-06 13:54:35'),
+(6, 6, 'Maria Ericka Mae D. Ceneta', 'San Antonio, Buhi', '06.jpg', '2023-04-06 13:47:48', '2023-04-06 13:54:35'),
+(7, 7, 'Trisha Jane Lopez', 'San Pascual, Buhi', '07.jpg', '2023-04-06 13:48:16', '2023-04-06 13:54:35'),
+(8, 8, 'Erika Mae Recafranca', 'Iriga City', '08.jpg', '2023-04-06 13:49:52', '2023-04-06 13:54:35'),
+(9, 9, 'Miles Tiffany Kaalim', 'Tabaco, Albay', '09.jpg', '2023-04-06 13:50:48', '2023-04-06 13:54:35'),
+(10, 10, 'Mary Claire Chavez', 'Santa Elena, Buhi', '10.jpg', '2023-04-06 13:51:50', '2023-04-06 13:54:35'),
+(11, 11, 'Chabelita P. Molina', 'San Antonio, Buhi', '11.jpg', '2023-04-06 13:52:26', '2023-04-06 13:54:35'),
+(12, 12, 'Hannah Paula E. Quebral', 'San Rafael, Buhi', '12.jpg', '2023-04-06 13:53:01', '2023-04-06 13:54:35');
 
 -- --------------------------------------------------------
 
@@ -454,7 +417,7 @@ CREATE TABLE `technicals` (
 --
 
 INSERT INTO `technicals` (`id`, `number`, `name`, `avatar`, `username`, `password`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'TECHNICAL O1', 'no-avatar.jpg', 'technical01', 'technical01', NULL, '2023-02-19 08:58:58', '2023-02-26 06:04:50');
+(1, 1, 'Technical 01', 'no-avatar.jpg', 'technical01', 'technical01', NULL, '2023-02-19 08:58:58', '2023-04-06 14:00:12');
 
 -- --------------------------------------------------------
 
@@ -618,19 +581,19 @@ ALTER TABLE `arrangements`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `competitions`
 --
 ALTER TABLE `competitions`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `criteria`
 --
 ALTER TABLE `criteria`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `deductions`
@@ -642,25 +605,25 @@ ALTER TABLE `deductions`
 -- AUTO_INCREMENT for table `eliminations`
 --
 ALTER TABLE `eliminations`
-  MODIFY `id` mediumint(9) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` mediumint(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `judges`
 --
 ALTER TABLE `judges`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `judge_event`
 --
 ALTER TABLE `judge_event`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `noshows`
@@ -690,7 +653,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `technicals`

@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /fobi/
+RewriteBase /bbsv-buhi/
 
 # Exclude assets from rewrite rule
 RewriteCond %{REQUEST_URI} !\.(css|js|svg|jpg|jpeg|png|gif|woff2|ico)$ [NC]
@@ -7,9 +7,9 @@ RewriteCond %{REQUEST_URI} !\.(css|js|svg|jpg|jpeg|png|gif|woff2|ico)$ [NC]
 # Redirect all requests to index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /fobi/public/index.html [L]
+RewriteRule ^(.*)$ /bbsv-buhi/public/index.html [L]
 
 # Exclude the public and app directories from the rewrite rule
-RewriteCond %{REQUEST_URI} !^/fobi/public/
-RewriteCond %{REQUEST_URI} !^/fobi/app/
-RewriteRule ^(.*)$ /fobi/public/$1 [L]
+RewriteCond %{REQUEST_URI} !^/bbsv-buhi/public/
+RewriteCond %{REQUEST_URI} !^/bbsv-buhi/app/
+RewriteRule ^(.*)$ /bbsv-buhi/public/$1 [L]

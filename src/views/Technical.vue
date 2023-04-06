@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th
-                        colspan="2"
-                        class="text-uppercase text-center font-weight-bold text-h4 text-grey-darken-4 py-3"
+                        colspan="3"
+                        class="text-uppercase text-center font-weight-bold text-grey-darken-4 py-3"
                         :class="$vuetify.display.mdAndDown ? 'text-h5' : 'text-h4'"
                     >
                         {{ event.title }}
@@ -38,25 +38,22 @@
                     :class="{ 'bg-grey-lighten-4': coordinates.y == teamIndex }"
                 >
                     <td
-                        class="text-uppercase text-center text-grey-darken-4 font-weight-bold"
+                        class="text-uppercase text-center text-h5 text-grey-darken-4 font-weight-bold"
                         style="width: 0.2rem;"
-                        :class="$vuetify.display.mdAndDown ? 'text-h5' : 'text-h4'"
                     >
-                        {{ teamIndex + 1 }}
+                        {{ team.number }}
                     </td>
-                    <td>
-                        <div class="d-flex">
-                            <v-avatar size="42" class="mr-2">
-                                <v-img
-                                    cover
-                                    :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`"
-                                />
-                            </v-avatar>
-                            <div>
-                                <p class="ma-0 text-body-1 text-uppercase font-weight-bold">{{ team.country }}</p>
-                                <p class="ma-0" style="margin-top: -5px !important;"><small>{{ team.name }}</small></p>
-                            </div>
-                        </div>
+                    <td style="width: 72px;">
+                        <v-avatar size="72">
+                            <v-img
+                                cover
+                                :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`"
+                            />
+                        </v-avatar>
+                    </td>
+                    <td class="px-0">
+                        <p class="ma-0 text-subtitle-2 text-uppercase font-weight-bold" style="line-height: 1.2">{{ team.name }}</p>
+                        <p class="mt-1 mb-0" style="line-height: 1"><small>{{ team.location }}</small></p>
                     </td>
                     <td>
                         <v-text-field
@@ -367,7 +364,8 @@
 
     tbody td {
         border-bottom: 1px solid #ddd;
-        padding-bottom: 1rem !important;
+        padding-top: 9px !important;
+        padding-bottom: 9px !important;
     }
 
     #submit {

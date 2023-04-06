@@ -15,8 +15,11 @@
 		>
 			<thead>
 				<tr>
-					<th colspan="2" class="text-center text-uppercase font-weight-bold text-grey-darken-4 text-h5 py-3">
-						{{ event.title}}
+					<th colspan="3" class="text-center text-uppercase font-weight-bold text-grey-darken-4 text-h5 py-3">
+                        {{ event.title}}
+                        <div class="result-title text-center opacity-75 d-none">
+                            <h6 class="ma-0">{{ $store.state.app.title }}</h6>
+                        </div>
 					</th>
                     <th
                         v-for="(technical, technicalKey, technicalIndex) in technicals"
@@ -86,20 +89,18 @@
 			</thead>
 			<tbody>
                 <tr v-for="(team, teamKey, teamIndex) in teams" :key="team.id">
-                    <td class="text-h5 text-center font-weight-bold">{{ teamIndex + 1 }}</td>
+                    <td class="text-h5 text-center font-weight-bold" style="width: 30px;">{{ team.number }}</td>
+                    <td style="width: 72px;">
+                        <v-avatar size="72">
+                            <v-img
+                                cover
+                                :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`"
+                            />
+                        </v-avatar>
+                    </td>
                     <td>
-                        <div class="d-flex">
-                            <v-avatar size="42" class="mr-2">
-                                <v-img
-                                    cover
-                                    :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`"
-                                />
-                            </v-avatar>
-                            <div>
-                                <p class="ma-0 text-body-1 text-uppercase font-weight-bold">{{ team.country }}</p>
-                                <p class="ma-0" style="margin-top: -5px !important;"><small>{{ team.name }}</small></p>
-                            </div>
-                        </div>
+                        <p class="ma-0 text-subtitle-2 text-uppercase font-weight-bold" style="line-height: 1.2">{{ team.name }}</p>
+                        <p class="mt-1 mb-0" style="line-height: 1"><small>{{ team.location }}</small></p>
                     </td>
                     <td
                         v-for="(technical, technicalKey, technicalIndex) in technicals"
@@ -143,11 +144,11 @@
                     <td class="text-right font-weight-bold text-h6"><span class="pr-3">{{ team.rank.final.fractional }}</span></td>
                 </tr>
 				<tr>
-					<td :colspan="(6 + totalTechnicals + totalJudges)">
+					<td :colspan="(7 + totalTechnicals + totalJudges)">
 						<v-row class="justify-center">
                             <v-col
                                 v-for="technical in technicals" :key="technical.id"
-                                md="3"
+                                md="4"
                             >
                                 <v-card class="text-center mb-5" flat>
                                     <v-card-title class="pt-16 font-weight-bold">
@@ -165,7 +166,7 @@
 
                             <v-col
                                 v-for="judge in judges" :key="judge.id"
-                                md="3"
+                                md="4"
                             >
                                 <v-card class="text-center mb-5" flat>
                                     <v-card-title class="pt-16 font-weight-bold">
@@ -332,8 +333,8 @@
     }
 
     tbody td {
-        border-bottom: 1px solid #ddd;
-        padding: 1rem !important;
+        padding-top: 9px !important;
+        padding-bottom: 9px !important;
     }
 
     th, td {
