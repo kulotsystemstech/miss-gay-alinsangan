@@ -38,13 +38,18 @@
                     <form action="teams_operation.php" method="POST" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="form-group">
+                                <label> Number </label>
+                                <input type="number" name="number" class="form-control" placeholder="Enter Number" autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label> Name </label>
                                 <input type="text" name="name" class="form-control" placeholder="Enter Name" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label> Country </label>
-                                <input type="text" name="country" class="form-control" placeholder="Enter Country" autocomplete="off" required>
+                                <label> Location </label>
+                                <input type="text" name="location" class="form-control" placeholder="Enter Location" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
@@ -79,13 +84,18 @@
                         <div class="modal-body">
                             <input type="hidden" name="update_id" id="update_id">
                             <div class="form-group">
+                                <label> Number </label>
+                                <input type="number" name="number" id="number" class="form-control" placeholder="Enter Number" autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group">
                                 <label> Name </label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
-                                <label> Country </label>
-                                <input type="text" name="country" id="country" class="form-control" placeholder="Enter Country" autocomplete="off" required>
+                                <label> Location </label>
+                                <input type="text" name="location" id="location" class="form-control" placeholder="Enter Location" autocomplete="off" required>
                             </div>
 
                             <div class="form-group">
@@ -186,10 +196,10 @@
             <table id="datatableid" class="table table-striped table-info text-center" >
                 <thead class="table-dark">
                 <tr>
-                    <th class="d-none"></th>
-                    <th scope="col"></th>
+                    <th scope="col" class="d-none"></th>
+                    <th scope="col">Number</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Country</th>
+                    <th scope="col">Location</th>
                     <th scope="col">Avatar</th>
                     <th scope="col">Operations</th>
                 </tr>
@@ -202,9 +212,9 @@
                 ?>
                     <tr>
                         <td class="d-none"><?php echo $team->getId(); ?></td>
-                        <td><?php echo $i; ?></td>
+                        <td><?php echo $team->getNumber(); ?></td>
                         <td><?php echo $team->getName(); ?></td>
-                        <td><?php echo $team->getCountry(); ?></td>
+                        <td><?php echo $team->getLocation(); ?></td>
                         <td><?php echo '<img src="uploads/'.$team->getAvatar().'" width="50"/>'; ?></td>
                         <td>
                             <button type="button" class="btn btn-success editbtn"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -238,8 +248,9 @@
                     console.log(data);
 
                     $('#update_id').val(data[0]);
+                    $('#number').val(data[1]);
                     $('#name').val(data[2]);
-                    $('#country').val(data[3]);
+                    $('#location').val(data[3]);
                     $('#avatar').val(data[4]);
 
                 });

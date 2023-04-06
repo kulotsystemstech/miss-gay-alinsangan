@@ -23,5 +23,12 @@
 
     .v-table__wrapper {
         height: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .result-title {
+        display: block !important;
+        opacity: 0.8 !important;
+        margin-top: -5px !important;
     }
 }

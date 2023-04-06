@@ -9,8 +9,9 @@ class Team extends App
 
     // properties
     protected $id;
+    protected $number = 0;
     protected $name;
-    protected $country;
+    protected $location;
     protected $avatar;
 
 
@@ -32,8 +33,9 @@ class Team extends App
             if($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $this->id = $row['id'];
+                $this->number = $row['number'];
                 $this->name = $row['name'];
-                $this->country = $row['country'];
+                $this->location = $row['location'];
                 $this->avatar = $row['avatar'];
             }
         }
@@ -81,8 +83,9 @@ class Team extends App
     {
         return [
             'id'    => $this->id,
+            'number' => $this->number,
             'name'  => $this->name,
-            'country' => $this->country,
+            'location' => $this->location,
             'avatar'  => $this->avatar
         ];
     }
@@ -124,7 +127,7 @@ class Team extends App
 
         // gather teams
         $team = new Team();
-        $sql = "SELECT id FROM $team->table ORDER BY id";
+        $sql = "SELECT id FROM $team->table ORDER BY number";
         $stmt = $team->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -232,8 +235,8 @@ class Team extends App
             App::returnError('HTTP/1.1 409', 'Insert Error: team [id = ' . $this->id . '] already exists.');
 
         // proceed with insert
-        $stmt = $this->conn->prepare("INSERT INTO $this->table(name, country, avatar) VALUES(?, ?, ?)");
-        $stmt->bind_param("sss", $this->name, $this->country, $this->avatar);
+        $stmt = $this->conn->prepare("INSERT INTO $this->table(number, name, location, avatar) VALUES(?, ?, ?, ?)");
+        $stmt->bind_param("isss", $this->number, $this->name, $this->location, $this->avatar);
         $stmt->execute();
         $this->id = $this->conn->insert_id;
     }
@@ -251,8 +254,8 @@ class Team extends App
             App::returnError('HTTP/1.1 404', 'Update Error: team [id = ' . $this->id . '] does not exist.');
 
         // proceed with update
-        $stmt = $this->conn->prepare("UPDATE $this->table SET name = ?, country = ?, avatar = ? WHERE id = ?");
-        $stmt->bind_param("sssi", $this->name, $this->country, $this->avatar, $this->id);
+        $stmt = $this->conn->prepare("UPDATE $this->table SET number = ?, name = ?, location = ?, avatar = ? WHERE id = ?");
+        $stmt->bind_param("isssi", $this->number, $this->name, $this->location, $this->avatar, $this->id);
         $stmt->execute();
     }
 
@@ -276,6 +279,18 @@ class Team extends App
 
 
     /***************************************************************************
+     * Set number
+     *
+     * @param int $number
+     * @return void
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+    }
+
+
+    /***************************************************************************
      * Set name
      *
      * @param string $name
@@ -288,14 +303,14 @@ class Team extends App
 
 
     /***************************************************************************
-     * Set country
+     * Set location
      *
-     * @param string $country
+     * @param string $location
      * @return void
      */
-    public function setCountry($country)
+    public function setLocation($location)
     {
-        $this->country = $country;
+        $this->location = $location;
     }
 
 
@@ -323,6 +338,17 @@ class Team extends App
 
 
     /***************************************************************************
+     * Get number
+     *
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+
+    /***************************************************************************
      * Get name
      *
      * @return string
@@ -334,13 +360,13 @@ class Team extends App
 
 
     /***************************************************************************
-     * Get country
+     * Get location
      *
      * @return string
      */
-    public function getCountry()
+    public function getLocation()
     {
-        return $this->country;
+        return $this->location;
     }
 
 

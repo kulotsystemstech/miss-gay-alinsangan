@@ -7,8 +7,9 @@ require_once '../models/Team.php';
 // Insert Data
 if(isset($_POST['insertdata'])) {
 
+    $number = $_POST['number'];
     $name = $_POST['name'];
-    $country = $_POST['country'];
+    $location = $_POST['location'];
     $file_name = '';
 
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
@@ -28,8 +29,9 @@ if(isset($_POST['insertdata'])) {
     }
 
     $team   = new Team();
+    $team->setNumber($number);
     $team->setName($name);
-    $team->setCountry($country);
+    $team->setLocation($location);
     $team->setAvatar($file_name);
     $team->insert();
 }
@@ -39,8 +41,9 @@ if(isset($_POST['insertdata'])) {
 if (isset($_POST['updatedata'])) {
 
     $id = $_POST['update_id'];
+    $number = $_POST['number'];
     $name = $_POST['name'];
-    $country = $_POST['country'];
+    $location = $_POST['location'];
     $file_name = '';
 
     if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
@@ -61,8 +64,9 @@ if (isset($_POST['updatedata'])) {
     }
 
     $team = Team::findById($id);
+    $team->setNumber($number);
     $team->setName($name);
-    $team->setCountry($country);
+    $team->setLocation($location);
     $team->setAvatar($file_name);
     $team->update();
 }
