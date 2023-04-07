@@ -56,6 +56,7 @@ require_once '../../models/Team.php';
                         <table class="table table-bordered text-center">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th><?php print_r($event_name); ?></th>
                                 <th>Action</th>
                             </tr>
@@ -66,20 +67,31 @@ require_once '../../models/Team.php';
                             foreach ($teams as $team) {
                                 $team_name = $team->getName();
                                 $team_id = $team->getId();
-
+                                $team_number = $team->getNumber();
+                                $team_location = $team->getLocation();
+                                $team_avatar = $team->getAvatar();
                                 ?>
-                                <tr>
-                                    <td
-                                        id="team_<?= $team_id ?>_<?= $event_id ?>"
-                                        class="<?= $event->hasTeamBeenEliminated($team) ? 'opacity-50 text-decoration-line-through' : ''; ?>"
-                                        :class="{
-                                            'opacity-50 text-decoration-line-through': (team['isEliminated_<?= $team_id ?>_<?= $event_id ?>'] == true),
-                                            'opacity-100 text-decor-none': (team['isEliminated_<?= $team_id ?>_<?= $event_id ?>'] == false)
-                                        }"
-                                    >
-                                        <?= $team_name ?>
-                                    </td>
+                                <tr
+                                    id="team_<?= $team_id ?>_<?= $event_id ?>"
+                                    class="<?= $event->hasTeamBeenEliminated($team) ? 'opacity-25 ' : ''; ?>"
+                                    :class="{
+                                        'opacity-25': (team['isEliminated_<?= $team_id ?>_<?= $event_id ?>'] == true),
+                                        'opacity-100 text-decor-none': (team['isEliminated_<?= $team_id ?>_<?= $event_id ?>'] == false)
+                                    }"
+                                >
+                                    <td class="align-middle fw-bolder fs-4"><?= $team_number ?></td>
                                     <td>
+                                        <div class="d-flex">
+                                            <div class="d-flex align-items-center">
+                                                <img class="ms-2 rounded-5" src="../uploads/<?= $team_avatar ?>" style="height: 3rem;" alt="Photo of <?= $team_name ?>">
+                                            </div>
+                                            <div class="ms-3 text-start">
+                                               <p class="m-0 card-header fw-bold" style="line-height: 1.1;"><?= $team_name ?></p>
+                                               <small class="m-0" style="font-size: 12px"><?= $team_location ?></small>
+                                           </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
                                         <button
                                             id="action_<?= $team_id ?>_<?= $event_id ?>"
                                             class="btn <?= $event->hasTeamBeenEliminated($team) ? 'btn-outline-secondary' : 'btn-outline-danger' ?>"
