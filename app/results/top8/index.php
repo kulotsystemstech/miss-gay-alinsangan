@@ -1,5 +1,4 @@
 <?php
-    date_default_timezone_set('Asia/Manila');
     const LOGIN_PAGE_PATH = '../../crud/';
     require_once '../../crud/auth.php';
 
@@ -150,7 +149,6 @@
         $ctr += $size;
     }
 
-
     // sort $unique_adjusted_ranks
     sort($unique_adjusted_ranks);
 
@@ -192,13 +190,17 @@
     // sort $unique_final_fractional_ranks
     sort($unique_final_fractional_ranks);
 
-    // determine top 8
+    // determine tops
+    $tops_ordered   = [];
+    $tops_unordered = [];
     $i = 0;
     foreach($titles as $title) {
         // update title of $unique_final_fractional_ranks[$i]'th team
         foreach($result as $team_key => $team) {
             if($team['rank']['final']['fractional'] == $unique_final_fractional_ranks[$i]) {
                 $result[$team_key]['title'] = $titles[$i];
+                $tops_ordered[]   = $team['info']['id'];
+                $tops_unordered[] = $team['info']['id'];
             }
         }
 
@@ -206,6 +208,13 @@
         if($i >= sizeof($unique_final_fractional_ranks))
             break;
     }
+
+    // sort $tops_ordered
+    sort($tops_ordered);
+
+    // shuffle $tops_unordered (deterministic)
+    mt_srand(615829437);
+    shuffle($tops_unordered);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -215,9 +224,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../crud/dist/bootstrap-5.2.3/css/bootstrap.min.css">
     <style>
-        body {
-            padding: 8px;
-        }
         th, td {
             vertical-align: middle;
         },
@@ -227,21 +233,21 @@
         .br {
             border-right: 2px solid #aaa !important;
         }
-        .bb, tbody tr:last-child td {
+        .bb, table.result tbody tr:last-child td {
             border-bottom: 2px solid #aaa !important;
         }
         .bl {
             border-left: 2px solid #aaa !important;
         }
     </style>
-    <title>Top 8</title>
+    <title>Top <?= sizeof($titles) ?></title>
 </head>
 <body>
-    <table class="table table-bordered">
+    <table class="table table-bordered result">
         <thead>
             <tr class="table-secondary">
                 <th colspan="3" rowspan="2" class="text-center bt br bl">
-                    <h1 class="m-0">TOP 8</h1>
+                    <h1 class="m-0">TOP <?= sizeof($titles) ?></h1>
                     <h5>BINIBINING SAN VICENTE 2023</h5>
                 </th>
                 <th colspan="2" class="text-center bt br">
@@ -385,22 +391,109 @@
     </table>
 
     <!-- Judges -->
-    <div class="row justify-content-center">
-        <?php foreach($event_production->getAllJudges() as $judge) { ?>
-            <div class="col-md-4">
-                <div class="mt-5 pt-3 text-center">
-                    <h6 class="mb-0"><?= $judge->getName() ?></h6>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <?php foreach($event_production->getAllJudges() as $judge) { ?>
+                <div class="col-md-4">
+                    <div class="mt-5 pt-3 text-center">
+                        <h6 class="mb-0"><?= $judge->getName() ?></h6>
+                    </div>
+                    <div class="text-center">
+                        <p class="mb-0">
+                            Judge <?= $judge->getNumber() ?>
+                            <?php if($judge->isChairmanOfEvent($event_production)) { ?>
+                                * (Chairman)
+                            <?php } ?>
+                        </p>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <p class="mb-0">
-                        Judge <?= $judge->getNumber() ?>
-                        <?php if($judge->isChairmanOfEvent($event_production)) { ?>
-                            * (Chairman)
+            <?php } ?>
+        </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="container-fluid mt-5" style="page-break-before: always;">
+        <div class="row">
+            <!-- unordered -->
+            <div class="col-md-6" align="center">
+                <h1>TOP <?= sizeof($titles) ?> in Random Order</h1>
+                <h4>FOR ANNOUNCEMENT</h4>
+                <div style="width: 80%;">
+                    <table class="table table-bordered mt-3">
+                        <tbody>
+                        <?php
+                        foreach($tops_unordered as $team_id) {
+                            $team = $result['team_'.$team_id];
+                        ?>
+                            <tr>
+                                <!-- number -->
+                                <td class="pe-2 fw-bold text-center">
+                                    <h3 class="m-0">
+                                        <?= $team['info']['number'] ?>
+                                    </h3>
+                                </td>
+
+                                <!-- avatar -->
+                                <td style="width: 72px;">
+                                    <img
+                                        src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
+                                        alt="<?= $team['info']['number'] ?>"
+                                        style="width: 100%; border-radius: 100%"
+                                    >
+                                </td>
+
+                                <!-- name -->
+                                <td>
+                                    <h6 class="text-uppercase m-0"><?= $team['info']['name'] ?></h6>
+                                    <small class="m-0"><?= $team['info']['location'] ?></small>
+                                </td>
+                            </tr>
                         <?php } ?>
-                    </p>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        <?php } ?>
+
+            <!-- ordered -->
+            <div class="col-md-6" align="center">
+                <h1>TOP <?= sizeof($titles) ?> in Proper Order</h1>
+                <h4>FOR FINAL Q & A</h4>
+                <div style="width: 80%;">
+                    <table class="table table-bordered mt-3">
+                        <tbody>
+                        <?php
+                        foreach($tops_ordered as $team_id) {
+                            $team = $result['team_'.$team_id];
+                        ?>
+                            <tr>
+                                <!-- number -->
+                                <td class="pe-2 fw-bold text-center">
+                                    <h3 class="m-0">
+                                        <?= $team['info']['number'] ?>
+                                    </h3>
+                                </td>
+
+                                <!-- avatar -->
+                                <td style="width: 72px;">
+                                    <img
+                                        src="../../crud/uploads/<?= $team['info']['avatar'] ?>"
+                                        alt="<?= $team['info']['number'] ?>"
+                                        style="width: 100%; border-radius: 100%"
+                                    >
+                                </td>
+
+                                <!-- name -->
+                                <td>
+                                    <h6 class="text-uppercase m-0"><?= $team['info']['name'] ?></h6>
+                                    <small class="m-0"><?= $team['info']['location'] ?></small>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="../../crud/dist/bootstrap-5.2.3/js/bootstrap.bundle.min.js"></script>
