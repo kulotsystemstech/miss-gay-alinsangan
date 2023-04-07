@@ -180,8 +180,9 @@
                         <span class="pr-3">{{ team.rank.final.fractional }}</span>
                     </td>
                     <td
-                        class="text-right font-weight-bold text-h6"
+                        class="text-center font-weight-bold text-body-1"
                         :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        style="line-height: 1.1"
                     >
                         {{ team.title }}
                     </td>
