@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2023 at 04:07 PM
+-- Generation Time: Apr 07, 2023 at 07:16 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -433,6 +433,36 @@ CREATE TABLE `technical_event` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `titles`
+--
+
+CREATE TABLE `titles` (
+  `id` smallint(5) UNSIGNED NOT NULL,
+  `event_id` smallint(5) UNSIGNED NOT NULL,
+  `rank` tinyint(3) UNSIGNED NOT NULL DEFAULT 1,
+  `title` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `titles`
+--
+
+INSERT INTO `titles` (`id`, `event_id`, `rank`, `title`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Best in Production', '2023-04-07 05:09:18', '2023-04-07 05:09:18'),
+(2, 2, 1, 'Best in Swimwear', '2023-04-07 05:09:49', '2023-04-07 05:09:49'),
+(3, 3, 1, 'Best in Advocacy', '2023-04-07 05:10:14', '2023-04-07 05:10:14'),
+(4, 4, 1, 'Best in Evening Gown', '2023-04-07 05:10:42', '2023-04-07 05:10:42'),
+(5, 5, 1, 'Mutya Ning Lourdes 2023', '2023-04-07 05:11:28', '2023-04-07 05:11:28'),
+(6, 5, 2, 'Mutya Ning Lourdes Tourismo 2023', '2023-04-07 05:11:47', '2023-04-07 05:11:47'),
+(7, 5, 3, 'Mutya Ning Lourdes SK 2023', '2023-04-07 05:12:12', '2023-04-07 05:12:12'),
+(8, 5, 4, 'Mutya Ning Lourdes 1st Runner Up', '2023-04-07 05:12:47', '2023-04-07 05:12:47'),
+(9, 5, 5, 'Mutya Ning Lourdes 2nd Runner Up', '2023-04-07 05:13:01', '2023-04-07 05:13:01');
+
 --
 -- Indexes for dumped tables
 --
@@ -562,6 +592,13 @@ ALTER TABLE `technical_event`
   ADD KEY `event_id` (`event_id`);
 
 --
+-- Indexes for table `titles`
+--
+ALTER TABLE `titles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `event_id` (`event_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -668,6 +705,12 @@ ALTER TABLE `technical_event`
   MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `titles`
+--
+ALTER TABLE `titles`
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -752,6 +795,12 @@ ALTER TABLE `ratings`
 ALTER TABLE `technical_event`
   ADD CONSTRAINT `technical_event_ibfk_2` FOREIGN KEY (`technical_id`) REFERENCES `technicals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `technical_event_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `titles`
+--
+ALTER TABLE `titles`
+  ADD CONSTRAINT `titles_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

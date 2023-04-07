@@ -6,9 +6,9 @@
 	<!--	Admin Results	-->
     <v-main v-if="$store.getters['auth/getUser'] !== null">
         <!-- results -->
-		<v-table 
-			v-if="$route.params.eventSlug && event" 
-			density="comfortable" :bordered="true" 
+		<v-table
+			v-if="$route.params.eventSlug && event"
+			density="comfortable" :bordered="true"
 			hover
 			:height="scoreSheetHeight"
 			fixed-header
@@ -85,12 +85,24 @@
 					<th class="text-center text-uppercase font-weight-bold text-grey-darken-4 py-3">
 						Final<br>Rank
 					</th>
+                    <th class="text-center text-uppercase font-weight-bold text-grey-darken-4 py-3">
+                        Title
+                    </th>
 				</tr>
 			</thead>
 			<tbody>
                 <tr v-for="(team, teamKey, teamIndex) in teams" :key="team.id">
-                    <td class="text-h5 text-center font-weight-bold" style="width: 30px;">{{ team.number }}</td>
-                    <td style="width: 72px;">
+                    <td
+                        class="text-h5 text-center font-weight-bold"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        style="width: 30px;"
+                    >
+                        {{ team.number }}
+                    </td>
+                    <td
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        style="width: 72px;"
+                    >
                         <v-avatar size="72">
                             <v-img
                                 cover
@@ -98,7 +110,7 @@
                             />
                         </v-avatar>
                     </td>
-                    <td>
+                    <td :class="{ 'bg-yellow-lighten-3': team.title !== '' }">
                         <p class="ma-0 text-subtitle-2 text-uppercase font-weight-bold" style="line-height: 1.2">{{ team.name }}</p>
                         <p class="mt-1 mb-0" style="line-height: 1"><small>{{ team.location }}</small></p>
                     </td>
@@ -108,7 +120,8 @@
                         class="text-center text-uppercase font-weight-bold text-red-darken-3"
                         :class="{
                             'bg-grey-lighten-3' : !team.deductions.inputs[technicalKey].is_locked,
-                            'bg-white' : team.deductions.inputs[technicalKey].is_locked
+                            'bg-white' : team.deductions.inputs[technicalKey].is_locked && team.title === '',
+							'bg-yellow-lighten-3': team.deductions.inputs[technicalKey].is_locked && team.title !== ''
                         }"
                     >
                         {{ team.deductions.inputs[technicalKey].value.toFixed(2) }}
@@ -118,33 +131,64 @@
                         class="text-right"
                         :class="{
                             'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
-                            'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
+                            'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
+							'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                         }"
                     >
-                        <div :class="{
-                            'text-dark-darken-1': judge.is_chairman == 0,
-                            'text-red-darken-3': judge.is_chairman == 1
-                        }">
+                        <div
+                            :class="{
+                                'text-dark-darken-1': judge.is_chairman == 0,
+                                'text-red-darken-3': judge.is_chairman == 1
+                            }"
+                        >
                             {{ team.ratings.inputs[`judge_${judge.id}`].final.deducted.toFixed(2) }}
                         </div>
 
                         <div
                             class="text-right font-weight-bold text-blue-darken-2"
                             :class="{
-                            'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
-                            'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked
-                        }"
+                                'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
+                                'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
+                                'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
+                            }"
                         >
                             {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
                         </div>
                     </td>
-                    <td class="text-right font-weight-bold text-green-darken-4"><span class="pr-2">{{ team.ratings.average.toFixed(2) }}</span></td>
-                    <td class="text-right font-weight-bold text-blue-darken-4"><span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span></td>
-                    <td class="text-right font-weight-bold text-grey-darken-1"><span class="pr-2">{{ team.rank.initial.fractional.toFixed(2) }}</span></td>
-                    <td class="text-right font-weight-bold text-h6"><span class="pr-3">{{ team.rank.final.fractional }}</span></td>
+                    <td
+                        class="text-right font-weight-bold text-green-darken-4"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                    >
+                        <span class="pr-2">{{ team.ratings.average.toFixed(2) }}</span>
+                    </td>
+                    <td
+                        class="text-right font-weight-bold text-blue-darken-4"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                    >
+                        <span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span>
+                    </td>
+                    <td
+                        class="text-right font-weight-bold text-grey-darken-1"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                    >
+                        <span class="pr-2">{{ team.rank.initial.fractional.toFixed(2) }}</span>
+                    </td>
+                    <td
+                        class="text-right font-weight-bold text-h6"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                    >
+                        <span class="pr-3">{{ team.rank.final.fractional }}</span>
+                    </td>
+                    <td
+                        class="text-center font-weight-bold text-body-1"
+                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        style="line-height: 1.1"
+                    >
+                        {{ team.title }}
+                    </td>
                 </tr>
 				<tr>
-					<td :colspan="(7 + totalTechnicals + totalJudges)">
+					<td :colspan="(8 + totalTechnicals + totalJudges)">
 						<v-row class="justify-center">
                             <v-col
                                 v-for="technical in technicals" :key="technical.id"
