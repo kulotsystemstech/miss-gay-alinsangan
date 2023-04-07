@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2023 at 07:16 AM
+-- Generation Time: Apr 07, 2023 at 10:04 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -457,11 +457,11 @@ INSERT INTO `titles` (`id`, `event_id`, `rank`, `title`, `created_at`, `updated_
 (2, 2, 1, 'Best in Swimwear', '2023-04-07 05:09:49', '2023-04-07 05:09:49'),
 (3, 3, 1, 'Best in Advocacy', '2023-04-07 05:10:14', '2023-04-07 05:10:14'),
 (4, 4, 1, 'Best in Evening Gown', '2023-04-07 05:10:42', '2023-04-07 05:10:42'),
-(5, 5, 1, 'Mutya Ning Lourdes 2023', '2023-04-07 05:11:28', '2023-04-07 05:11:28'),
-(6, 5, 2, 'Mutya Ning Lourdes Tourismo 2023', '2023-04-07 05:11:47', '2023-04-07 05:11:47'),
-(7, 5, 3, 'Mutya Ning Lourdes SK 2023', '2023-04-07 05:12:12', '2023-04-07 05:12:12'),
-(8, 5, 4, 'Mutya Ning Lourdes 1st Runner Up', '2023-04-07 05:12:47', '2023-04-07 05:12:47'),
-(9, 5, 5, 'Mutya Ning Lourdes 2nd Runner Up', '2023-04-07 05:13:01', '2023-04-07 05:13:01');
+(5, 5, 1, 'Binibining San Vicente 2023', '2023-04-07 05:11:28', '2023-04-07 08:03:28'),
+(6, 5, 2, 'Binibining San Vicente Tourismo 2023', '2023-04-07 05:11:47', '2023-04-07 08:03:28'),
+(7, 5, 3, 'Binibining San Vicente SK 2023', '2023-04-07 05:12:12', '2023-04-07 08:03:28'),
+(8, 5, 4, 'Binibining San Vicente 1st Runner Up', '2023-04-07 05:12:47', '2023-04-07 08:03:28'),
+(9, 5, 5, 'Binibining San Vicente 2nd Runner Up', '2023-04-07 05:13:01', '2023-04-07 08:03:28');
 
 --
 -- Indexes for dumped tables
