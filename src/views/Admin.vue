@@ -188,7 +188,7 @@
                     </td>
                 </tr>
 				<tr>
-					<td :colspan="(7 + totalTechnicals + totalJudges)">
+					<td :colspan="(8 + totalTechnicals + totalJudges)">
 						<v-row class="justify-center">
                             <v-col
                                 v-for="technical in technicals" :key="technical.id"
