@@ -232,7 +232,11 @@
             </v-table>
 
             <!-- winners -->
-            <v-row class="winners-page d-none justify-center pt-3" style="page-break-before: always;">
+            <v-row
+                v-if="Object.values(winners).length > 0"
+                class="winners-page d-none justify-center pt-3"
+                style="page-break-before: always;"
+            >
                 <v-col cols="12" sm="9" md="7" lg="5">
                     <div style="padding: 15px">
                         <table class="table-winners" style="width: 100%">
@@ -302,7 +306,7 @@
                 teams     : [],
                 judges    : [],
                 technicals: [],
-                winners   : [],
+                winners   : {},
 
                 timer: null,
                 openUnlockDialog: false,
@@ -326,11 +330,11 @@
                     if (this.timer)
                         clearTimeout(this.timer);
 
-                    this.event     = null;
-                    this.teams     = [];
-                    this.judges    = [];
-                    this.technicals= [];
-                    this.winners   = [];
+                    this.event      = null;
+                    this.teams      = [];
+                    this.judges     = [];
+                    this.technicals = [];
+                    this.winners    = {};
                     this.tabulate();
                 }
             }
