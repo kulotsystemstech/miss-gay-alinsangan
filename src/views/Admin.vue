@@ -256,7 +256,7 @@
                 teams     : [],
                 judges    : [],
                 technicals: [],
-                winners   : [],
+                winners   : {},
 
                 timer: null,
                 openUnlockDialog: false,
@@ -280,11 +280,11 @@
                     if (this.timer)
                         clearTimeout(this.timer);
 
-                    this.event     = null;
-                    this.teams     = [];
-                    this.judges    = [];
-                    this.technicals= [];
-                    this.winners   = [];
+                    this.event      = null;
+                    this.teams      = [];
+                    this.judges     = [];
+                    this.technicals = [];
+                    this.winners    = {};
                     this.tabulate();
                 }
             }
