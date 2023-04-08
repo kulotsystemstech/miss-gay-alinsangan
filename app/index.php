@@ -62,7 +62,8 @@ $routes = [
     [ "name" => "Top 8"     , "route" => "results/top8" ],
     [ "name" => "Guidelines", "route" => "crud/guidelines/event_ranking.php" ],
     [ "name" => "Assignment", "route" => "crud/assignment" ],
-    [ "name" => "No show"   , "route" => "crud/noshow" ]
+    [ "name" => "No show"   , "route" => "crud/noshow" ],
+    [ "name" => "Eliminations"   , "route" => "crud/eliminations" ]
 ];
 ?>
 <!DOCTYPE html>
