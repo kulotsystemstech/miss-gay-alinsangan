@@ -249,7 +249,7 @@
                                         <td colspan="3"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-center">
+                                        <td colspan="3" class="pa-3 text-center" style="border: 1px solid #ddd">
                                             <span class="text-h4">{{ winner[1] }}</span>
                                         </td>
                                     </tr>
