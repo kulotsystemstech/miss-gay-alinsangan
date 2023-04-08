@@ -61,10 +61,10 @@
             handleWindowResize() {
                 this.$store.commit('setWindowHeight', window.innerHeight);
 
-                // check sidebar
-                if(this.$vuetify.display.smAndDown)
-                    this.$store.state.app.sideNav = false;
-            },
+			// check sidebar
+			if (this.$vuetify.display.mdAndDown)
+				this.$store.state.app.sideNav = false;
+		},
 
             startPing() {
                 this.stopPing();
@@ -110,14 +110,14 @@
             window.addEventListener('resize', this.handleWindowResize);
             this.handleWindowResize();
 
-            // manage sidebar
-            if(this.$vuetify.display.mdAndUp)
-                this.$store.state.app.sideNav = true;
-        },
-        destroyed() {
-            window.removeEventListener('resize', this.handleWindowResize);
-        },
-    }
+		// manage sidebar
+		if (this.$vuetify.display.lgAndUp)
+			this.$store.state.app.sideNav = true;
+	},
+	destroyed() {
+		window.removeEventListener('resize', this.handleWindowResize);
+	},
+}
 </script>
 
 
