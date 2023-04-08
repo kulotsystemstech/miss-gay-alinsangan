@@ -2,7 +2,7 @@
 	<v-navigation-drawer
 		theme="dark"
 		v-model="$store.state.app.sideNav"
-		:permanent="$vuetify.display.mdAndUp"
+		:permanent="$vuetify.display.lgAndUp"
 	>
         <v-list class="pa-0">
             <template v-for="(group, groupIndex) in $store.getters['events/getCategorizedEvents']">
@@ -51,8 +51,8 @@
                     }
                 });
 
-                // close sidebar when screen is smAndDown
-                if(this.$vuetify.display.smAndDown)
+                // close sidebar when screen is mdAndDown
+                if (this.$vuetify.display.mdAndDown)
                     this.$store.state.app.sideNav = false;
             }
         },
