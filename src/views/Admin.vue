@@ -23,7 +23,7 @@
                         :key="technical.id"
                         class="text-center text-uppercase font-weight-bold text-red-darken-4 py-3"
                     >
-                        Deduct {{ technicalIndex + 1 }}
+                        <!-- technical unlock deductions -->
                         <v-btn
                             class="unlock"
                             @click="unlockTechnicalDeductions(technical)"
@@ -34,42 +34,90 @@
                         >
                             <v-icon icon="mdi-lock-open-variant"/>
                         </v-btn>
-                    </th>
-					<template v-for="judge in judges" :key="judge.id">
-						<th
-							class="text-center text-uppercase py-3"
-						>
-                            <v-btn
-                                class="unlock"
-                                @click="unlockJudgeRatings(judge)"
-                                variant="text"
-                                size="x-small"
-                                icon
-                                style="position: absolute; top: 0; right: 1px"
+
+                        Deduct
+                        <div>
+                            <div class="d-flex justify-center">
+                                <v-icon
+                                    class="online-status"
+                                    icon="mdi-circle-medium"
+                                    :color="technical.online ? 'success' : 'error'"
+                                    style="margin-left: -8px;"
+                                />
+                                {{ technicalIndex + 1 }}
+                            </div>
+                        </div>
+                        &nbsp;
+
+                        <!-- technical help status -->
+                        <div class="help-status mt-1" v-if="technical.calling">
+                            <v-chip
+                                size="small"
+                                color="warning"
+                                variant="flat"
                             >
-                                <v-icon icon="mdi-lock-open-variant"/>
-                            </v-btn>
-							<div
-								:class="{
-                                'text-dark-darken-1': judge.is_chairman == 0,
-                                'text-red-darken-3': judge.is_chairman == 1
-                            	}"
-							>
-								Judge {{ judge.number }}<span v-if="judge.is_chairman == 1">*</span>
-                                <div
-                                    :class="{
-                                        'text-dark-darken-1': judge.is_chairman == 0,
-                                        'text-red-darken-4': judge.is_chairman == 1
-                                    }"
-                                >
-                                    <small>Total</small>
+                                HELP
+                            </v-chip>
+                        </div>
+                    </th>
+                    <th
+                        v-for="judge in judges"
+                        :key="judge.id"
+                        class="text-center text-uppercase py-3"
+                    >
+                        <!-- judge unlock ratings -->
+                        <v-btn
+                            class="unlock"
+                            @click="unlockJudgeRatings(judge)"
+                            variant="text"
+                            size="x-small"
+                            icon
+                            style="position: absolute; top: 0; right: 1px"
+                        >
+                            <v-icon icon="mdi-lock-open-variant"/>
+                        </v-btn>
+
+                        <div
+                            :class="{
+                            'text-dark-darken-1': judge.is_chairman == 0,
+                            'text-red-darken-3': judge.is_chairman == 1
+                            }"
+                        >
+                            <div>
+                                <div class="d-flex justify-center">
+                                    <v-icon
+                                        class="online-status"
+                                        icon="mdi-circle-medium"
+                                        :color="judge.online ? 'success' : 'error'"
+                                        style="margin-left: -8px;"
+                                    />
+                                    Judge {{ judge.number }}<span v-if="judge.is_chairman == 1">*</span>
                                 </div>
-                                <div class="text-blue-darken-2" style="margin-top: -10px;">
-                                    <small>Rank</small>
-                                </div>
-							</div>
-						</th>
-					</template>
+                            </div>
+                            <div
+                                :class="{
+                                    'text-dark-darken-1': judge.is_chairman == 0,
+                                    'text-red-darken-4': judge.is_chairman == 1
+                                }"
+                            >
+                                <small>Total</small>
+                            </div>
+                            <div class="text-blue-darken-2" style="margin-top: -10px;">
+                                <small>Rank</small>
+                            </div>
+                        </div>
+
+                        <!-- judge help status -->
+                        <div class="help-status mt-1" v-if="judge.calling">
+                            <v-chip
+                                size="small"
+                                color="warning"
+                                variant="flat"
+                            >
+                                HELP
+                            </v-chip>
+                        </div>
+                    </th>
 					<th class="text-center text-uppercase font-weight-bold text-green-darken-4 py-3">
 						Average
 					</th>
@@ -189,7 +237,7 @@
                                 v-for="technical in technicals" :key="technical.id"
                                 md="3"
                             >
-                                <v-card class="text-center mb-5" flat>
+                                <v-card class="text-center mb-5" :class="{ 'text-warning': technical.calling }" flat>
                                     <v-card-title class="pt-16 font-weight-bold">
                                         {{ technical.name }}
                                     </v-card-title>
@@ -207,7 +255,7 @@
                                 v-for="judge in judges" :key="judge.id"
                                 md="3"
                             >
-                                <v-card class="text-center mb-5" flat>
+                                <v-card class="text-center mb-5" :class="{ 'text-warning': judge.calling }" flat>
                                     <v-card-title class="pt-16 font-weight-bold">
                                         {{ judge.name }}
                                     </v-card-title>
