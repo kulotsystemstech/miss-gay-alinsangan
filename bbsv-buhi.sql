@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2023 at 04:16 AM
+-- Generation Time: Apr 09, 2023 at 08:39 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -181,18 +181,18 @@ CREATE TABLE `eliminations` (
 --
 
 INSERT INTO `eliminations` (`id`, `event_id`, `team_id`, `created_at`, `updated_at`) VALUES
-(1, 5, 1, '2023-04-06 13:56:12', '2023-04-06 13:56:12'),
-(2, 5, 2, '2023-04-06 13:56:13', '2023-04-06 13:56:13'),
-(3, 5, 3, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
-(4, 5, 4, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
-(5, 5, 5, '2023-04-06 13:56:15', '2023-04-06 13:56:15'),
-(6, 5, 6, '2023-04-06 13:56:16', '2023-04-06 13:56:16'),
-(7, 5, 7, '2023-04-06 13:56:17', '2023-04-06 13:56:17'),
-(9, 5, 8, '2023-04-06 13:56:23', '2023-04-06 13:56:23'),
-(10, 5, 9, '2023-04-06 13:56:24', '2023-04-06 13:56:24'),
-(11, 5, 10, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
-(12, 5, 11, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
-(13, 5, 12, '2023-04-06 13:56:26', '2023-04-06 13:56:26');
+(1, 5, 7, '2023-04-06 13:56:12', '2023-04-06 13:56:12'),
+(2, 5, 3, '2023-04-06 13:56:13', '2023-04-06 13:56:13'),
+(3, 5, 10, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
+(4, 5, 5, '2023-04-06 13:56:14', '2023-04-06 13:56:14'),
+(5, 5, 12, '2023-04-06 13:56:15', '2023-04-06 13:56:15'),
+(6, 5, 8, '2023-04-06 13:56:16', '2023-04-06 13:56:16'),
+(7, 5, 9, '2023-04-06 13:56:17', '2023-04-06 13:56:17'),
+(9, 5, 4, '2023-04-06 13:56:23', '2023-04-06 13:56:23'),
+(10, 5, 1, '2023-04-06 13:56:24', '2023-04-06 13:56:24'),
+(11, 5, 6, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
+(12, 5, 2, '2023-04-06 13:56:25', '2023-04-06 13:56:25'),
+(13, 5, 11, '2023-04-06 13:56:26', '2023-04-06 13:56:26');
 
 -- --------------------------------------------------------
 
@@ -383,18 +383,18 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `number`, `name`, `location`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Hanna Grace A. Clavillas', 'San Isidro, Buhi', '01.jpg', '2023-04-06 13:42:20', '2023-04-06 13:54:35'),
-(2, 2, 'Neoli Kryss Angeline L. Abarientos', 'San Miguel, Nabua', '02.jpg', '2023-04-06 13:43:02', '2023-04-06 13:54:35'),
-(3, 3, 'Mara Monte', 'Sta. Justina, Buhi', '03.jpg', '2023-04-06 13:45:57', '2023-04-06 13:54:35'),
-(4, 4, 'Aaliyah Mae S. Mariscotes', 'San Vicente, Buhi', '04.jpg', '2023-04-06 13:46:35', '2023-04-06 13:54:35'),
-(5, 5, 'Lian Shaine Naparato', 'Sta. Justina, Buhi', '05.jpg', '2023-04-06 13:47:09', '2023-04-06 13:54:35'),
-(6, 6, 'Maria Ericka Mae D. Ceneta', 'San Antonio, Buhi', '06.jpg', '2023-04-06 13:47:48', '2023-04-06 13:54:35'),
-(7, 7, 'Trisha Jane Lopez', 'San Pascual, Buhi', '07.jpg', '2023-04-06 13:48:16', '2023-04-06 13:54:35'),
-(8, 8, 'Erika Mae Recafranca', 'Iriga City', '08.jpg', '2023-04-06 13:49:52', '2023-04-06 13:54:35'),
-(9, 9, 'Miles Tiffany Kaalim', 'Tabaco, Albay', '09.jpg', '2023-04-06 13:50:48', '2023-04-06 13:54:35'),
-(10, 10, 'Mary Claire Chavez', 'Santa Elena, Buhi', '10.jpg', '2023-04-06 13:51:50', '2023-04-06 13:54:35'),
-(11, 11, 'Chabelita P. Molina', 'San Antonio, Buhi', '11.jpg', '2023-04-06 13:52:26', '2023-04-06 13:54:35'),
-(12, 12, 'Hannah Paula E. Quebral', 'San Rafael, Buhi', '12.jpg', '2023-04-06 13:53:01', '2023-04-06 13:54:35');
+(1, 1, 'Miles Tiffany Kaalim', 'Tabaco, Albay', '01-miles-tiffany-kaalim.jpg', '2023-04-06 13:50:48', '2023-04-09 06:38:09'),
+(2, 2, 'Chabelita P. Molina', 'San Antonio, Buhi', '02-chabelita-molina.jpg', '2023-04-06 13:52:26', '2023-04-09 06:38:15'),
+(3, 3, 'Neoli Kryss Angeline L. Abarientos', 'San Miguel, Nabua', '03-neoli-kryss-angeline-abarientos.jpg', '2023-04-06 13:43:02', '2023-04-09 06:38:22'),
+(4, 4, 'Erika Mae Recafranca', 'Iriga City', '04-erika-mae-recafranca.jpg', '2023-04-06 13:49:52', '2023-04-09 06:38:30'),
+(5, 5, 'Aaliyah Mae S. Mariscotes', 'San Vicente, Buhi', '05-aaliyah-mae-mariscotes.jpg', '2023-04-06 13:46:35', '2023-04-09 06:38:35'),
+(6, 6, 'Mary Claire Chavez', 'Santa Elena, Buhi', '06-mary-claire-chavez.jpg', '2023-04-06 13:51:50', '2023-04-09 06:38:40'),
+(7, 7, 'Hanna Grace A. Clavillas', 'San Isidro, Buhi', '07-hanna-grace-clavillas.jpg', '2023-04-06 13:42:20', '2023-04-09 06:38:44'),
+(8, 8, 'Maria Ericka Mae D. Ceneta', 'San Antonio, Buhi', '08-maria-ericka-mae-ceneta.jpg', '2023-04-06 13:47:48', '2023-04-09 06:38:49'),
+(9, 9, 'Trisha Jane Lopez', 'San Pascual, Buhi', '09-trisha-jane-lopez.jpg', '2023-04-06 13:48:16', '2023-04-09 06:38:54'),
+(10, 10, 'Mara Monte', 'Sta. Justina, Buhi', '10-mara-monte.jpg', '2023-04-06 13:45:57', '2023-04-09 06:39:03'),
+(11, 11, 'Hannah Paula E. Quebral', 'San Rafael, Buhi', '11-hannah-paula-quebral.jpg', '2023-04-06 13:53:01', '2023-04-09 06:39:07'),
+(12, 12, 'Lian Shaine Naparato', 'Sta. Justina, Buhi', '12-lian-shaine-naparato.jpg', '2023-04-06 13:47:09', '2023-04-09 06:39:13');
 
 -- --------------------------------------------------------
 
@@ -693,7 +693,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT for table `technicals`
