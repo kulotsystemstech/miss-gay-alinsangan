@@ -16,7 +16,7 @@
                 variant="outlined"
                 class="mr-5"
                 size="small"
-                :color="askingForHelp ? 'warning' : 'brown'"
+                :color="askingForHelp ? 'warning' : 'grey'"
                 :disabled="helpDisabled"
                 @click="toggleHelp"
             >
