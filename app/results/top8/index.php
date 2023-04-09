@@ -250,26 +250,26 @@
                     <h1 class="m-0">TOP <?= sizeof($titles) ?></h1>
                     <h5>BINIBINING SAN VICENTE 2023</h5>
                 </th>
-                <th colspan="2" class="text-center bt br">
+                <th colspan="2" class="text-center text-success bt br">
                     PRODUCTION
                 </th>
-                <th colspan="2" class="text-center bt br">
+                <th colspan="2" class="text-center text-success bt br">
                     SWIMWEAR
                 </th>
-                <th colspan="2" class="text-center bt br">
+                <th colspan="2" class="text-center text-success bt br">
                     ADVOCACY
                 </th>
-                <th colspan="2" class="text-center bt br">
+                <th colspan="2" class="text-center text-success bt br">
                     EVENING<br>GOWN
                 </th>
                 <th rowspan="2" class="text-center bl bt br">
                     <span class="opacity-75">GENERAL<br>AVERAGE</span>
                 </th>
-                <th rowspan="2" class="text-center bl bt br">
-                    TOTAL<br>RANK
+                <th rowspan="2" class="text-center text-primary bl bt br">
+                    <span class="opacity-75">TOTAL<br>RANK</span>
                 </th>
                 <th rowspan="2" class="text-center bl bt br">
-                    INITIAL<br>RANK
+                    <span class="opacity-50">INITIAL<br>RANK</span>
                 </th>
                 <th rowspan="2" class="text-center bl bt br">
                     FINAL<br>RANK
@@ -280,16 +280,16 @@
             </tr>
             <tr class="table-secondary">
                 <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
-                <th class="text-center br">Rank</th>
+                <th class="text-center text-primary br">Rank</th>
 
                 <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
-                <th class="text-center br">Rank</th>
+                <th class="text-center text-primary br">Rank</th>
 
                 <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
-                <th class="text-center br">Rank</th>
+                <th class="text-center text-primary br">Rank</th>
 
                 <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
-                <th class="text-center br">Rank</th>
+                <th class="text-center text-primary br">Rank</th>
             </tr>
         </thead>
 
@@ -298,7 +298,7 @@
         foreach($result as $team_key => $team) { ?>
             <tr<?= $team['title'] !== '' ? ' class="table-warning"' : '' ?>>
                 <!-- number -->
-                <td class="pe-2 fw-bold bl" align="right">
+                <td class="pe-3 fw-bold bl" align="right">
                     <h4 class="m-0">
                         <?= $team['info']['number'] ?>
                     </h4>
@@ -320,69 +320,69 @@
                 </td>
 
                 <!-- production -->
-                <td class="pe-2 bl" align="right">
+                <td class="pe-3 bl" align="right">
                     <span class="opacity-75">
                         <?= number_format($team['inputs']['production']['average'], 2) ?>
                     </span>
                 </td>
-                <td class="pe-2 br" align="right">
+                <td class="pe-3 text-primary br" align="right">
                     <?= number_format($team['inputs']['production']['rank'], 2) ?>
                 </td>
 
                 <!-- swimwear -->
-                <td class="pe-2 bl" align="right">
+                <td class="pe-3 bl" align="right">
                     <span class="opacity-75">
                         <?= number_format($team['inputs']['swimwear']['average'], 2) ?>
                     </span>
                 </td>
-                <td class="pe-2 br" align="right">
+                <td class="pe-3 text-primary br" align="right">
                     <?= number_format($team['inputs']['swimwear']['rank'], 2) ?>
                 </td>
 
                 <!-- advocacy -->
-                <td class="pe-2 bl" align="right">
+                <td class="pe-3 bl" align="right">
                     <span class="opacity-75">
                         <?= number_format($team['inputs']['advocacy']['average'], 2) ?>
                     </span>
                 </td>
-                <td class="pe-2 br" align="right">
+                <td class="pe-3 text-primary br" align="right">
                     <?= number_format($team['inputs']['advocacy']['rank'], 2) ?>
                 </td>
 
                 <!-- evening_gown -->
-                <td class="pe-2 bl" align="right">
+                <td class="pe-3 bl" align="right">
                     <span class="opacity-75">
                         <?= number_format($team['inputs']['evening_gown']['average'], 2) ?>
                     </span>
                 </td>
-                <td class="pe-2 br" align="right">
+                <td class="pe-3 text-primary br" align="right">
                     <?= number_format($team['inputs']['evening_gown']['rank'], 2) ?>
                 </td>
 
                 <!-- general average -->
-                <td class="pe-2 bl br fw-bold" align="right">
+                <td class="pe-3 bl br fw-bold" align="right">
                     <span class="opacity-75">
                         <?= number_format($team['average'], 2) ?>
                     </span>
                 </td>
 
                 <!-- total rank -->
-                <td class="pe-2 bl br fw-bold" align="right">
-                    <?= number_format($team['rank']['total'], 2) ?>
+                <td class="pe-3 text-primary fw-bold bl br fw-bold" align="right">
+                    <span class="opacity-75"><?= number_format($team['rank']['total'], 2) ?></span>
                 </td>
 
                 <!-- initial rank -->
-                <td class="pe-2 bl br fw-bold" align="right">
-                    <?= number_format($team['rank']['initial'], 2) ?>
+                <td class="pe-3 bl br fw-bold" align="right">
+                    <span class="opacity-50"><?= number_format($team['rank']['initial'], 2) ?></span>
                 </td>
 
                 <!-- final rank -->
-                <td class="pe-2 bl br fw-bold" align="right">
+                <td class="pe-3 bl br fw-bold" align="right">
                     <?= number_format($team['rank']['final']['fractional'], 2) ?>
                 </td>
 
                 <!-- title -->
-                <td class="pe-2 bl br fw-bold" align="center" style="line-height: 1.1">
+                <td class="bl br fw-bold" align="center" style="line-height: 1.1">
                     <h4 class="ma-0"><?= $team['title'] ?></h4>
                 </td>
             </tr>
@@ -427,7 +427,7 @@
                         ?>
                             <tr>
                                 <!-- number -->
-                                <td class="pe-2 fw-bold text-center">
+                                <td class="pe-3 fw-bold text-center">
                                     <h3 class="m-0">
                                         <?= $team['info']['number'] ?>
                                     </h3>
@@ -467,7 +467,7 @@
                         ?>
                             <tr>
                                 <!-- number -->
-                                <td class="pe-2 fw-bold text-center">
+                                <td class="pe-3 fw-bold text-center">
                                     <h3 class="m-0">
                                         <?= $team['info']['number'] ?>
                                     </h3>
