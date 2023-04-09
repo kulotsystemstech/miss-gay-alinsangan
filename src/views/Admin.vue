@@ -237,7 +237,7 @@
                                 v-for="technical in technicals" :key="technical.id"
                                 md="3"
                             >
-                                <v-card class="text-center mb-5" :class="{ 'text-warning': judge.calling }" flat>
+                                <v-card class="text-center mb-5" :class="{ 'text-warning': technical.calling }" flat>
                                     <v-card-title class="pt-16 font-weight-bold">
                                         {{ technical.name }}
                                     </v-card-title>
