@@ -28,43 +28,14 @@
                 pingTimer: null
             }
         },
-        created() {
-            // check for authenticated user
-            $.ajax({
-                url: `${this.$store.getters.appURL}/index.php`,
-                type: 'GET',
-                xhrFields: {
-                    withCredentials: true
-                },
-                data: {
-                    getUser: ''
-                },
-                success: (data) => {
-                    data = JSON.parse(data);
-                    if (data.user) {
-                        this.$store.commit('auth/setUser', data.user);
-                        this.$router.replace({
-                            name: data.user.userType
-                        });
-                    }
-                    setTimeout(() => {
-                        this.loading = false;
-                    }, 1000);
-                },
-                error: (error) => {
-                    alert(`ERROR ${error.status}: ${error.statusText}`);
-                    this.loading = false;
-                }
-            });
-        },
         methods: {
             handleWindowResize() {
                 this.$store.commit('setWindowHeight', window.innerHeight);
 
-			// check sidebar
-			if (this.$vuetify.display.mdAndDown)
-				this.$store.state.app.sideNav = false;
-		},
+                // check sidebar
+                if (this.$vuetify.display.mdAndDown)
+                    this.$store.state.app.sideNav = false;
+            },
 
             startPing() {
                 this.stopPing();
@@ -94,7 +65,11 @@
                         },
                         success: (data) => {
                             data = JSON.parse(data);
-                            if(data.pinged) {
+                            if (data.pinged) {
+                                // set calling property of user
+                                if(data.calling != null)
+                                    this.$store.state['auth'].user.calling = data.calling;
+
                                 // repeat after m milliseconds
                                 const m = 5000;
                                 this.pingTimer = setTimeout(() => {
@@ -106,18 +81,47 @@
                 }
             }
         },
+        created() {
+            // check for authenticated user
+            $.ajax({
+                url: `${this.$store.getters.appURL}/index.php`,
+                type: 'GET',
+                xhrFields: {
+                    withCredentials: true
+                },
+                data: {
+                    getUser: ''
+                },
+                success: (data) => {
+                    data = JSON.parse(data);
+                    if (data.user) {
+                        this.$store.commit('auth/setUser', data.user);
+                        this.$router.replace({
+                            name: data.user.userType
+                        });
+                    }
+                    setTimeout(() => {
+                        this.loading = false;
+                    }, 1000);
+                },
+                error: (error) => {
+                    alert(`ERROR ${error.status}: ${error.statusText}`);
+                    this.loading = false;
+                },
+            });
+        },
         mounted() {
             window.addEventListener('resize', this.handleWindowResize);
             this.handleWindowResize();
 
-		// manage sidebar
-		if (this.$vuetify.display.lgAndUp)
-			this.$store.state.app.sideNav = true;
-	},
-	destroyed() {
-		window.removeEventListener('resize', this.handleWindowResize);
-	},
-}
+            // manage sidebar
+            if (this.$vuetify.display.lgAndUp)
+                this.$store.state.app.sideNav = true;
+        },
+        destroyed() {
+            window.removeEventListener('resize', this.handleWindowResize);
+        }
+    }
 </script>
 
 
