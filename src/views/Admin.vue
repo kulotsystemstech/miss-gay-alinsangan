@@ -294,24 +294,30 @@
                                     :key="winner[0]"
                                 >
                                     <tr v-if="winnerIndex > 0">
-                                        <td colspan="3"></td>
+                                        <td colspan="3" style="height: 100px;"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="pa-3 text-center" style="border: 1px solid #ddd">
-                                            <span class="text-h4">{{ winner[1] }}</span>
+                                            <span class="text-h4 font-weight-bold">{{ winner[1] }}</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-h3 text-center font-weight-bold pl-3 py-3 pr-6">
+                                        <td
+                                            class="text-h3 text-center font-weight-bold pl-3 py-3 pr-6"
+                                            style="border-left: 1px solid #ddd; border-bottom: 1px solid #ddd;"
+                                        >
                                             {{ teams[winner[0]].number }}
                                         </td>
-                                        <td class="py-1" style="width: 72px;">
+                                        <td style="width: 72px; padding-top: 8px !important; padding-bottom: 8px !important; border-bottom: 1px solid #ddd;">
                                             <img
                                                 style="width: 100%; border-radius: 100%;"
                                                 :src="`${$store.getters.appURL}/crud/uploads/${teams[winner[0]].avatar}`"
                                             />
                                         </td>
-                                        <td class="pa-3">
+                                        <td
+                                            class="pa-3"
+                                            style="border-bottom: 1px solid #ddd; border-right: 1px solid #ddd;"
+                                        >
                                             <p class="ma-0 text-h6 text-uppercase font-weight-bold" style="line-height: 1.2">{{ teams[winner[0]].name }}</p>
                                             <p class="mt-1 text-body-1 mb-0" style="line-height: 1"><small>{{ teams[winner[0]].location }}</small></p>
                                         </td>
