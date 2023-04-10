@@ -25,7 +25,7 @@
         </v-list>
 		<template v-slot:append>
 			<v-col class="text-center mt-4" cols="12">
-                <v-btn class="mb-3" variant="tonal" @click="refresh" block>REFRESH</v-btn>
+                <v-btn class="mb-3" variant="tonal" @click="refresh" block :loading="refreshing">REFRESH</v-btn>
 				&copy; <strong class="text-uppercase">ACLC Iriga 2023</strong>
 			</v-col>
 		</template>
@@ -39,7 +39,7 @@
         name: "SideNav",
         data() {
             return {
-
+                refreshing: false
             }
         },
         methods: {
@@ -58,6 +58,7 @@
             },
 
             refresh() {
+                this.refreshing = true;
                 window.location.reload();
             }
         },
