@@ -26,6 +26,7 @@
                     >
                         <!-- technical unlock deductions -->
                         <v-btn
+                            v-if="technicalSubmitted[technicalKey]"
                             class="unlock"
                             @click="unlockTechnicalDeductions(technical)"
                             variant="text"
@@ -55,13 +56,14 @@
                         </div>
                     </th>
                     <th
-                        v-for="judge in judges"
+                        v-for="(judge, judgeKey, judgeIndex) in judges"
                         :key="judge.id"
                         class="text-center text-uppercase py-3"
                         :class="{ 'bg-red-lighten-3': !judge.online }"
                     >
                         <!-- judge unlock ratings -->
                         <v-btn
+                            v-if="judgeSubmitted[judgeKey]"
                             class="unlock"
                             @click="unlockJudgeRatings(judge)"
                             variant="text"
