@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th colspan="3" class="text-center text-uppercase font-weight-bold text-grey-darken-4 text-h5 py-3">
-                            {{ event.title}}
+                            {{ event.title }}
                             <div class="result-title text-center opacity-75 d-none">
                                 <h6 class="ma-0">{{ $store.state.app.title }}</h6>
                             </div>
@@ -29,12 +29,14 @@
                         >
                             <!-- technical unlock deductions -->
                             <v-btn
+                                v-if="technicalSubmitted[technicalKey]"
                                 class="unlock"
                                 @click="unlockTechnicalDeductions(technical)"
                                 variant="text"
                                 size="x-small"
                                 icon
-                                style="position: absolute; top: 0; right: 1px"
+                                :ripple="false"
+                                style="position: absolute; top: -7px; right: -7px"
                             >
                                 <v-icon icon="mdi-lock-open-variant"/>
                             </v-btn>
@@ -57,19 +59,21 @@
                             </div>
                         </th>
                         <th
-                            v-for="judge in judges"
+                            v-for="(judge, judgeKey, judgeIndex) in judges"
                             :key="judge.id"
                             class="text-center text-uppercase py-3"
                             :class="{ 'bg-red-lighten-3': !judge.online }"
                         >
                             <!-- judge unlock ratings -->
                             <v-btn
+                                v-if="judgeSubmitted[judgeKey]"
                                 class="unlock"
                                 @click="unlockJudgeRatings(judge)"
                                 variant="text"
                                 size="x-small"
                                 icon
-                                style="position: absolute; top: 0; right: 1px"
+                                :ripple="false"
+                                style="position: absolute; top: -7px; right: -7px"
                             >
                                 <v-icon icon="mdi-lock-open-variant"/>
                             </v-btn>
@@ -128,13 +132,13 @@
                     <tr v-for="(team, teamKey, teamIndex) in teams" :key="team.id">
                         <td
                             class="text-h5 text-center font-weight-bold"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                             style="width: 30px;"
                         >
                             {{ team.number }}
                         </td>
                         <td
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                             style="width: 72px;"
                         >
                             <v-avatar size="72">
@@ -144,7 +148,7 @@
                                 />
                             </v-avatar>
                         </td>
-                        <td :class="{ 'bg-yellow-lighten-3': team.title !== '' }">
+                        <td :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }">
                             <p class="ma-0 text-subtitle-2 text-uppercase font-weight-bold" style="line-height: 1.2">{{ team.name }}</p>
                             <p class="mt-1 mb-0" style="line-height: 1"><small>{{ team.location }}</small></p>
                         </td>
@@ -155,7 +159,7 @@
                             :class="{
                                 'bg-grey-lighten-3' : !team.deductions.inputs[technicalKey].is_locked,
                                 'bg-white' : team.deductions.inputs[technicalKey].is_locked && team.title === '',
-                                'bg-yellow-lighten-3': team.deductions.inputs[technicalKey].is_locked && team.title !== ''
+                                'bg-yellow-lighten-3': allSubmitted && team.deductions.inputs[technicalKey].is_locked && team.title !== ''
                             }"
                         >
                             {{ team.deductions.inputs[technicalKey].value.toFixed(2) }}
@@ -166,7 +170,7 @@
                             :class="{
                                 'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
                                 'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
-                                'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
+                                'bg-yellow-lighten-3' : allSubmitted && team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                             }"
                         >
                             <div
@@ -183,7 +187,7 @@
                                 :class="{
                                     'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
                                     'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
-                                    'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
+                                    'bg-yellow-lighten-3' : allSubmitted && team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                                 }"
                             >
                                 {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
@@ -191,31 +195,31 @@
                         </td>
                         <td
                             class="text-right font-weight-bold text-green-darken-4"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
                             <span class="pr-2">{{ team.ratings.average.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-right font-weight-bold text-blue-darken-4"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
                             <span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-right font-weight-bold text-grey-darken-1"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
                             <span class="pr-2">{{ team.rank.initial.fractional.toFixed(2) }}</span>
                         </td>
                         <td
                             class="text-right font-weight-bold text-h6"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
                             <span class="pr-3">{{ team.rank.final.fractional }}</span>
                         </td>
                         <td
                             class="text-center font-weight-bold text-body-1"
-                            :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                             style="line-height: 1.1"
                         >
                             {{ team.title }}
@@ -361,6 +365,45 @@
             },
             totalJudges() {
                 return Object.values(this.judges).length;
+            },
+            technicalSubmitted() {
+                const status = {};
+                for(const technicalKey in this.technicals) {
+                    let submitted = true;
+                    for(const teamKey in this.teams) {
+                        if(!this.teams[teamKey].deductions.inputs[technicalKey].is_locked) {
+                            submitted = false;
+                            break;
+                        }
+                    }
+                    status[technicalKey] = submitted;
+                }
+                return status;
+            },
+            judgeSubmitted() {
+                const status = {};
+                for(const judgeKey in this.judges) {
+                    let submitted = true;
+                    for(const teamKey in this.teams) {
+                        if(!this.teams[teamKey].ratings.inputs[judgeKey].rank.rating.is_locked) {
+                            submitted = false;
+                            break;
+                        }
+                    }
+                    status[judgeKey] = submitted;
+                }
+                return status;
+            },
+            allSubmitted() {
+                let status = true;
+                const submissions = {...this.technicalSubmitted, ...this.judgeSubmitted};
+                for(const key in submissions) {
+                    if(!submissions[key]) {
+                        status = false;
+                        break;
+                    }
+                }
+                return status;
             }
 		},
         watch: {
