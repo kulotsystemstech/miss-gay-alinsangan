@@ -31,7 +31,8 @@
                             variant="text"
                             size="x-small"
                             icon
-                            style="position: absolute; top: 0; right: 1px"
+                            :ripple="false"
+                            style="position: absolute; top: -7px; right: -7px"
                         >
                             <v-icon icon="mdi-lock-open-variant"/>
                         </v-btn>
@@ -66,7 +67,8 @@
                             variant="text"
                             size="x-small"
                             icon
-                            style="position: absolute; top: 0; right: 1px"
+                            :ripple="false"
+                            style="position: absolute; top: -7px; right: -7px"
                         >
                             <v-icon icon="mdi-lock-open-variant"/>
                         </v-btn>
@@ -125,11 +127,11 @@
                 <tr v-for="(team, teamKey, teamIndex) in teams" :key="team.id">
                     <td
                         class="text-h5 text-center font-weight-bold"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                     >
                         {{ teamIndex + 1 }}
                     </td>
-                    <td :class="{ 'bg-yellow-lighten-3': team.title !== '' }">
+                    <td :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }">
                         <div class="d-flex">
                             <v-avatar size="42" class="mr-2">
                                 <v-img
@@ -150,7 +152,7 @@
                         :class="{
                             'bg-grey-lighten-3' : !team.deductions.inputs[technicalKey].is_locked,
                             'bg-white' : team.deductions.inputs[technicalKey].is_locked && team.title === '',
-							'bg-yellow-lighten-3': team.deductions.inputs[technicalKey].is_locked && team.title !== ''
+							'bg-yellow-lighten-3': allSubmitted && team.deductions.inputs[technicalKey].is_locked && team.title !== ''
                         }"
                     >
                         {{ team.deductions.inputs[technicalKey].value.toFixed(2) }}
@@ -161,7 +163,7 @@
                         :class="{
                             'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
                             'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
-							'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
+							'bg-yellow-lighten-3' : allSubmitted && team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                         }"
                     >
                         <div
@@ -178,7 +180,7 @@
                             :class="{
                                 'bg-grey-lighten-3' : !team.ratings.inputs[`judge_${judge.id}`].final.is_locked,
                                 'bg-white' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title === '',
-                                'bg-yellow-lighten-3' : team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
+                                'bg-yellow-lighten-3' : allSubmitted && team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                             }"
                         >
                             {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
@@ -186,31 +188,31 @@
                     </td>
                     <td
                         class="text-right font-weight-bold text-green-darken-4"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                     >
                         <span class="pr-2">{{ team.ratings.average.toFixed(2) }}</span>
                     </td>
                     <td
                         class="text-right font-weight-bold text-blue-darken-4"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                     >
                         <span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span>
                     </td>
                     <td
                         class="text-right font-weight-bold text-grey-darken-1"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                     >
                         <span class="pr-2">{{ team.rank.initial.fractional.toFixed(2) }}</span>
                     </td>
                     <td
                         class="text-right font-weight-bold text-h6"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                     >
                         <span class="pr-3">{{ team.rank.final.fractional }}</span>
                     </td>
                     <td
                         class="text-center font-weight-bold text-body-1"
-                        :class="{ 'bg-yellow-lighten-3': team.title !== '' }"
+                        :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         style="line-height: 1.1"
                     >
                         {{ team.title }}
@@ -305,6 +307,45 @@
             },
             totalJudges() {
                 return Object.values(this.judges).length;
+            },
+            technicalSubmitted() {
+                const status = {};
+                for(const technicalKey in this.technicals) {
+                    let submitted = true;
+                    for(const teamKey in this.teams) {
+                        if(!this.teams[teamKey].deductions.inputs[technicalKey].is_locked) {
+                            submitted = false;
+                            break;
+                        }
+                    }
+                    status[technicalKey] = submitted;
+                }
+                return status;
+            },
+            judgeSubmitted() {
+                const status = {};
+                for(const judgeKey in this.judges) {
+                    let submitted = true;
+                    for(const teamKey in this.teams) {
+                        if(!this.teams[teamKey].ratings.inputs[judgeKey].rank.rating.is_locked) {
+                            submitted = false;
+                            break;
+                        }
+                    }
+                    status[judgeKey] = submitted;
+                }
+                return status;
+            },
+            allSubmitted() {
+                let status = true;
+                const submissions = {...this.technicalSubmitted, ...this.judgeSubmitted};
+                for(const key in submissions) {
+                    if(!submissions[key]) {
+                        status = false;
+                        break;
+                    }
+                }
+                return status;
             }
 		},
         watch: {
