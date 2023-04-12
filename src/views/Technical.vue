@@ -233,7 +233,6 @@
                             this.event = data.event;
                             this.teams = data.teams;
                             this.submitDeduction = {};
-                            console.log(data)
 
                             for (let i = 0; i < this.teams.length; i++) {
                                 const team = this.teams[i];
@@ -272,7 +271,6 @@
                                 deduction.loading = false;
                             }, 1000);
                         }
-                        console.log(`${jqXHR.status}: ${jqXHR.statusText}`);
                     },
                     error: (error) => {
                         deduction.loading = false;
@@ -315,7 +313,6 @@
                         }
 
                         this.submitDeduction['is_locked'] = true;
-                        console.log(`${jqXHR.status}: ${jqXHR.statusText}`);
                     },
                     error: (error) => {
                         this.submitLoading = false;
