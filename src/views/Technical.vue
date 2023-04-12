@@ -166,6 +166,7 @@
 
     export default {
         name: 'Technical',
+        emits: ['startPing'],
         components: {
             topNav,
             sideNav
