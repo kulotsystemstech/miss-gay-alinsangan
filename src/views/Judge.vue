@@ -149,76 +149,78 @@
 			</tbody>
 			<!--	Dialog	  -->
 			<tfoot>
-				<td colspan="12">
-					<v-col align="center"
-						   justify="end"
-					>
-						<v-btn
-							class="py-7 bg-grey-lighten-1 text-grey-darken-3"
-							@click="openSubmitDialog"
-							:disabled="scoreSheetDisabled"
-							block
-							flat
-						>
-						<p style="font-size: 1.2rem;">submit ratings</p>
-						</v-btn>
-						<v-dialog
-							v-if="submitDialog"
-							v-model="submitDialog"
-							persistent
-							max-width="400"
-						>
-							<v-card>
-								<v-card-title class="bg-black">
-									<v-icon id="remind">mdi-information</v-icon> Submit Ratings
-								</v-card-title>
-								<v-card-text>
-									Please confirm that you wish to finalize the ratings for <b>{{ event.title }}</b>. This action cannot be undone.
-								</v-card-text>
-								<v-card-actions>
-									<v-spacer></v-spacer>
-                                    <v-btn
-                                        class="text-red-darken-1"
-                                        :disabled="submitLoading"
-                                        @click="submitDialog = false"
-                                    >
-                                        Go Back
-                                    </v-btn>
-                                    <v-btn
-                                        class="text-green-darken-1"
-                                        :loading="submitLoading"
-                                        @click="submitRatings"
-                                    >
-                                        Submit
-                                    </v-btn>
-								</v-card-actions>
-							</v-card>
-						</v-dialog>
-						<v-dialog
-							v-if="inspectDialog"
-							v-model="inspectDialog"
-							persistent
-							max-width="400"
-						>
-							<v-card>
-								<v-card-title class="bg-red-darken-4">
-									<v-icon id="warning">mdi-alert</v-icon>	Submit Ratings
-								</v-card-title>
-								<v-card-text>
-									<p class="mb-2 text-red-darken-4">
-										Sorry, your ratings for {{ event.title}} cannot be submitted as they must be between
-										<b>{{ $store.state.rating.min }}</b> and <b>{{ $store.state.rating.max }}</b>.
-									</p>
-									<p class="text-red-darken-4">Please adjust your ratings and try submitting again.</p>
-								</v-card-text>
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn color="red-darken-4" @click="inspectDialog = false">Go Back</v-btn>
-								</v-card-actions>
-							</v-card>
-						</v-dialog>
-					</v-col>
-				</td>
+                <tr>
+                    <td colspan="12">
+                        <v-col align="center"
+                               justify="end"
+                        >
+                            <v-btn
+                                class="py-7 bg-grey-lighten-1 text-grey-darken-3"
+                                @click="openSubmitDialog"
+                                :disabled="scoreSheetDisabled"
+                                block
+                                flat
+                            >
+                            <p style="font-size: 1.2rem;">submit ratings</p>
+                            </v-btn>
+                            <v-dialog
+                                v-if="submitDialog"
+                                v-model="submitDialog"
+                                persistent
+                                max-width="400"
+                            >
+                                <v-card>
+                                    <v-card-title class="bg-black">
+                                        <v-icon id="remind">mdi-information</v-icon> Submit Ratings
+                                    </v-card-title>
+                                    <v-card-text>
+                                        Please confirm that you wish to finalize the ratings for <b>{{ event.title }}</b>. This action cannot be undone.
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                            class="text-red-darken-1"
+                                            :disabled="submitLoading"
+                                            @click="submitDialog = false"
+                                        >
+                                            Go Back
+                                        </v-btn>
+                                        <v-btn
+                                            class="text-green-darken-1"
+                                            :loading="submitLoading"
+                                            @click="submitRatings"
+                                        >
+                                            Submit
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                            <v-dialog
+                                v-if="inspectDialog"
+                                v-model="inspectDialog"
+                                persistent
+                                max-width="400"
+                            >
+                                <v-card>
+                                    <v-card-title class="bg-red-darken-4">
+                                        <v-icon id="warning">mdi-alert</v-icon>	Submit Ratings
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <p class="mb-2 text-red-darken-4">
+                                            Sorry, your ratings for {{ event.title}} cannot be submitted as they must be between
+                                            <b>{{ $store.state.rating.min }}</b> and <b>{{ $store.state.rating.max }}</b>.
+                                        </p>
+                                        <p class="text-red-darken-4">Please adjust your ratings and try submitting again.</p>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="red-darken-4" @click="inspectDialog = false">Go Back</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-col>
+                    </td>
+                </tr>
 			</tfoot>
 		</v-table>
 
@@ -242,6 +244,7 @@
 
     export default {
         name: 'Judge',
+        emits: ['startPing'],
         components: {
             topNav,
             sideNav
