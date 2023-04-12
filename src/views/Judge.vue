@@ -431,7 +431,6 @@
                                 this.totals[`team_${team.id}`].loading = false;
                             }, 1000);
                         }
-                        console.log(`${jqXHR.status}: ${jqXHR.statusText}`);
                     },
                     error: (error) => {
                         alert(`ERROR ${error.status}: ${error.statusText}`);
@@ -474,7 +473,6 @@
                                 this.totals[`team_${team.id}`].loading = false;
                             }, 1000);
                         }
-                        console.log(`${jqXHR.status}: ${jqXHR.statusText}`);
                     },
                     error: (error) => {
                         alert(`ERROR ${error.status}: ${error.statusText}`);
@@ -539,7 +537,6 @@
                                 }
                             }, 600);
                         }
-                        console.log(`${jqXHR.status}: ${jqXHR.statusText}`);
                     },
                     error: (error) => {
                         this.submitLoading = false
