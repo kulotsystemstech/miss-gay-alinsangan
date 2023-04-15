@@ -19,20 +19,20 @@ Here are the steps to set up the development environment for this project:
 4. Copy [**`app/config/database.example.php`**](app/config/database.example.php)
    to **`app/config/database.php`**, then modify the database connection settings in the new file.
 
-5. Open the terminal and navigate to the project directory **bbsv-buhi**.
+5. Inside [phpMyAdmin](http://localhost/phpmyadmin),
+   create a MySQL database named `bbsv-buhi` and import [bbsv-buhi.sql](bbsv-buhi.sql) into it.
 
-6. Execute the following commands to install the required dependencies:
+6. Open the terminal and navigate to the project directory **bbsv-buhi**.
+
+7. Execute the following commands to install the required dependencies:
    ```sh
    npm install
    ```
 
-7. Compile and run the development server with hot reloading:
+8. Compile and run the development server with hot reloading:
    ```sh
    npm run dev
    ```
-
-8. Inside [phpMyAdmin](http://localhost/phpmyadmin),
-   create a MySQL database named `bbsv-buhi` and import [bbsv-buhi.sql](bbsv-buhi.sql) into it.
 
 9. Open your web browser and access <http://localhost:5178/bbsv-buhi> to view the application.
 
