@@ -12,6 +12,7 @@ export default createStore({
 
     state: {
         app: {
+            title: 'Face of Beauty International',
             backendDir: 'app',
             sideNav: false
         },
