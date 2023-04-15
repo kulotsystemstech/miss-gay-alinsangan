@@ -4,6 +4,9 @@
 			<v-row justify="center" align="center">
 				<v-col xs="12" sm="10" md="8" lg="6">
 					<v-card id="card-login" class="mx-10 my-3 pa-1 elevation-10">
+                        <v-card-title>
+                            <h4 class="text-h4 font-weight-bold text-center text-white">{{ $store.state.app.title }}</h4>
+                        </v-card-title>
 						<v-form
 							class="bg-white rounded"
 							@submit.prevent="handleSubmit"
