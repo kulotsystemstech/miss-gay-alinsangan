@@ -127,10 +127,6 @@ $routes = [
                 </div>
                 <?php } ?>
             </div>
-
-            <div class="text-center text-secondary mt-5" >
-                <small>Wanna contribute? <a target="_blank" href="https://github.com/ronhedwigzape/bbsv-buhi">https://github.com/ronhedwigzape/bbsv-buhi</a></small>
-            </div>
         </div>
     </div>
 
