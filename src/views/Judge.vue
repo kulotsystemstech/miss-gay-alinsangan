@@ -99,7 +99,8 @@
 							)"
 							:disabled="ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].is_locked"
 							:id="`input_${teamIndex}_${criterionIndex}`"
-							@keydown.down.prevent="moveDown(criterionIndex, teamIndex)"
+                            @keyup.prevent="handleRatingKeyUp(team)"
+                            @keydown.down.prevent="moveDown(criterionIndex, teamIndex)"
 							@keydown.enter="moveDown(criterionIndex, teamIndex)"
 							@keydown.up.prevent="moveUp(criterionIndex, teamIndex)"
 							@keydown.right.prevent="moveRight(criterionIndex, teamIndex)"
@@ -396,14 +397,30 @@
                     });
                 }
             },
+            handleRatingKeyUp(team) {
+                // initialize total
+                let total = 0;
+
+                // accumulate ratings to total score
+                const teamRating = this.ratings[`${this.event.slug}_${team.id}`];
+                for (let i = 0; i < this.criteria.length; i++) {
+                    const criterion = this.criteria[i];
+                    total += Number(teamRating[`${this.$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value);
+                }
+
+                // accumulate total adds into totals object
+                this.totals[`team_${team.id}`].value = total;
+            },
             saveRating(rating, percentage, team) {
                 this.totals[`team_${team.id}`].loading = true;
-                // validates rating
-                if (rating.value < 0 || rating.value === '') {
+
+                // validate rating
+                if (rating.value < 0 || rating.value === '')
                     rating.value = 0;
-                } else if (rating.value > percentage) {
+                else if (rating.value > percentage)
                     rating.value = percentage;
-                }
+                this.handleRatingKeyUp(team);
+
                 // auto-save ratings
                 $.ajax({
                     url: `${this.$store.getters.appURL}/${this.$store.getters['auth/getUser'].userType}.php`,
@@ -415,18 +432,6 @@
                         rating
                     },
                     success: (data, textStatus, jqXHR) => {
-                        let total = 0;
-
-                        // accumulate ratings to total score
-                        const teamRating = this.ratings[`${this.event.slug}_${team.id}`];
-                        for (let j = 0; j < this.criteria.length; j++) {
-                            const criterion = this.criteria[j];
-                            total += teamRating[`${this.$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value
-                        }
-
-                        // accumulate total adds into totals object
-                        this.totals[`team_${team.id}`].value = total;
-
                         // set timeout for loading
                         if (this.totals[`team_${team.id}`].loading) {
                             setTimeout(() => {
@@ -436,7 +441,7 @@
                     },
                     error: (error) => {
                         alert(`ERROR ${error.status}: ${error.statusText}`);
-                    },
+                    }
                 });
             },
             calculateTotalScores(team) {
