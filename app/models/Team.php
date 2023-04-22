@@ -120,9 +120,7 @@ class Team extends App
         if($event_id > 0) {
             require_once 'Event.php';
             $event = Event::findById($event_id);
-            foreach($event->getAllEliminatedTeams() as $eliminated_team) {
-                $eliminated_team_ids[] = $eliminated_team->getId();
-            }
+            $eliminated_team_ids = $event->getRowEliminatedTeamIds();
         }
 
         // gather teams
