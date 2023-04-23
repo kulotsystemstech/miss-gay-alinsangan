@@ -71,7 +71,7 @@
 									<div class="d-flex flex-wrap" >
 										<?php foreach(Team::rows($event->getID()) as $team){ ?>
 											<div data-team="<?php echo $team["id"]; ?>" data-event="<?php echo $event->getID(); ?>" class="flex-grow-1 text-center team <?php echo $event->hasTeamNotShownUp(Team::findById($team["id"])) ? "noShow" : ""; ?>" >
-												<div class="avatar" style="background-image: url('../uploads/<?php echo $team["logo"]; ?>')" ></div>
+												<div class="avatar" style="background-image: url('../uploads/<?php echo $team["avatar"]; ?>')" ></div>
 											</div>
 										<?php } ?>
 									</div>	
