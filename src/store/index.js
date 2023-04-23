@@ -22,6 +22,10 @@ export default createStore({
         rating: {
             min: 70,
             max: 100
+        },
+        deduction: {
+            min: 0,
+            max: 100
         }
     },
 
