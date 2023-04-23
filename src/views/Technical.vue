@@ -63,15 +63,15 @@
                             justify="center"
                             hide-details
                             single-line
-                            :min="0"
-                            :max="100"
+                            :min="$store.state.deduction.min"
+                            :max="$store.state.deduction.max"
                             :loading="deductions[`${event.slug}_${team.id}`].loading"
                             v-model.number="deductions[`${event.slug}_${team.id}`].value"
                             @change="saveDeduction(deductions[`${event.slug}_${team.id}`], team.id)"
                             :class="{
                                 'text-error font-weight-bold': (
-                                    deductions[`${event.slug}_${team.id}`].value < 0 ||
-                                    deductions[`${event.slug}_${team.id}`].value > 100
+                                    deductions[`${event.slug}_${team.id}`].value < $store.state.deduction.min ||
+                                    deductions[`${event.slug}_${team.id}`].value > $store.state.deduction.max
                                 ),
                                 'text-grey-darken-2': deductions[`${event.slug}_${team.id}`].value === 0
                             }"

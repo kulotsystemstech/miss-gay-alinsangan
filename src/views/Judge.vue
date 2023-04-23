@@ -76,7 +76,6 @@
 						<v-text-field
 							type="number"
 							class="font-weight-bold"
-							variant="underlined"
 							hide-details
 							single-line
 							:min="0"
@@ -95,6 +94,12 @@
 							   || ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value < 0
 							   || ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value > criterion.percentage
 							)"
+                            :variant="
+                                ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value < 0
+                                ||
+                                ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].value > criterion.percentage
+                                ? 'outlined' : 'underlined'
+							"
 							:disabled="ratings[`${event.slug}_${team.id}`][`${$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`].is_locked"
 							:id="`input_${teamIndex}_${criterionIndex}`"
                             @keyup.prevent="handleRatingKeyUp(team)"
