@@ -17,8 +17,8 @@
                     <tr>
                         <th colspan="3" class="text-center text-uppercase font-weight-bold text-grey-darken-4 text-h5 py-3">
                             {{ event.title }}
-                            <div class="result-title text-center opacity-75 d-none">
-                                <h6 class="ma-0">{{ $store.state.app.title }}</h6>
+                            <div class="result-title text-center opacity-75 d-none" style="padding-top: 8px;">
+                                <h6 class="ma-0" style="line-height: 1;">{{ $store.state.app.title }}</h6>
                             </div>
                         </th>
                         <th
