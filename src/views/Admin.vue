@@ -165,7 +165,9 @@
                                 'bg-yellow-lighten-3': allSubmitted && team.deductions.inputs[technicalKey].is_locked && team.title !== ''
                             }"
                         >
-                            {{ team.deductions.inputs[technicalKey].value.toFixed(2) }}
+                            <span :class="{ blurred: !team.deductions.inputs[technicalKey].is_locked && team.deductions.inputs[technicalKey].value <= 0 }">
+                                {{ team.deductions.inputs[technicalKey].value.toFixed(2) }}
+                            </span>
                         </td>
                         <td
                             v-for="judge in judges" :key="judge.id"
@@ -182,7 +184,9 @@
                                     'text-red-darken-3': judge.is_chairman == 1
                                 }"
                             >
-                                {{ team.ratings.inputs[`judge_${judge.id}`].final.deducted.toFixed(2) }}
+                                <span :class="{ blurred: !team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.ratings.inputs[`judge_${judge.id}`].final.deducted <= 0 }">
+                                    {{ team.ratings.inputs[`judge_${judge.id}`].final.deducted.toFixed(2) }}
+                                </span>
                             </div>
 
                             <div
@@ -193,7 +197,9 @@
                                     'bg-yellow-lighten-3' : allSubmitted && team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.title !== ''
                                 }"
                             >
-                                {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
+                                <span :class="{ blurred: !team.ratings.inputs[`judge_${judge.id}`].final.is_locked && team.ratings.inputs[`judge_${judge.id}`].final.deducted <= 0 }">
+                                    {{ team.ratings.inputs[`judge_${judge.id}`].rank.fractional.toFixed(2) }}
+                                </span>
                             </div>
                         </td>
                         <td
@@ -527,5 +533,9 @@
     .table-winners th,
     .table-winners td {
         border: 0;
+    }
+
+    .blurred {
+        opacity: 0.3;
     }
 </style>
