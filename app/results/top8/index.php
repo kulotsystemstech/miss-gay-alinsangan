@@ -65,12 +65,13 @@
         }
 
         // get total rank and average
-        $total_rank    = $rank_production + $rank_swimwear + $rank_advocacy + $rank_evening_gown;
-        $total_average = ($average_production + $average_swimwear + $average_advocacy + $average_evening_gown) / 4;
+        $rank_total      = $rank_production + $rank_swimwear + $rank_advocacy + $rank_evening_gown;
+        $rank_average    = $rank_total / 4;
+        $general_average = ($average_production + $average_swimwear + $average_advocacy + $average_evening_gown) / 4;
 
-        // push $total_rank to $unique_total_ranks
-        if(!in_array($total_rank, $unique_total_ranks))
-            $unique_total_ranks[] = $total_rank;
+        // push $rank_total to $unique_total_ranks
+        if(!in_array($rank_total, $unique_total_ranks))
+            $unique_total_ranks[] = $rank_total;
 
         // append to $result
         $result[$team_key] = [
@@ -93,9 +94,10 @@
                     'average' => $average_evening_gown
                 ]
             ],
-            'average' => $total_average,
+            'average' => $general_average,
             'rank' => [
-                'total'    => $total_rank,
+                'total'    => $rank_total,
+                'average'  => $rank_average,
                 'dense'    => 0,
                 'initial'  => 0,
                 'adjusted' => 0,
@@ -263,10 +265,13 @@
                     EVENING<br>GOWN
                 </th>
                 <th rowspan="2" class="text-center bl bt br">
-                    <span class="opacity-75">GENERAL<br>AVERAGE</span>
+                    <span class="opacity-75">GEN.<br>AVG.</span>
                 </th>
                 <th rowspan="2" class="text-center text-primary bl bt br">
-                    <span class="opacity-75">TOTAL<br>RANK</span>
+                    <span class="opacity-75">RANK<br>TOTAL</span>
+                </th>
+                <th rowspan="2" class="text-center text-primary bl bt br">
+                    <span class="opacity-75">RANK<br>AVG.</span>
                 </th>
                 <th rowspan="2" class="text-center bl bt br">
                     <span class="opacity-50">INITIAL<br>RANK</span>
@@ -279,16 +284,16 @@
                 </th>
             </tr>
             <tr class="table-secondary">
-                <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
+                <th class="text-center bl"><span class="opacity-75">Avg.</span></th>
                 <th class="text-center text-primary br">Rank</th>
 
-                <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
+                <th class="text-center bl"><span class="opacity-75">Avg.</span></th>
                 <th class="text-center text-primary br">Rank</th>
 
-                <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
+                <th class="text-center bl"><span class="opacity-75">Avg.</span></th>
                 <th class="text-center text-primary br">Rank</th>
 
-                <th class="text-center bl"><span class="opacity-75">Ave.</span></th>
+                <th class="text-center bl"><span class="opacity-75">Avg.</span></th>
                 <th class="text-center text-primary br">Rank</th>
             </tr>
         </thead>
@@ -366,9 +371,14 @@
                     </span>
                 </td>
 
-                <!-- total rank -->
+                <!-- rank total -->
                 <td class="pe-3 text-primary fw-bold bl br fw-bold" align="right">
                     <span class="opacity-75"><?= number_format($team['rank']['total'], 2) ?></span>
+                </td>
+
+                <!-- rank average -->
+                <td class="pe-3 text-primary fw-bold bl br fw-bold" align="right">
+                    <span class="opacity-75"><?= number_format($team['rank']['average'], 2) ?></span>
                 </td>
 
                 <!-- initial rank -->
