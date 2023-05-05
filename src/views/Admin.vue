@@ -112,10 +112,13 @@
                             </div>
                         </th>
                         <th class="text-center text-uppercase font-weight-bold text-green-darken-4 py-3">
-                            Average
+                            Total<br>Avg.
                         </th>
                         <th class="text-center text-uppercase font-weight-bold text-blue-darken-4 py-3">
-                            Total<br>Rank
+                            Rank<br>Total
+                        </th>
+                        <th class="text-center text-uppercase font-weight-bold text-blue-darken-3 py-3">
+                            Rank<br>Avg.
                         </th>
                         <th class="text-center text-uppercase font-weight-bold text-grey-darken-1 py-3">
                             Initial<br>Rank
@@ -206,6 +209,12 @@
                             <span class="pr-2">{{ team.rank.total.fractional.toFixed(2) }}</span>
                         </td>
                         <td
+                            class="text-right font-weight-bold text-blue-darken-4"
+                            :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
+                        >
+                            <span class="pr-2">{{ team.rank.average.fractional.toFixed(2) }}</span>
+                        </td>
+                        <td
                             class="text-right font-weight-bold text-grey-darken-1"
                             :class="{ 'bg-yellow-lighten-3': allSubmitted && team.title !== '' }"
                         >
@@ -226,7 +235,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td :colspan="(8 + totalTechnicals + totalJudges)">
+                        <td :colspan="(9 + totalTechnicals + totalJudges)">
                             <v-row class="justify-center">
                                 <v-col
                                     v-for="technical in technicals" :key="technical.id"
