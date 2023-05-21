@@ -13,6 +13,7 @@ export default createStore({
     state: {
         app: {
             title: 'Binibining San Vicente 2023',
+            org: 'ACLC College Iriga',
             backendDir: 'app',
             sideNav: false
         },
@@ -54,6 +55,5 @@ export default createStore({
         setWindowHeight(state, n) {
             state.window.height = n;
         }
-    },
-
-})
+    }
+});
