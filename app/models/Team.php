@@ -13,6 +13,7 @@ class Team extends App
     protected $name;
     protected $location;
     protected $avatar;
+    protected $disabled = false;
 
 
     /***************************************************************************
@@ -82,11 +83,12 @@ class Team extends App
     public function toArray()
     {
         return [
-            'id'    => $this->id,
-            'number' => $this->number,
-            'name'  => $this->name,
+            'id'       => $this->id,
+            'number'   => $this->number,
+            'name'     => $this->name,
             'location' => $this->location,
-            'avatar'  => $this->avatar
+            'avatar'   => $this->avatar,
+            'disabled' => $this->disabled
         ];
     }
 
@@ -116,6 +118,7 @@ class Team extends App
     public static function all($event_id = 0)
     {
         // gather team ids of eliminated teams
+        $event = null;
         $eliminated_team_ids = [];
         if($event_id > 0) {
             require_once 'Event.php';
@@ -136,7 +139,11 @@ class Team extends App
 
         $teams = [];
         while($row = $result->fetch_assoc()) {
-            $teams[] = new Team($row['id']);
+            $team = new Team($row['id']);
+            if($event) {
+                $team->disabled = $team->hasNotShownUpForEvent($event);
+            }
+            $teams[] = $team;
         }
 
         // sort teams for an event
