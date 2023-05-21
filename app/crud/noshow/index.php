@@ -41,13 +41,12 @@
 
 		.team.noShow{
 			filter: grayscale(1);
-			opacity: 0.2;
+			opacity: 0.4;
 		}
 	</style>
 
 </head>
 <body>
-
 	<div class="container p-4">
 		<div id="app" class="row">
 			<?php
@@ -71,7 +70,14 @@
 									<div class="d-flex flex-wrap" >
 										<?php foreach(Team::rows($event->getID()) as $team){ ?>
 											<div data-team="<?php echo $team["id"]; ?>" data-event="<?php echo $event->getID(); ?>" class="flex-grow-1 text-center team <?php echo $event->hasTeamNotShownUp(Team::findById($team["id"])) ? "noShow" : ""; ?>" >
-												<div class="avatar" style="background-image: url('../uploads/<?php echo $team["avatar"]; ?>')" ></div>
+                                                <div class="avatar position-relative" style="background-image: url('../uploads/<?php echo $team["avatar"]; ?>'); border-radius: 50%;">
+                                                    <h5
+                                                        class="position-absolute m-0 pb-1 w-100 text-center text-white"
+                                                        style="bottom: 0; line-height: 1"
+                                                    >
+                                                        <span style="text-shadow: 2px 2px #444"><?php echo $team["number"] ?></span>
+                                                    </h5>
+                                                </div>
 											</div>
 										<?php } ?>
 									</div>	
@@ -85,7 +91,6 @@
 			</div>
 			<?php } ?>
 		</div>
-
 	</div>
 
 	<script type="text/javascript">
