@@ -350,7 +350,7 @@
             },
             updateCoordinates (y) {
                 this.coordinates.y = y;
-                this.move(y, false);
+                this.move(y, null, false);
             }
         },
 

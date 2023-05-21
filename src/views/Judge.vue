@@ -606,7 +606,7 @@
                 // get input coordinates
                 this.coordinates.x = x;
                 this.coordinates.y = y;
-                this.move(x, y, false);
+                this.move(x, y, null, false);
             }
         },
         mounted() {
