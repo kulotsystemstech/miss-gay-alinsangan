@@ -13,10 +13,9 @@ export default createStore({
     state: {
         app: {
             title: 'Face of Beauty International',
+            org: 'ACLC College Iriga',
             backendDir: 'app',
-            sideNav: false,
-            title: 'Sportsfest-LitMusDa 2023',
-            org: 'ACLC College Iriga'
+            sideNav: false
         },
         window: {
             height: 0
@@ -56,6 +55,5 @@ export default createStore({
         setWindowHeight(state, n) {
             state.window.height = n;
         }
-    },
-
+    }
 })
