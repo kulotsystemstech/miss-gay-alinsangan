@@ -70,13 +70,13 @@
 									<div class="d-flex flex-wrap" >
 										<?php foreach(Team::rows($event->getID()) as $team){ ?>
 											<div data-team="<?php echo $team["id"]; ?>" data-event="<?php echo $event->getID(); ?>" class="flex-grow-1 text-center team <?php echo $event->hasTeamNotShownUp(Team::findById($team["id"])) ? "noShow" : ""; ?>" >
-                                                <div class="avatar position-relative" style="background-image: url('../uploads/<?php echo $team["avatar"]; ?>')">
-                                                    <p
+                                                <div class="avatar position-relative" style="background-image: url('../uploads/<?php echo $team["avatar"]; ?>'); border-radius: 50%;">
+                                                    <h5
                                                         class="position-absolute m-0 pb-1 w-100 text-center text-white"
                                                         style="bottom: 0; line-height: 1"
                                                     >
-                                                        <small class="fw-bold" style="text-shadow: 1px 1px #666"><?php echo $team["country"] ?></small>
-                                                    </p>
+                                                        <span style="text-shadow: 2px 2px #444"><?php echo $team["number"] ?></span>
+                                                    </h5>
                                                 </div>
 											</div>
 										<?php } ?>
