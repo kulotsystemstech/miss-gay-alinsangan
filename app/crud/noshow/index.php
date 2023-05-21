@@ -13,7 +13,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>NoShow</title>
+	<title>Enable / Disable</title>
 
 	<link rel="stylesheet" type="text/css" href="../dist/bootstrap-5.2.3/css/bootstrap.min.css" />
 	<script type="text/javascript" src="../dist/jquery-3.6.4/jquery-3.6.4.min.js" ></script>
