@@ -14,7 +14,9 @@ export default createStore({
         app: {
             title: 'Face of Beauty International',
             backendDir: 'app',
-            sideNav: false
+            sideNav: false,
+            title: 'Sportsfest-LitMusDa 2023',
+            org: 'ACLC College Iriga'
         },
         window: {
             height: 0
