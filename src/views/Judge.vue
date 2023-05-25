@@ -472,7 +472,7 @@
                 let ratings = [];
                 for (let criterion of this.criteria) {
                     const rating = this.ratings[`${this.event.slug}_${team.id}`][`${this.$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`];
-                    rating.value = this.totals[`team_${team.id}`].value * (criterion.percentage / 100);
+                    rating.value = this.totals[`team_${team.id}`].value * (criterion.percentage / this.$store.state.rating.max);
                     // Ratings are pushed to array
                     ratings.push(rating);
                 }
