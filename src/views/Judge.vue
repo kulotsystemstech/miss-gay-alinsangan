@@ -37,6 +37,7 @@
 						:class="{ 'bg-grey-lighten-4': coordinates.x == criteria.length && !scoreSheetDisabled }, $vuetify.display.mdAndDown ? 'text-body-1' : 'text-h6'"
 					>
 						Total
+                        <p class="ma-0 text-subtitle-2 text-green-darken-2">{{ minRating.toFixed(2) }} - {{ (maxRating >= 100) ? maxRating.toFixed(0) : maxRating.toFixed(2) }}</p>
 					</th>
 					<th
 						style="width: 13%"
@@ -44,6 +45,7 @@
                         :class="$vuetify.display.mdAndDown ? 'text-body-1' : 'text-h6'"
 					>
 						Rank
+                        <p class="ma-0 text-subtitle-2">&nbsp;</p>
 					</th>
 				</tr>
 			</thead>
@@ -120,23 +122,23 @@
 							single-line
 							:loading="totals[`team_${team.id}`].loading"
 							v-model.number="totals[`team_${team.id}`].value"
-							:min="$store.state.rating.min"
-							:max="$store.state.rating.max"
+							:min="minRating"
+							:max="maxRating"
 							@change="calculateTotalScores(team)"
 							:class="{
 								'text-error font-weight-bold': (
-									totals[`team_${team.id}`].value < $store.state.rating.min
-								|| totals[`team_${team.id}`].value > $store.state.rating.max
+									totals[`team_${team.id}`].value < minRating
+								|| totals[`team_${team.id}`].value > maxRating
 								),
 								'text-success font-weight-bold': (
-									totals[`team_${team.id}`].value >= $store.state.rating.min
-								&& totals[`team_${team.id}`].value <= $store.state.rating.max
+									totals[`team_${team.id}`].value >= minRating
+								&& totals[`team_${team.id}`].value <= maxRating
 								)
 							}"
 							:error="(
 								  totals[`team_${team.id}`].value.toString().trim() === ''
-							   || totals[`team_${team.id}`].value < $store.state.rating.min
-							   || totals[`team_${team.id}`].value > $store.state.rating.max
+							   || totals[`team_${team.id}`].value < minRating
+							   || totals[`team_${team.id}`].value > maxRating
 						   )"
 							:disabled="team.disabled || totals[`team_${team.id}`].is_locked"
 							:id="`input_${teamIndex}_${criteria.length}`"
@@ -219,8 +221,8 @@
                                     </v-card-title>
                                     <v-card-text>
                                         <p class="mb-2 text-red-darken-4">
-                                            Sorry, your ratings for {{ event.title}} cannot be submitted as they must be between
-                                            <b>{{ $store.state.rating.min }}</b> and <b>{{ $store.state.rating.max }}</b>.
+                                            Sorry, your ratings for <b>{{ event.title }}</b> cannot be submitted as they must be from
+                                            <big><b>{{ minRating }}</b></big> to <big><b>{{ maxRating }}</b></big>.
                                         </p>
                                         <p class="text-red-darken-4">Please adjust your ratings and try submitting again.</p>
                                     </v-card-text>
@@ -354,6 +356,25 @@
                 }
                 // return value
                 return disabled;
+            },
+            totalCriteriaPercentage() {
+                let percentage = 0;
+                for(let i=0; i<this.criteria.length; i++) {
+                    percentage += this.criteria[i].percentage;
+                }
+                return percentage;
+            },
+            minRating() {
+                if(this.totalCriteriaPercentage >= 100)
+                    return this.$store.state.rating.min;
+                else
+                    return this.totalCriteriaPercentage * 0.60;
+            },
+            maxRating() {
+                if(this.totalCriteriaPercentage >= 100)
+                    return this.$store.state.rating.max;
+                else
+                    return this.totalCriteriaPercentage;
             }
         },
         watch: {
@@ -460,18 +481,17 @@
                 this.totals[`team_${team.id}`].loading = true;
 
                 // validates total scores
-                if (this.totals[`team_${team.id}`].value < this.$store.state.rating.min || this.totals[`team_${team.id}`].value === '') {
-                    this.totals[`team_${team.id}`].value = this.$store.state.rating.min;
-                } else if (this.totals[`team_${team.id}`].value > this.$store.state.rating.max) {
-                    this.totals[`team_${team.id}`].value = this.$store.state.rating.max;
+                if (this.totals[`team_${team.id}`].value < this.minRating || this.totals[`team_${team.id}`].value === '') {
+                    this.totals[`team_${team.id}`].value = this.minRating;
+                } else if (this.totals[`team_${team.id}`].value > this.maxRating) {
+                    this.totals[`team_${team.id}`].value = this.maxRating;
                 }
 
                 // total score divided and distributed based on criteria percentage
                 let ratings = [];
                 for (let criterion of this.criteria) {
                     const rating = this.ratings[`${this.event.slug}_${team.id}`][`${this.$store.getters['auth/getUser'].id}_${criterion.id}_${team.id}`];
-                    rating.value = this.totals[`team_${team.id}`].value * (criterion.percentage / 100);
-                    // Ratings are pushed to array
+                    rating.value = this.totals[`team_${team.id}`].value * (criterion.percentage / this.totalCriteriaPercentage);
                     ratings.push(rating);
                 }
 
@@ -498,13 +518,9 @@
                 })
             },
             openSubmitDialog() {
-                // define minRating and maxRating
-                let minRating = this.$store.state.rating.min;
-                let maxRating = this.$store.state.rating.max;
-
                 // open dialog according to ratings
                 for (let i = 0; i < this.teams.length; i++) {
-                    if (!this.teams[i].disabled && (this.totals[`team_${this.teams[i].id}`].value < minRating || this.totals[`team_${this.teams[i].id}`].value > maxRating)) {
+                    if (!this.teams[i].disabled && (this.totals[`team_${this.teams[i].id}`].value < this.minRating || this.totals[`team_${this.teams[i].id}`].value > this.maxRating)) {
                         this.inspectDialog = true
                         this.submitDialog = false;
                         break;

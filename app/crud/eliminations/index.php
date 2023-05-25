@@ -59,7 +59,7 @@ require_once '../../models/Team.php';
                             <?php
                             $teams = Team::all();
                             foreach ($teams as $team) {
-                                $team_name = $team->getName();
+                                $team_name = $team->getCountry();
                                 $team_id = $team->getId();
                                 $team_number = $team->getNumber();
                                 $team_location = $team->getLocation();
