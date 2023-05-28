@@ -61,7 +61,8 @@
                             withCredentials: true
                         },
                         data: {
-                            ping: true
+                            ping: true,
+                            eventSlug: this.$route.params.eventSlug ? this.$route.params.eventSlug : null
                         },
                         success: (data) => {
                             data = JSON.parse(data);
