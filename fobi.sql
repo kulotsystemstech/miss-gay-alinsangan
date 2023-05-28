@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2023 at 03:40 AM
+-- Generation Time: May 28, 2023 at 04:42 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -34,6 +34,7 @@ CREATE TABLE `admins` (
   `avatar` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `active_portion` varchar(255) DEFAULT NULL,
   `called_at` timestamp NULL DEFAULT NULL,
   `pinged_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -44,8 +45,8 @@ CREATE TABLE `admins` (
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `number`, `name`, `avatar`, `username`, `password`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, '2023-03-18 06:13:38', '2023-02-19 07:36:32', '2023-03-18 06:44:17');
+INSERT INTO `admins` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, NULL, NULL, '2023-02-19 07:36:32', '2023-05-28 02:41:10');
 
 -- --------------------------------------------------------
 
@@ -224,6 +225,7 @@ CREATE TABLE `judges` (
   `avatar` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `active_portion` varchar(255) DEFAULT NULL,
   `called_at` timestamp NULL DEFAULT NULL,
   `pinged_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -234,26 +236,26 @@ CREATE TABLE `judges` (
 -- Dumping data for table `judges`
 --
 
-INSERT INTO `judges` (`id`, `number`, `name`, `avatar`, `username`, `password`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'JUDGE 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, '2023-03-18 06:50:09', '2023-02-19 08:58:05', '2023-03-18 06:50:09'),
-(2, 2, 'JUDGE 02', 'no-avatar.jpg', 'judge02', 'judge02', NULL, '2023-03-16 15:21:23', '2023-02-19 08:58:16', '2023-03-18 06:42:37'),
-(3, 3, 'JUDGE 03', 'no-avatar.jpg', 'judge03', 'judge03', NULL, '2023-03-16 15:30:00', '2023-02-19 08:58:32', '2023-03-18 06:42:43'),
-(4, 4, 'JUDGE 04', 'no-avatar.jpg', 'judge04', 'judge04', NULL, '2023-03-16 15:30:00', '2023-02-21 05:32:22', '2023-03-18 06:42:46'),
-(5, 5, 'JUDGE 05', 'no-avatar.jpg', 'judge05', 'judge05', NULL, '2023-03-16 15:30:03', '2023-02-21 05:32:22', '2023-03-18 06:42:49'),
-(6, 6, 'JUDGE 06', 'no-avatar.jpg', 'judge06', 'judge06', NULL, '2023-03-16 15:30:00', '2023-03-16 01:06:51', '2023-03-18 06:42:52'),
-(7, 7, 'JUDGE 07', 'no-avatar.jpg', 'judge07', 'judge07', NULL, '2023-03-16 15:30:00', '2023-03-16 01:07:07', '2023-03-18 06:42:56'),
-(8, 8, 'JUDGE 08', 'no-avatar.jpg', 'judge08', 'judge08', NULL, '2023-03-16 15:30:01', '2023-03-16 01:07:16', '2023-03-18 06:43:00'),
-(9, 1, 'PAGEANT 01', 'no-avatar.jpg', 'pageant01', 'pageant01', NULL, NULL, '2023-03-18 06:22:48', '2023-03-18 06:43:17'),
-(10, 2, 'PAGEANT 02', 'no-avatar.jpg', 'pageant02', 'pageant02', NULL, NULL, '2023-03-18 06:22:52', '2023-03-18 06:41:30'),
-(11, 3, 'PAGEANT 03', 'no-avatar.jpg', 'pageant03', 'pageant03', NULL, NULL, '2023-03-18 06:22:57', '2023-03-18 06:41:34'),
-(12, 4, 'PAGEANT 04', 'no-avatar.jpg', 'pageant04', 'pageant04', NULL, NULL, '2023-03-18 06:23:02', '2023-03-18 06:41:38'),
-(13, 5, 'PAGEANT 05', 'no-avatar.jpg', 'pageant05', 'pageant05', NULL, NULL, '2023-03-18 06:23:06', '2023-03-18 06:41:42'),
-(14, 6, 'PAGEANT 06', 'no-avatar.jpg', 'pageant06', 'pageant06', NULL, NULL, '2023-03-18 06:23:10', '2023-03-18 06:41:47'),
-(15, 7, 'PAGEANT 07', 'no-avatar.jpg', 'pageant07', 'pageant07', NULL, NULL, '2023-03-18 06:23:13', '2023-03-18 06:41:56'),
-(16, 8, 'PAGEANT 08', 'no-avatar.jpg', 'pageant08', 'pageant08', NULL, NULL, '2023-03-18 06:23:16', '2023-03-18 06:42:01'),
-(17, 9, 'PAGEANT 09', 'no-avatar.jpg', 'pageant09', 'pageant09', NULL, NULL, '2023-03-18 06:23:24', '2023-03-18 06:42:05'),
-(18, 1, 'PRELIMINARY 01', 'no-avatar.jpg', 'prelim01', 'prelim01', NULL, NULL, '2023-03-18 06:23:28', '2023-03-18 06:42:09'),
-(19, 1, 'RESULT 01', 'no-avatar.jpg', 'result01', 'result01', NULL, NULL, '2023-03-18 06:23:32', '2023-03-18 06:42:14');
+INSERT INTO `judges` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'JUDGE 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, NULL, NULL, '2023-02-19 08:58:05', '2023-05-28 02:41:22'),
+(2, 2, 'JUDGE 02', 'no-avatar.jpg', 'judge02', 'judge02', NULL, NULL, NULL, '2023-02-19 08:58:16', '2023-05-28 02:41:25'),
+(3, 3, 'JUDGE 03', 'no-avatar.jpg', 'judge03', 'judge03', NULL, NULL, NULL, '2023-02-19 08:58:32', '2023-05-28 02:41:27'),
+(4, 4, 'JUDGE 04', 'no-avatar.jpg', 'judge04', 'judge04', NULL, NULL, NULL, '2023-02-21 05:32:22', '2023-05-28 02:41:29'),
+(5, 5, 'JUDGE 05', 'no-avatar.jpg', 'judge05', 'judge05', NULL, NULL, NULL, '2023-02-21 05:32:22', '2023-05-28 02:41:31'),
+(6, 6, 'JUDGE 06', 'no-avatar.jpg', 'judge06', 'judge06', NULL, NULL, NULL, '2023-03-16 01:06:51', '2023-05-28 02:41:33'),
+(7, 7, 'JUDGE 07', 'no-avatar.jpg', 'judge07', 'judge07', NULL, NULL, NULL, '2023-03-16 01:07:07', '2023-05-28 02:41:36'),
+(8, 8, 'JUDGE 08', 'no-avatar.jpg', 'judge08', 'judge08', NULL, NULL, NULL, '2023-03-16 01:07:16', '2023-05-28 02:41:38'),
+(9, 1, 'PAGEANT 01', 'no-avatar.jpg', 'pageant01', 'pageant01', NULL, NULL, NULL, '2023-03-18 06:22:48', '2023-03-18 06:43:17'),
+(10, 2, 'PAGEANT 02', 'no-avatar.jpg', 'pageant02', 'pageant02', NULL, NULL, NULL, '2023-03-18 06:22:52', '2023-03-18 06:41:30'),
+(11, 3, 'PAGEANT 03', 'no-avatar.jpg', 'pageant03', 'pageant03', NULL, NULL, NULL, '2023-03-18 06:22:57', '2023-03-18 06:41:34'),
+(12, 4, 'PAGEANT 04', 'no-avatar.jpg', 'pageant04', 'pageant04', NULL, NULL, NULL, '2023-03-18 06:23:02', '2023-03-18 06:41:38'),
+(13, 5, 'PAGEANT 05', 'no-avatar.jpg', 'pageant05', 'pageant05', NULL, NULL, NULL, '2023-03-18 06:23:06', '2023-03-18 06:41:42'),
+(14, 6, 'PAGEANT 06', 'no-avatar.jpg', 'pageant06', 'pageant06', NULL, NULL, NULL, '2023-03-18 06:23:10', '2023-03-18 06:41:47'),
+(15, 7, 'PAGEANT 07', 'no-avatar.jpg', 'pageant07', 'pageant07', NULL, NULL, NULL, '2023-03-18 06:23:13', '2023-03-18 06:41:56'),
+(16, 8, 'PAGEANT 08', 'no-avatar.jpg', 'pageant08', 'pageant08', NULL, NULL, NULL, '2023-03-18 06:23:16', '2023-03-18 06:42:01'),
+(17, 9, 'PAGEANT 09', 'no-avatar.jpg', 'pageant09', 'pageant09', NULL, NULL, NULL, '2023-03-18 06:23:24', '2023-03-18 06:42:05'),
+(18, 1, 'PRELIMINARY 01', 'no-avatar.jpg', 'prelim01', 'prelim01', NULL, NULL, NULL, '2023-03-18 06:23:28', '2023-03-18 06:42:09'),
+(19, 1, 'RESULT 01', 'no-avatar.jpg', 'result01', 'result01', NULL, NULL, NULL, '2023-03-18 06:23:32', '2023-03-18 06:42:14');
 
 -- --------------------------------------------------------
 
@@ -446,6 +448,7 @@ CREATE TABLE `technicals` (
   `avatar` varchar(255) DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `active_portion` varchar(255) DEFAULT NULL,
   `called_at` timestamp NULL DEFAULT NULL,
   `pinged_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -456,8 +459,8 @@ CREATE TABLE `technicals` (
 -- Dumping data for table `technicals`
 --
 
-INSERT INTO `technicals` (`id`, `number`, `name`, `avatar`, `username`, `password`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'TECHNICAL O1', 'no-avatar.jpg', 'technical01', 'technical01', NULL, NULL, '2023-02-19 08:58:58', '2023-02-26 06:04:50');
+INSERT INTO `technicals` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 'TECHNICAL O1', 'no-avatar.jpg', 'technical01', 'technical01', NULL, NULL, NULL, '2023-02-19 08:58:58', '2023-02-26 06:04:50');
 
 -- --------------------------------------------------------
 
