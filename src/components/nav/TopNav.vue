@@ -36,14 +36,17 @@
             </v-btn>
 
             <!-- user info -->
-			<v-chip
-				:color="$store.getters['auth/getUser'] !== null ?
-					$store.getters['auth/getUser'].userType === 'admin' ? 'amber' :
-					$store.getters['auth/getUser'].userType === 'judge' ? 'green-lighten-2' :
-					'red-lighten-2' : ''"
-				:style="$vuetify.display.mdAndDown ? 'font-size: 12px' : ''"
-			>
-				<v-icon start icon="mdi-account-circle"/>
+            <v-chip
+                :color="
+                    $store.getters['auth/getUser'] !== null
+                    ? (
+                        ($store.getters['auth/getUser'].userType === 'admin')
+					    ? 'amber'
+					    : (isUserOnline ? 'green-lighten-2' : 'red-lighten-2')
+					  )
+                    : 'grey-lighten-1'"
+                :style="$vuetify.display.mdAndDown ? 'font-size: 12px' : ''"
+            >
 				{{ $store.getters['auth/getUser'].name }}
 			</v-chip>
 			<v-avatar
