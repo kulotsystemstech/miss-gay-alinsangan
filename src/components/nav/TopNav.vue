@@ -48,12 +48,17 @@
 			</v-chip>
 			<v-avatar
 				size="35"
-				v-if="$vuetify.display.lgAndUp"
-				:class="$vuetify.display.lgAndUp ? 'ms-3' : ''"
+                v-if="$vuetify.display.smAndUp"
+                :class="$vuetify.display.smAndUp ? 'ms-3' : ''"
 			>
-				<v-img
-					:src="`${$store.getters.appURL}/crud/uploads/${$store.getters['auth/getUser'].avatar}`"
-				/>
+				<v-img :src="`${$store.getters.appURL}/crud/uploads/${$store.getters['auth/getUser'].avatar}`">
+                    <div
+                        v-if="$store.getters['auth/getUser'].userType !== 'admin'"
+                        class="status"
+                        :class="{ 'status-active': isUserOnline }"
+                    >
+                    </div>
+                </v-img>
 			</v-avatar>
 		</template>
 
@@ -126,12 +131,21 @@
                 dialog: false,
                 signingOut: false,
                 signedOut: false,
-                helpDisabled: false
+                helpDisabled: false,
+                statusTimer: null
             }
         },
         computed: {
             askingForHelp() {
                 return this.$store.getters['auth/getUser'].calling;
+            },
+            isUserOnline() {
+                let currentTimestamp = this.$store.getters['auth/getUser'].currentTimestamp;
+                let pingTimestamp = this.$store.getters['auth/getUser'].pingTimestamp;
+                if (currentTimestamp === null || pingTimestamp === null)
+                    return false;
+                else
+                    return (currentTimestamp - pingTimestamp) < 13000;
             }
         },
         methods: {
@@ -188,6 +202,17 @@
                     },
                 });
             }
+        },
+        mounted() {
+            if (this.$store.getters['auth/getUser'].userType !== 'admin') {
+                this.statusTimer = setInterval(() => {
+                    this.$store.commit('auth/setUserCurrentTimestamp', Date.now());
+                }, 2400);
+            }
+        },
+        unmounted() {
+            if (this.statusTimer)
+                clearInterval(this.statusTimer);
         }
     }
 </script>
@@ -207,6 +232,26 @@
 
     #remind {
         animation: tilt-shaking 1s linear infinite;
+    }
+
+    .status {
+        background-color: #b00020;
+        position: fixed;
+        top: 36px;
+        right: 70px;
+        z-index: 2;
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+    .status-active {
+        background-color: #12c212 !important;
+    }
+    @media only screen and (max-width: 800px) {
+        .status {
+            right: 55px;
+        }
     }
 
     @keyframes shine {
