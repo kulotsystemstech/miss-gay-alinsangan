@@ -30,16 +30,16 @@
                             <p
                                 class="text-grey-darken-1"
                                 :class="{
-                                    'text-subtitle-1': $vuetify.display.mdAndDown,
+                                    'text-caption text-uppercase': $vuetify.display.mdAndDown,
                                     'text-grey-darken-3': coordinates.x == criterionIndex && !scoreSheetDisabled
                                 }"
                             >
                                 {{ criterion.title }}
                             </p>
                             <b
-                                class="text-grey-darken-2"
+                                class="text-grey-darken-2 text-h6"
                                 :class="{
-                                    'text-subtitle-2 font-weight-bold': $vuetify.display.mdAndDown,
+                                    'text-body-2 text-uppercase font-weight-bold': $vuetify.display.mdAndDown,
                                     'text-grey-darken-4': coordinates.x == criterionIndex && !scoreSheetDisabled
                                 }"
                                 style="margin-top: auto"
