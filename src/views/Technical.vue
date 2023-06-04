@@ -24,7 +24,7 @@
                     </th>
                     <th
                         style="width: 1rem;"
-                        class="text-uppercase text-center text-grey-darken-4 py-3"
+                        class="text-uppercase text-center text-grey-darken-3 font-weight-bold py-3"
                         :class="$vuetify.display.mdAndDown ? 'text-body-1' : 'text-h6'"
                     >
                         Deduction
@@ -38,13 +38,16 @@
                     :class="{ 'bg-grey-lighten-4': coordinates.y == teamIndex }"
                 >
                     <td
-                        class="text-uppercase text-center text-grey-darken-4 font-weight-bold"
+                        class="text-uppercase text-right text-h5 font-weight-bold text-grey-darken-2"
+                        :class="{ 'text-grey-darken-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
                         style="width: 0.2rem;"
-                        :class="$vuetify.display.mdAndDown ? 'text-h5' : 'text-h4'"
                     >
                         {{ teamIndex + 1 }}
                     </td>
-                    <td>
+                    <td
+                        class="text-grey-darken-2"
+                        :class="{ 'text-grey-darken-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
+                    >
                         <div class="d-flex">
                             <v-avatar size="42" class="mr-2">
                                 <v-img
