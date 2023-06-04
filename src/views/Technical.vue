@@ -24,7 +24,7 @@
                     </th>
                     <th
                         style="width: 1rem;"
-                        class="text-uppercase text-center text-grey-darken-4 py-3"
+                        class="text-uppercase text-center text-grey-darken-3 font-weight-bold py-3"
                         :class="$vuetify.display.mdAndDown ? 'text-body-1' : 'text-h6'"
                     >
                         Deduction
@@ -35,10 +35,11 @@
                 <tr
                     v-for="(team, teamIndex) in teams"
                     :key="team.id"
-                    :class="{ 'bg-grey-lighten-4': coordinates.y == teamIndex }"
+                    :class="{ 'bg-grey-lighten-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
                 >
                     <td
-                        class="text-uppercase text-center text-h5 text-grey-darken-4 font-weight-bold"
+                        class="text-uppercase text-right text-h5 font-weight-bold text-grey-darken-2"
+                        :class="{ 'text-grey-darken-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
                         style="width: 0.2rem;"
                     >
                         {{ team.number }}
@@ -51,7 +52,10 @@
                             />
                         </v-avatar>
                     </td>
-                    <td class="px-0">
+                    <td
+                        class="px-0 text-grey-darken-2"
+                        :class="{ 'text-grey-darken-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
+                    >
                         <p class="ma-0 text-subtitle-2 text-uppercase font-weight-bold" style="line-height: 1.2">{{ team.name }}</p>
                         <p class="mt-1 mb-0" style="line-height: 1"><small>{{ team.location }}</small></p>
                     </td>
