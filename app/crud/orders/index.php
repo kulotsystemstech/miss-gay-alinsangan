@@ -98,7 +98,7 @@ function findArrangementId($eventId, $order) {
                                                         }
                                                     ?>
                                                 >
-                                                    <?= $team->getCountry() ?>
+                                                    <?= $team->getNumber() ?> - <?= $team->getName() ?>
                                                 </option>
                                             <?php } ?>
                                         </select>
