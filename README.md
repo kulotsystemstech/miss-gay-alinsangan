@@ -97,3 +97,8 @@ Here's how to compile the project for production deployment:
    For example:
      - <http://localhost/fobi>
      - <http://192.168.1.99/fobi>
+
+
+#### Admin Dashboard
+To configure tabulation settings or view results, access the admin dashboard at <http://localhost/fobi/app>.
+The default ***username*** and ***password*** is `admin`.
