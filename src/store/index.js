@@ -12,7 +12,7 @@ export default createStore({
 
     state: {
         app: {
-            title: 'Binibining San Vicente 2023',
+            title: 'Miss ACLC Iriga Campus Face 2023',
             org: 'ACLC College Iriga',
             backendDir: 'app',
             sideNav: false
