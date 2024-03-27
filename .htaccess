@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /bbsv-buhi/
+RewriteBase /miss-aclc-iriga/
 
 # Exclude assets from rewrite rule
 RewriteCond %{REQUEST_URI} !\.(css|js|svg|jpg|jpeg|png|gif|woff2|ico|ttf)$ [NC]
@@ -7,9 +7,9 @@ RewriteCond %{REQUEST_URI} !\.(css|js|svg|jpg|jpeg|png|gif|woff2|ico|ttf)$ [NC]
 # Redirect all requests to index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /bbsv-buhi/public/index.html [L]
+RewriteRule ^(.*)$ /miss-aclc-iriga/public/index.html [L]
 
 # Exclude the public and app directories from the rewrite rule
-RewriteCond %{REQUEST_URI} !^/bbsv-buhi/public/
-RewriteCond %{REQUEST_URI} !^/bbsv-buhi/app/
-RewriteRule ^(.*)$ /bbsv-buhi/public/$1 [L]
+RewriteCond %{REQUEST_URI} !^/miss-aclc-iriga/public/
+RewriteCond %{REQUEST_URI} !^/miss-aclc-iriga/app/
+RewriteRule ^(.*)$ /miss-aclc-iriga/public/$1 [L]
