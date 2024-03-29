@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 02:28 PM
+-- Generation Time: Mar 29, 2024 at 09:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, NULL, NULL, '2023-02-19 07:36:32', '2024-03-27 13:24:18');
+(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, NULL, NULL, '2023-02-19 07:36:32', '2024-03-29 08:01:09');
 
 -- --------------------------------------------------------
 
@@ -325,20 +325,20 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `number`, `name`, `location`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Annalyn Rebutar', 'Miss ACLC', 'annalyn-rebutar.jpg', '2024-03-27 12:57:34', '2024-03-27 13:05:22'),
-(2, 2, 'Brianna Catangui', 'Miss ACLC', 'brianna-catangui.jpg', '2024-03-27 12:58:05', '2024-03-27 13:05:27'),
-(3, 3, 'Catherine Turalde', 'Miss ACLC', 'catherine-turalde.jpg', '2024-03-27 12:58:43', '2024-03-27 13:05:31'),
-(4, 4, 'Cherlen Narceda', 'Miss ACLC', 'cherlen-narceda.jpg', '2024-03-27 12:59:41', '2024-03-27 13:05:35'),
-(5, 5, 'Cielo Pervera', 'Miss ACLC', 'cielo-pervera.jpg', '2024-03-27 13:00:17', '2024-03-27 13:05:40'),
-(6, 6, 'Diana Judavar', 'Miss ACLC', 'diana-judavar.jpg', '2024-03-27 13:00:40', '2024-03-27 13:05:43'),
-(7, 7, 'Diana Villareal', 'Miss ACLC', 'diana-villareal.jpg', '2024-03-27 13:01:04', '2024-03-27 13:05:46'),
-(8, 8, 'Jade Nica Labios', 'Miss ACLC', 'jade-nica-labios.jpg', '2024-03-27 13:02:03', '2024-03-27 13:05:50'),
-(9, 9, 'Krisha Magistrado', 'Miss ACLC', 'krisha-magistrado.jpg', '2024-03-27 13:02:49', '2024-03-27 13:05:54'),
-(10, 10, 'Lian Jed Caballero', 'Miss ACLC', 'lian-jed-caballero.jpg', '2024-03-27 13:03:18', '2024-03-27 13:05:58'),
-(11, 11, 'Ma. Fatima Villadares', 'Miss ACLC', 'ma-fatima-villadares.jpg', '2024-03-27 13:03:50', '2024-03-27 13:06:03'),
-(12, 12, 'Renchelle Nacario', 'Miss ACLC', 'renchelle-nacario.jpg', '2024-03-27 13:04:11', '2024-03-27 13:06:07'),
-(13, 13, 'Shirly Jinahon', 'Miss ACLC', 'shirly-jinahon.jpg', '2024-03-27 13:04:30', '2024-03-27 13:06:11'),
-(14, 14, 'Stephany Tesorero', 'Miss ACLC', 'stephany-tesorero.jpg', '2024-03-27 13:05:01', '2024-03-27 13:06:14');
+(1, 10, 'Annalyn C. Rebutar', 'HUMSS-11A', 'annalyn-rebutar.jpg', '2024-03-27 12:57:34', '2024-03-29 07:28:29'),
+(2, 2, 'Brianna G. Catangui', 'STEM-12C', 'brianna-catangui.jpg', '2024-03-27 12:58:05', '2024-03-29 07:19:40'),
+(3, 13, 'Ma. Catherine Joy R. Turalde', 'COLLEGE', 'catherine-turalde.jpg', '2024-03-27 12:58:43', '2024-03-29 07:30:23'),
+(4, 11, 'Cherlen Angel Narceda', 'STEM-11B', 'cherlen-narceda.jpg', '2024-03-27 12:59:41', '2024-03-29 07:29:00'),
+(5, 6, 'Ma. Cielo Mae I. Pervera', 'ABM-12A', 'cielo-pervera.jpg', '2024-03-27 13:00:17', '2024-03-29 07:26:18'),
+(6, 4, 'Princess Diana C. Judavar', 'STEM-12B', 'diana-judavar.jpg', '2024-03-27 13:00:40', '2024-03-29 07:23:43'),
+(7, 9, 'Diana Rose Z. Villareal', 'ABM-12A', 'diana-villareal.jpg', '2024-03-27 13:01:04', '2024-03-29 07:27:01'),
+(8, 5, 'Jade Nica B. Labios', 'GAS-11A', 'jade-nica-labios.jpg', '2024-03-27 13:02:03', '2024-03-29 07:24:07'),
+(9, 8, 'Krisha Mae B. Magistrado', 'ABM-12A', 'krisha-magistrado.jpg', '2024-03-27 13:02:49', '2024-03-29 07:28:07'),
+(10, 3, 'Lian Jed K. Caballero', 'ABM-12A', 'lian-jed-caballero.jpg', '2024-03-27 13:03:18', '2024-03-29 07:23:02'),
+(11, 7, 'Ma. Fatima A. Villadares', 'ABM-12A', 'ma-fatima-villadares.jpg', '2024-03-27 13:03:50', '2024-03-29 07:27:43'),
+(12, 14, 'Renchelle Ann A. Nacario', 'HUMSS-11A', 'renchelle-nacario.jpg', '2024-03-27 13:04:11', '2024-03-29 07:30:13'),
+(13, 1, 'Shirly Anne A. Jinahon', 'ABM-12A', 'shirly-jinahon.jpg', '2024-03-27 13:04:30', '2024-03-29 07:19:25'),
+(14, 12, 'Stephany D. Tesorero', 'TVL-CSS-12A', 'stephany-tesorero.jpg', '2024-03-27 13:05:01', '2024-03-29 07:29:42');
 
 -- --------------------------------------------------------
 
