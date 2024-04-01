@@ -1,5 +1,5 @@
 <?php
-const LOGIN_PAGE_PATH = '../../crud/';
+const LOGIN_PAGE_PATH = '../crud/';
 require_once '../crud/auth.php';
 
 require_once '../config/database.php';
@@ -11,15 +11,15 @@ require_once '../models/Event.php';
 const EVENTS = [
     [
         'slug'    => 'production-number',
-        'percent' => 16.67
+        'percent' => 16.667
     ],
     [
         'slug'    => 'sports-wear',
-        'percent' => 16.67
+        'percent' => 16.667
     ],
     [
         'slug'    => 'playsuit',
-        'percent' => 16.67
+        'percent' => 16.667
     ],
     [
         'slug'    => 'final-qa',
