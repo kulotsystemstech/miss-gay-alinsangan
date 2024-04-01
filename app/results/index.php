@@ -386,50 +386,6 @@ shuffle($tops_unordered);
             <?php } ?>
         </div>
     </div>
-
-    <!-- Summary -->
-    <div class="container-fluid mt-5 pt-5" style="page-break-before: always;">
-        <div class="col-md-6 offset-md-3" align="center">
-            <h4 class="opacity-75"><?= $competition_title ?></h4>
-            <?php if(sizeof($tops_ordered) > 0 && sizeof($result) > 0) { ?>
-                <h1 style="margin-bottom: 45px;"><?= $result['team_'.$tops_ordered[0]]['title'] ?></h1>
-            <?php } ?>
-            <div style="width: 80%;">
-                <table class="table table-bordered mt-3">
-                    <tbody>
-                    <?php
-                    foreach($tops_ordered as $team_id) {
-                        $team = $result['team_'.$team_id];
-                        ?>
-                        <tr>
-                            <!-- number -->
-                            <td class="pe-3 fw-bold text-center">
-                                <h3 class="m-0">
-                                    <?= $team['info']['number'] ?>
-                                </h3>
-                            </td>
-
-                            <!-- avatar -->
-                            <td style="width: 72px;">
-                                <img
-                                    src="../crud/uploads/<?= $team['info']['avatar'] ?>"
-                                    alt="<?= $team['info']['number'] ?>"
-                                    style="width: 100%; border-radius: 100%"
-                                >
-                            </td>
-
-                            <!-- name -->
-                            <td>
-                                <h6 class="text-uppercase m-0"><?= $team['info']['name'] ?></h6>
-                                <small class="m-0"><?= $team['info']['location'] ?></small>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="../crud/dist/bootstrap-5.2.3/js/bootstrap.bundle.min.js"></script>
