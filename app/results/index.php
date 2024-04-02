@@ -388,6 +388,59 @@ shuffle($tops_unordered);
     </div>
 </div>
 
+<!-- Summary -->
+<div class="container-fluid mt-5 pt-5" style="page-break-before: always;">
+    <div class="col-md-6 offset-md-3" align="center">
+        <div style="width: 50%;">
+            <table class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                    <th colspan="3" class="text-center" style="border-width: 0; border-style: hidden">
+                        <h4 class="opacity-75"><?= $competition_title ?> Winners</h4>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                for ($i = count($titles) - 1; $i >= 0; $i--) {
+                    $title = $titles[$i];
+                    foreach ($result as $team_key => $team) {
+                        if ($team['title'] === $title) {
+                            ?>
+                            <tr>
+                                <td colspan="3" align="center" style="border-right: 0; border-left: 0; margin-top: 20px; margin-bottom: 20px">
+                                    <h2 class="font-weight-bolder mt-5 mb-2"><?= $title ?></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- Number -->
+                                <td class="pe-3 fw-bold text-center">
+                                    <h3 class="m-0"><?= $team['info']['number'] ?></h3>
+                                </td>
+                                <!-- Avatar -->
+                                <td style="width: 72px;">
+                                    <img src="../crud/uploads/<?= $team['info']['avatar'] ?>" alt="<?= $team['info']['number'] ?>" style="width: 100%; border-radius: 100%">
+                                </td>
+                                <!-- Name and Title -->
+                                <td style="padding-left: 20px; padding-right: 20px;">
+                                    <h5 class="text-uppercase m-0"><?= $team['info']['name'] ?></h5>
+                                    <small class="m-0"><?= $team['info']['location'] ?></small>
+                                </td>
+                            </tr>
+                            <?php
+                            break;
+                        }
+                    }
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
 <script src="../crud/dist/bootstrap-5.2.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
