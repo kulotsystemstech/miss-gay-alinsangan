@@ -33,6 +33,7 @@ app/crud/uploads/*
 !app/crud/uploads/renchelle-nacario.jpg
 !app/crud/uploads/shirly-jinahon.jpg
 !app/crud/uploads/stephany-tesorero.jpg
+!app/crud/uploads/full
 !app/crud/uploads/no-avatar.jpg
 !app/crud/dist
 /cypress/videos/

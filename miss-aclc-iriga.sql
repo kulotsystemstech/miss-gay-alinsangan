@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2024 at 02:28 PM
+-- Generation Time: Apr 01, 2024 at 08:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,7 +46,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, NULL, NULL, '2023-02-19 07:36:32', '2024-03-27 13:24:18');
+(1, 1, 'DEVELOPMENT', 'no-avatar.jpg', 'admin', 'admin', NULL, NULL, NULL, '2023-02-19 07:36:32', '2024-03-29 08:01:09');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `competition_id`, `slug`, `title`, `created_at`, `updated_at`) VALUES
-(1, 1, 'coronation', 'Coronation', '2023-04-06 13:25:10', '2024-03-27 13:24:45');
+(1, 1, 'pageant', 'Pageant', '2023-04-06 13:25:10', '2024-04-01 05:06:51');
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,18 @@ CREATE TABLE `criteria` (
 --
 
 INSERT INTO `criteria` (`id`, `event_id`, `title`, `percentage`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Rating', 100, '2024-03-27 12:01:03', '2024-03-27 12:02:30');
+(1, 1, 'Production Performance', 40, '2024-03-27 12:01:03', '2024-04-01 05:10:42'),
+(2, 1, 'Poise and Bearing', 40, '2024-04-01 05:11:01', '2024-04-01 05:11:01'),
+(3, 1, 'Over-all Impact', 20, '2024-04-01 05:11:12', '2024-04-01 05:11:50'),
+(4, 2, 'Sport Identity', 40, '2024-04-01 05:12:08', '2024-04-01 05:12:08'),
+(5, 2, 'Poise and Bearing', 40, '2024-04-01 05:12:20', '2024-04-01 05:12:20'),
+(6, 2, 'Over-all Impact', 20, '2024-04-01 05:12:31', '2024-04-01 05:12:31'),
+(7, 3, 'Body Proportion', 40, '2024-04-01 05:12:49', '2024-04-01 05:12:49'),
+(8, 3, 'Poise and Bearing', 40, '2024-04-01 05:12:59', '2024-04-01 05:12:59'),
+(9, 3, 'Over-all Impact', 20, '2024-04-01 05:13:16', '2024-04-01 05:13:16'),
+(10, 4, 'Content of the Answer and Delivery', 40, '2024-04-01 05:13:45', '2024-04-01 05:13:45'),
+(11, 4, 'Beauty of the Face', 40, '2024-04-01 05:13:57', '2024-04-01 05:13:57'),
+(12, 4, 'Poise and Bearing', 20, '2024-04-01 05:14:08', '2024-04-01 05:14:08');
 
 -- --------------------------------------------------------
 
@@ -179,7 +190,10 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `category_id`, `slug`, `title`, `created_at`, `updated_at`) VALUES
-(1, 1, 'production', 'Production', '2023-04-06 13:25:37', '2023-04-06 14:07:37');
+(1, 1, 'production-number', 'Production Number', '2023-04-06 13:25:37', '2024-04-01 05:08:02'),
+(2, 1, 'sports-wear', 'Sports Wear', '2024-04-01 05:07:40', '2024-04-01 05:07:40'),
+(3, 1, 'playsuit', 'Playsuit', '2024-04-01 05:08:35', '2024-04-01 05:08:35'),
+(4, 1, 'final-qa', 'Final Q&A', '2024-04-01 05:09:21', '2024-04-01 05:09:21');
 
 -- --------------------------------------------------------
 
@@ -206,7 +220,7 @@ CREATE TABLE `judges` (
 --
 
 INSERT INTO `judges` (`id`, `number`, `name`, `avatar`, `username`, `password`, `active_portion`, `called_at`, `pinged_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Judge 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, NULL, NULL, '2023-04-06 13:58:11', '2024-03-27 13:26:37'),
+(1, 1, 'Judge 01', 'no-avatar.jpg', 'judge01', 'judge01', NULL, NULL, NULL, '2023-04-06 13:58:11', '2024-04-01 06:58:31'),
 (2, 2, 'Judge 02', 'no-avatar.jpg', 'judge02', 'judge02', NULL, NULL, NULL, '2023-04-06 13:58:28', '2023-04-06 13:58:28'),
 (3, 3, 'Judge 03', 'no-avatar.jpg', 'judge03', 'judge03', NULL, NULL, NULL, '2023-04-06 13:58:42', '2023-04-06 13:58:42'),
 (4, 4, 'Judge 04', 'no-avatar.jpg', 'judge04', 'judge04', NULL, NULL, NULL, '2023-04-06 13:59:26', '2023-04-06 13:59:26'),
@@ -236,7 +250,22 @@ INSERT INTO `judge_event` (`id`, `judge_id`, `event_id`, `is_chairman`, `created
 (2, 2, 1, 0, '2023-04-06 14:01:01', '2024-03-27 13:26:57'),
 (3, 3, 1, 0, '2023-04-06 14:01:14', '2024-03-27 13:27:00'),
 (4, 4, 1, 0, '2023-04-06 14:01:28', '2024-03-27 13:27:03'),
-(5, 5, 1, 0, '2023-04-06 14:01:42', '2024-03-27 13:27:05');
+(5, 5, 1, 0, '2023-04-06 14:01:42', '2024-03-27 13:27:05'),
+(6, 1, 2, 0, '2024-04-01 05:25:28', '2024-04-01 05:25:28'),
+(7, 1, 3, 0, '2024-04-01 05:25:34', '2024-04-01 05:25:34'),
+(8, 1, 4, 0, '2024-04-01 05:25:41', '2024-04-01 05:25:41'),
+(9, 2, 2, 0, '2024-04-01 05:26:40', '2024-04-01 05:26:40'),
+(10, 2, 3, 0, '2024-04-01 05:26:44', '2024-04-01 05:26:44'),
+(11, 2, 4, 0, '2024-04-01 05:26:49', '2024-04-01 05:26:49'),
+(12, 3, 2, 0, '2024-04-01 05:27:04', '2024-04-01 05:27:04'),
+(13, 3, 3, 0, '2024-04-01 05:27:08', '2024-04-01 05:27:08'),
+(14, 3, 4, 0, '2024-04-01 05:27:12', '2024-04-01 05:27:12'),
+(15, 4, 2, 0, '2024-04-01 05:27:29', '2024-04-01 05:27:29'),
+(16, 4, 3, 0, '2024-04-01 05:27:37', '2024-04-01 05:27:37'),
+(17, 4, 4, 0, '2024-04-01 05:27:44', '2024-04-01 05:27:44'),
+(18, 5, 2, 0, '2024-04-01 05:28:08', '2024-04-01 05:28:08'),
+(19, 5, 3, 0, '2024-04-01 05:28:13', '2024-04-01 05:28:13'),
+(20, 5, 4, 0, '2024-04-01 05:28:17', '2024-04-01 05:28:17');
 
 -- --------------------------------------------------------
 
@@ -325,20 +354,20 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `number`, `name`, `location`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Annalyn Rebutar', 'Miss ACLC', 'annalyn-rebutar.jpg', '2024-03-27 12:57:34', '2024-03-27 13:05:22'),
-(2, 2, 'Brianna Catangui', 'Miss ACLC', 'brianna-catangui.jpg', '2024-03-27 12:58:05', '2024-03-27 13:05:27'),
-(3, 3, 'Catherine Turalde', 'Miss ACLC', 'catherine-turalde.jpg', '2024-03-27 12:58:43', '2024-03-27 13:05:31'),
-(4, 4, 'Cherlen Narceda', 'Miss ACLC', 'cherlen-narceda.jpg', '2024-03-27 12:59:41', '2024-03-27 13:05:35'),
-(5, 5, 'Cielo Pervera', 'Miss ACLC', 'cielo-pervera.jpg', '2024-03-27 13:00:17', '2024-03-27 13:05:40'),
-(6, 6, 'Diana Judavar', 'Miss ACLC', 'diana-judavar.jpg', '2024-03-27 13:00:40', '2024-03-27 13:05:43'),
-(7, 7, 'Diana Villareal', 'Miss ACLC', 'diana-villareal.jpg', '2024-03-27 13:01:04', '2024-03-27 13:05:46'),
-(8, 8, 'Jade Nica Labios', 'Miss ACLC', 'jade-nica-labios.jpg', '2024-03-27 13:02:03', '2024-03-27 13:05:50'),
-(9, 9, 'Krisha Magistrado', 'Miss ACLC', 'krisha-magistrado.jpg', '2024-03-27 13:02:49', '2024-03-27 13:05:54'),
-(10, 10, 'Lian Jed Caballero', 'Miss ACLC', 'lian-jed-caballero.jpg', '2024-03-27 13:03:18', '2024-03-27 13:05:58'),
-(11, 11, 'Ma. Fatima Villadares', 'Miss ACLC', 'ma-fatima-villadares.jpg', '2024-03-27 13:03:50', '2024-03-27 13:06:03'),
-(12, 12, 'Renchelle Nacario', 'Miss ACLC', 'renchelle-nacario.jpg', '2024-03-27 13:04:11', '2024-03-27 13:06:07'),
-(13, 13, 'Shirly Jinahon', 'Miss ACLC', 'shirly-jinahon.jpg', '2024-03-27 13:04:30', '2024-03-27 13:06:11'),
-(14, 14, 'Stephany Tesorero', 'Miss ACLC', 'stephany-tesorero.jpg', '2024-03-27 13:05:01', '2024-03-27 13:06:14');
+(1, 1, 'Shirly Anne A. Jinahon', 'ABM-12A', 'shirly-jinahon.jpg', '2024-03-27 13:04:30', '2024-03-29 09:05:43'),
+(2, 2, 'Brianna G. Catangui', 'STEM-12C', 'brianna-catangui.jpg', '2024-03-27 12:58:05', '2024-03-29 07:19:40'),
+(3, 3, 'Lian Jed K. Caballero', 'ABM-12A', 'lian-jed-caballero.jpg', '2024-03-27 13:03:18', '2024-03-29 09:05:35'),
+(4, 4, 'Princess Diana C. Judavar', 'STEM-12B', 'diana-judavar.jpg', '2024-03-27 13:00:40', '2024-03-29 09:05:20'),
+(5, 5, 'Jade Nica B. Labios', 'GAS-11A', 'jade-nica-labios.jpg', '2024-03-27 13:02:03', '2024-03-29 09:05:01'),
+(6, 6, 'Ma. Cielo Mae I. Pervera', 'ABM-12A', 'cielo-pervera.jpg', '2024-03-27 13:00:17', '2024-03-29 09:05:16'),
+(7, 7, 'Ma. Fatima A. Villadares', 'ABM-12A', 'ma-fatima-villadares.jpg', '2024-03-27 13:03:50', '2024-03-29 09:05:38'),
+(8, 8, 'Krisha Mae B. Magistrado', 'ABM-12A', 'krisha-magistrado.jpg', '2024-03-27 13:02:49', '2024-03-29 09:05:31'),
+(9, 9, 'Diana Rose Z. Villareal', 'ABM-12A', 'diana-villareal.jpg', '2024-03-27 13:01:04', '2024-03-29 09:05:25'),
+(10, 10, 'Annalyn C. Rebutar', 'HUMSS-11A', 'annalyn-rebutar.jpg', '2024-03-27 12:57:34', '2024-03-29 09:05:07'),
+(11, 11, 'Cherlen Angel Narceda', 'STEM-11B', 'cherlen-narceda.jpg', '2024-03-27 12:59:41', '2024-03-29 09:05:13'),
+(12, 12, 'Stephany D. Tesorero', 'TVL-CSS-12A', 'stephany-tesorero.jpg', '2024-03-27 13:05:01', '2024-03-29 09:05:40'),
+(13, 13, 'Ma. Catherine Joy R. Turalde', 'COLLEGE', 'catherine-turalde.jpg', '2024-03-27 12:58:43', '2024-03-29 09:05:10'),
+(14, 14, 'Renchelle Ann A. Nacario', 'HUMSS-11A', 'renchelle-nacario.jpg', '2024-03-27 13:04:11', '2024-03-29 09:05:45');
 
 -- --------------------------------------------------------
 
@@ -401,7 +430,9 @@ CREATE TABLE `titles` (
 --
 
 INSERT INTO `titles` (`id`, `event_id`, `rank`, `title`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Best in Production', '2023-04-07 05:09:18', '2023-04-07 05:09:18');
+(1, 1, 1, 'Best in Production', '2023-04-06 21:09:18', '2023-04-06 21:09:18'),
+(2, 2, 1, 'Best in Sports Wear', '2024-04-01 05:21:37', '2024-04-01 05:40:21'),
+(3, 3, 1, 'Best in Playsuit', '2024-04-01 05:21:38', '2024-04-01 05:40:26');
 
 --
 -- Indexes for dumped tables
@@ -570,7 +601,7 @@ ALTER TABLE `competitions`
 -- AUTO_INCREMENT for table `criteria`
 --
 ALTER TABLE `criteria`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `deductions`
@@ -588,7 +619,7 @@ ALTER TABLE `eliminations`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `judges`
@@ -600,7 +631,7 @@ ALTER TABLE `judges`
 -- AUTO_INCREMENT for table `judge_event`
 --
 ALTER TABLE `judge_event`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `noshows`
@@ -648,7 +679,7 @@ ALTER TABLE `technical_event`
 -- AUTO_INCREMENT for table `titles`
 --
 ALTER TABLE `titles`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
