@@ -341,7 +341,7 @@ shuffle($tops_unordered);
                 <td class="br"></td>
 
                 <!-- slot -->
-                <td rowspan="2" class="bb br text-center" style="line-height: 1.1; vertical-align: bottom">
+                <td rowspan="2" class="bb br text-center" style="line-height: 1.1; vertical-align: center">
                     <h4 class="m-0"><?= $team['title'] ?></h4>
                 </td>
             </tr>
@@ -428,7 +428,6 @@ shuffle($tops_unordered);
                                 </td>
                             </tr>
                             <?php
-                            break;
                         }
                     }
                 }
