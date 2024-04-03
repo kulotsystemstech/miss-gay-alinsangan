@@ -45,11 +45,32 @@
                         {{ team.number }}
                     </td>
                     <td style="width: 72px;">
-                        <v-avatar size="72">
-                            <v-img
-                                cover
-                                :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`"
-                            />
+                        <v-avatar size="72" class="avatar">
+                            <v-img class="avatar-hover-effect" cover :src="`${$store.getters.appURL}/crud/uploads/${team.avatar}`">
+                                <v-tooltip activator="parent" location="left" align="center">
+                                    <v-card
+                                        class="mx-auto"
+                                        theme="dark"
+                                    >
+                                        <v-img
+                                            height="400"
+                                            width="280"
+                                            :lazy-src="`${$store.getters.appURL}/crud/uploads/full/${team.avatar}`"
+                                            :src="`${$store.getters.appURL}/crud/uploads/full/${team.avatar}`"
+                                            cover
+                                        >
+                                            <template v-slot:placeholder>
+                                                <div class="d-flex align-center justify-center fill-height">
+                                                    <v-progress-circular
+                                                        color="grey-lighten-4"
+                                                        indeterminate
+                                                    ></v-progress-circular>
+                                                </div>
+                                            </template>
+                                        </v-img>
+                                    </v-card>
+                                </v-tooltip>
+                            </v-img>
                         </v-avatar>
                     </td>
                     <td
@@ -385,6 +406,16 @@
         -webkit-text-fill-color: transparent;
 
         animation: shine 10s ease infinite;
+    }
+
+    .avatar:hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(10, 10, 10, 0.75);
+    }
+
+    .avatar-hover-effect:hover {
+        transform: scale(1.2);
+        transition: transform 0.3s ease;
     }
 
     #remind {
