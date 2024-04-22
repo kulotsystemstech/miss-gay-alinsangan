@@ -163,6 +163,8 @@ class Admin extends User
                 $result['technicals'][$key_technical]['calling'] = $technical->isCalling();
                 $active_event = Event::findBySlug($technical->getActivePortion());
                 $result['technicals'][$key_technical]['active_portion_title'] = $active_event ? $active_event->getTitle() : null;
+                $active_team = $result['technicals'][$key_technical]['online'] ? $technical->getActiveTeamInEvent($event) : false;
+                $result['technicals'][$key_technical]['active_team_id'] = $active_team ? $active_team->getId() : null;
 
                 // get technical's total team deductions
                 $technical_total = $technical->getEventTeamDeduction($event, $team);
@@ -205,6 +207,8 @@ class Admin extends User
                 $result['judges'][$key_judge]['calling'] = $judge->isCalling();
                 $active_event = Event::findBySlug($judge->getActivePortion());
                 $result['judges'][$key_judge]['active_portion_title'] = $active_event ? $active_event->getTitle() : null;
+                $active_team = $result['judges'][$key_judge]['online'] ? $judge->getActiveTeamInEvent($event) : false;
+                $result['judges'][$key_judge]['active_team_id'] = $active_team ? $active_team->getId() : null;
 
                 // get judge's total team ratings and ranks
                 $judge_total = $judge_ranks[$key_judge]['ranks'][$key_team]['rating']; // $judge->getEventTeamRating($event, $team);
@@ -601,6 +605,16 @@ class Admin extends User
             'teams'        => []
         ];
 
+        /**
+         * Team point deductions (if any)
+         * [team_{id}' => {deduction}, ...]
+         */
+        define('TEAM_DEDUCTIONS', [
+            'team_1' => 0,
+            'team_2' => 0,
+            'team_3' => 0
+        ]);
+
         // get all teams
         require_once 'Team.php';
         $teams = Team::all();
@@ -609,6 +623,11 @@ class Admin extends User
             $arr_team = $team->toArray();
             $arr_team['inputs'] = [];
             $arr_team['points'] = 0;
+            $arr_team['team_deductions'] = 0;
+            if(isset(TEAM_DEDUCTIONS[$key_team])) {
+                $arr_team['points'] -= TEAM_DEDUCTIONS[$key_team];
+                $arr_team['team_deductions'] = TEAM_DEDUCTIONS[$key_team];
+            }
             $arr_team['rank'] = [
                 'dense'      => 0,
                 'fractional' => 0
