@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 05:59 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Apr 22, 2024 at 12:23 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -263,6 +263,8 @@ CREATE TABLE `judge_event` (
   `judge_id` tinyint(3) UNSIGNED NOT NULL,
   `event_id` smallint(5) UNSIGNED NOT NULL,
   `is_chairman` tinyint(1) NOT NULL DEFAULT 0,
+  `active_team_id` tinyint(3) UNSIGNED NOT NULL,
+  `has_active_team` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -271,32 +273,32 @@ CREATE TABLE `judge_event` (
 -- Dumping data for table `judge_event`
 --
 
-INSERT INTO `judge_event` (`id`, `judge_id`, `event_id`, `is_chairman`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, '2023-04-06 14:00:46', '2023-04-06 14:00:46'),
-(2, 1, 2, 0, '2023-04-06 14:00:48', '2023-04-06 14:00:48'),
-(3, 1, 3, 0, '2023-04-06 14:00:51', '2023-04-06 14:00:51'),
-(4, 1, 4, 0, '2023-04-06 14:00:53', '2023-04-06 14:00:53'),
-(5, 1, 5, 0, '2023-04-06 14:00:55', '2023-04-06 14:00:55'),
-(6, 2, 1, 0, '2023-04-06 14:01:01', '2023-04-06 14:01:01'),
-(7, 2, 2, 0, '2023-04-06 14:01:03', '2023-04-06 14:01:03'),
-(8, 2, 3, 0, '2023-04-06 14:01:06', '2023-04-06 14:01:06'),
-(9, 2, 4, 0, '2023-04-06 14:01:08', '2023-04-06 14:01:08'),
-(10, 2, 5, 0, '2023-04-06 14:01:10', '2023-04-06 14:01:10'),
-(11, 3, 1, 0, '2023-04-06 14:01:14', '2023-04-06 14:01:14'),
-(12, 3, 2, 0, '2023-04-06 14:01:16', '2023-04-06 14:01:16'),
-(13, 3, 3, 0, '2023-04-06 14:01:19', '2023-04-06 14:01:19'),
-(14, 3, 4, 0, '2023-04-06 14:01:21', '2023-04-06 14:01:21'),
-(15, 3, 5, 0, '2023-04-06 14:01:23', '2023-04-06 14:01:23'),
-(16, 4, 1, 0, '2023-04-06 14:01:28', '2023-04-06 14:01:28'),
-(17, 4, 2, 0, '2023-04-06 14:01:30', '2023-04-06 14:01:30'),
-(18, 4, 3, 0, '2023-04-06 14:01:33', '2023-04-06 14:01:33'),
-(19, 4, 4, 0, '2023-04-06 14:01:36', '2023-04-06 14:01:36'),
-(20, 4, 5, 0, '2023-04-06 14:01:38', '2023-04-06 14:01:38'),
-(21, 5, 1, 0, '2023-04-06 14:01:42', '2023-04-06 14:01:42'),
-(22, 5, 2, 0, '2023-04-06 14:01:45', '2023-04-06 14:01:45'),
-(23, 5, 3, 0, '2023-04-06 14:01:47', '2023-04-06 14:01:47'),
-(24, 5, 4, 0, '2023-04-06 14:01:49', '2023-04-06 14:01:49'),
-(25, 5, 5, 0, '2023-04-06 14:01:52', '2023-04-06 14:01:52');
+INSERT INTO `judge_event` (`id`, `judge_id`, `event_id`, `is_chairman`, `active_team_id`, `has_active_team`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 0, 1, 0, '2023-04-06 14:00:46', '2024-04-22 10:21:17'),
+(2, 1, 2, 0, 1, 0, '2023-04-06 14:00:48', '2024-04-22 10:21:17'),
+(3, 1, 3, 0, 1, 0, '2023-04-06 14:00:51', '2024-04-22 10:21:17'),
+(4, 1, 4, 0, 1, 0, '2023-04-06 14:00:53', '2024-04-22 10:21:17'),
+(5, 1, 5, 0, 1, 0, '2023-04-06 14:00:55', '2024-04-22 10:21:17'),
+(6, 2, 1, 0, 1, 0, '2023-04-06 14:01:01', '2024-04-22 10:21:17'),
+(7, 2, 2, 0, 1, 0, '2023-04-06 14:01:03', '2024-04-22 10:21:17'),
+(8, 2, 3, 0, 1, 0, '2023-04-06 14:01:06', '2024-04-22 10:21:17'),
+(9, 2, 4, 0, 1, 0, '2023-04-06 14:01:08', '2024-04-22 10:21:17'),
+(10, 2, 5, 0, 1, 0, '2023-04-06 14:01:10', '2024-04-22 10:21:17'),
+(11, 3, 1, 0, 1, 0, '2023-04-06 14:01:14', '2024-04-22 10:21:17'),
+(12, 3, 2, 0, 1, 0, '2023-04-06 14:01:16', '2024-04-22 10:21:17'),
+(13, 3, 3, 0, 1, 0, '2023-04-06 14:01:19', '2024-04-22 10:21:17'),
+(14, 3, 4, 0, 1, 0, '2023-04-06 14:01:21', '2024-04-22 10:21:17'),
+(15, 3, 5, 0, 1, 0, '2023-04-06 14:01:23', '2024-04-22 10:21:17'),
+(16, 4, 1, 0, 1, 0, '2023-04-06 14:01:28', '2024-04-22 10:21:17'),
+(17, 4, 2, 0, 1, 0, '2023-04-06 14:01:30', '2024-04-22 10:21:17'),
+(18, 4, 3, 0, 1, 0, '2023-04-06 14:01:33', '2024-04-22 10:21:17'),
+(19, 4, 4, 0, 1, 0, '2023-04-06 14:01:36', '2024-04-22 10:21:17'),
+(20, 4, 5, 0, 1, 0, '2023-04-06 14:01:38', '2024-04-22 10:21:17'),
+(21, 5, 1, 0, 1, 0, '2023-04-06 14:01:42', '2024-04-22 10:21:17'),
+(22, 5, 2, 0, 1, 0, '2023-04-06 14:01:45', '2024-04-22 10:21:17'),
+(23, 5, 3, 0, 1, 0, '2023-04-06 14:01:47', '2024-04-22 10:21:17'),
+(24, 5, 4, 0, 1, 0, '2023-04-06 14:01:49', '2024-04-22 10:21:17'),
+(25, 5, 5, 0, 1, 0, '2023-04-06 14:01:52', '2024-04-22 10:21:17');
 
 -- --------------------------------------------------------
 
@@ -435,6 +437,8 @@ CREATE TABLE `technical_event` (
   `id` tinyint(3) UNSIGNED NOT NULL,
   `technical_id` tinyint(3) UNSIGNED NOT NULL,
   `event_id` smallint(5) UNSIGNED NOT NULL,
+  `active_team_id` tinyint(3) UNSIGNED NOT NULL,
+  `has_active_team` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -543,7 +547,8 @@ ALTER TABLE `judges`
 ALTER TABLE `judge_event`
   ADD PRIMARY KEY (`id`),
   ADD KEY `judge_id` (`judge_id`),
-  ADD KEY `event_id` (`event_id`);
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `active_team_id` (`active_team_id`);
 
 --
 -- Indexes for table `noshows`
@@ -595,7 +600,8 @@ ALTER TABLE `technicals`
 ALTER TABLE `technical_event`
   ADD PRIMARY KEY (`id`),
   ADD KEY `judge_id` (`technical_id`),
-  ADD KEY `event_id` (`event_id`);
+  ADD KEY `event_id` (`event_id`),
+  ADD KEY `active_team_id` (`active_team_id`);
 
 --
 -- Indexes for table `titles`
@@ -765,7 +771,8 @@ ALTER TABLE `events`
 --
 ALTER TABLE `judge_event`
   ADD CONSTRAINT `judge_event_ibfk_1` FOREIGN KEY (`judge_id`) REFERENCES `judges` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `judge_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `judge_event_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `judge_event_ibfk_3` FOREIGN KEY (`active_team_id`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `noshows`
@@ -800,7 +807,8 @@ ALTER TABLE `ratings`
 --
 ALTER TABLE `technical_event`
   ADD CONSTRAINT `technical_event_ibfk_2` FOREIGN KEY (`technical_id`) REFERENCES `technicals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `technical_event_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `technical_event_ibfk_3` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `technical_event_ibfk_4` FOREIGN KEY (`active_team_id`) REFERENCES `teams` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `titles`
