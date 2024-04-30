@@ -70,6 +70,7 @@
 				<tr
 					v-for="(team, teamIndex) in teams"
 					:key="team.id"
+                    :id="`row--team-${team.id}`"
 					:class="{ 'bg-grey-lighten-4': coordinates.y == teamIndex && !scoreSheetDisabled }"
 				>
                     <td
@@ -144,28 +145,24 @@
 						<v-text-field
 							type="number"
 							class="font-weight-bold"
-							variant="outlined"
-							hide-details
+                            :variant="(!totalErrors[`team_${team.id}`].empty && totalErrors[`team_${team.id}`].invalid) ? 'filled' : 'outlined'"
+                            :hide-details="!(!totalErrors[`team_${team.id}`].empty && totalErrors[`team_${team.id}`].invalid)"
 							single-line
 							:loading="totals[`team_${team.id}`].loading"
 							v-model.number="totals[`team_${team.id}`].value"
 							:min="minRating"
 							:max="maxRating"
 							@change="calculateTotalScores(team)"
+                            :ref="`txt-total-${team.id}`"
 							:class="{
-								'text-error font-weight-bold': (
-									totals[`team_${team.id}`].value < minRating
-								|| totals[`team_${team.id}`].value > maxRating
-								),
-								'text-green-darken-2 font-weight-bold': (
-									totals[`team_${team.id}`].value >= minRating
-								&& totals[`team_${team.id}`].value <= maxRating
-								)
+                                'text-error font-weight-bold'  : totalErrors[`team_${team.id}`].invalid,
+                                'text-success font-weight-bold': !totalErrors[`team_${team.id}`].invalid,
+                                'v-input-total-error': !totalErrors[`team_${team.id}`].empty && totalErrors[`team_${team.id}`].invalid
 							}"
-							:error="(
-								  totals[`team_${team.id}`].value.toString().trim() === ''
-							   || totals[`team_${team.id}`].value < minRating
-							   || totals[`team_${team.id}`].value > maxRating
+                            :error="totalErrors[`team_${team.id}`].empty || totalErrors[`team_${team.id}`].invalid"
+                            :error-messages="(
+                                (!totalErrors[`team_${team.id}`].empty && totalErrors[`team_${team.id}`].invalid)
+                                ? `${minRating} - ${maxRating}` : ''
                             )"
 							:disabled="team.disabled || totals[`team_${team.id}`].is_locked"
 							:id="`input_${teamIndex}_${criteria.length}`"
@@ -256,7 +253,7 @@
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
-                                        <v-btn color="red-darken-4" @click="inspectDialog = false">Go Back</v-btn>
+                                        <v-btn color="red-darken-4" @click="closeInspectDialog">Go Back</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </v-dialog>
@@ -403,6 +400,18 @@
                     return this.$store.state.rating.max;
                 else
                     return this.totalCriteriaPercentage;
+            },
+            totalErrors() {
+                const errors = {};
+                for(let i=0; i<this.teams.length; i++) {
+                    const team  = this.teams[i];
+                    const total = this.totals[`team_${team.id}`].value;
+                    errors[`team_${team.id}`] = {
+                        empty  : ['0', ''].includes(total.toString().trim()),
+                        invalid: total < this.minRating || total > this.maxRating
+                    };
+                }
+                return errors;
             }
         },
         watch: {
@@ -548,7 +557,7 @@
             openSubmitDialog() {
                 // open dialog according to ratings
                 for (let i = 0; i < this.teams.length; i++) {
-                    if (!this.teams[i].disabled && (this.totals[`team_${this.teams[i].id}`].value < this.minRating || this.totals[`team_${this.teams[i].id}`].value > this.maxRating)) {
+                    if (!this.teams[i].disabled && (this.totalErrors[`team_${this.teams[i].id}`].empty || this.totalErrors[`team_${this.teams[i].id}`].invalid)) {
                         this.inspectDialog = true
                         this.submitDialog = false;
                         break;
@@ -556,6 +565,31 @@
                         this.submitDialog = true
                     }
                 }
+            },
+            closeInspectDialog() {
+                this.inspectDialog = false;
+                this.$nextTick(() => {
+                    for(let i=0; i<this.teams.length; i++) {
+                        const team = this.teams[i];
+                        if(this.totalErrors[`team_${team.id}`]) {
+                            if(!team.disabled && (this.totalErrors[`team_${team.id}`].empty || this.totalErrors[`team_${team.id}`].invalid)) {
+                                const inputTotal = this.$refs[`txt-total-${team.id}`];
+                                if(inputTotal)
+                                    inputTotal[0].focus();
+                                /*const trTeam = $(`#row--team-${team.id}`);
+                                if(trTeam.length > 0) {
+                                    const tableWrapper = trTeam.closest('.v-table__wrapper');
+                                    if(tableWrapper.length > 0) {
+                                        tableWrapper.animate({
+                                            scrollTop: trTeam.offset().top
+                                        }, 300);
+                                    }
+                                }*/
+                                break;
+                            }
+                        }
+                    }
+                });
             },
             submitRatings() {
                 // set loading state
