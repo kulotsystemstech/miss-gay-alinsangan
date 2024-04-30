@@ -557,7 +557,7 @@
             openSubmitDialog() {
                 // open dialog according to ratings
                 for (let i = 0; i < this.teams.length; i++) {
-                    if (!this.teams[i].disabled && (this.totals[`team_${this.teams[i].id}`].value < this.minRating || this.totals[`team_${this.teams[i].id}`].value > this.maxRating)) {
+                    if (!this.teams[i].disabled && (this.totalErrors[`team_${this.teams[i].id}`].empty || this.totalErrors[`team_${this.teams[i].id}`].invalid)) {
                         this.inspectDialog = true
                         this.submitDialog = false;
                         break;
@@ -572,7 +572,7 @@
                     for(let i=0; i<this.teams.length; i++) {
                         const team = this.teams[i];
                         if(this.totalErrors[`team_${team.id}`]) {
-                            if(this.totalErrors[`team_${team.id}`].empty || this.totalErrors[`team_${team.id}`].invalid) {
+                            if(!team.disabled && (this.totalErrors[`team_${team.id}`].empty || this.totalErrors[`team_${team.id}`].invalid)) {
                                 const inputTotal = this.$refs[`txt-total-${team.id}`];
                                 if(inputTotal)
                                     inputTotal[0].focus();
