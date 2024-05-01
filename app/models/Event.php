@@ -447,6 +447,48 @@ class Event extends App
 
 
     /***************************************************************************
+     * Get all judges with unlocked ratings for the event as array of objects
+     *
+     * @return Judge[]
+     */
+    public function getAllJudgesWithUnlockedRatings()
+    {
+        $judges = [];
+        foreach($this->getAllJudges() as $judge) {
+            if($judge->hasUnlockedRatings($this))
+                $judges[] = $judge;
+        }
+        return $judges;
+    }
+
+
+    /***************************************************************************
+     * Get all judges with unlocked ratings for the event as array of arrays
+     *
+     * @return array
+     */
+    public function getRowJudgesWithUnlockedRatings()
+    {
+        $judges = [];
+        foreach($this->getAllJudgesWithUnlockedRatings() as $judge) {
+            $judges[] = $judge->toArray();
+        }
+        return $judges;
+    }
+
+
+    /***************************************************************************
+     * Determine if this event has judges with unlocked ratings
+     *
+     * @return bool
+     */
+    public function hasJudgesWithUnlockedRatings()
+    {
+        return (sizeof($this->getAllJudgesWithUnlockedRatings()) > 0);
+    }
+
+
+    /***************************************************************************
      * Get all assigned technicals to event as array of objects
      *
      * @return Technical[]
@@ -493,6 +535,48 @@ class Event extends App
     public function hasTechnical($technical)
     {
         return $technical->hasEvent($this);
+    }
+
+
+    /***************************************************************************
+     * Get all technicals with unlocked deductions for the event as array of objects
+     *
+     * @return Technical[]
+     */
+    public function getAllTechnicalsWithUnlockedDeductions()
+    {
+        $technicals = [];
+        foreach($this->getAllTechnicals() as $technical) {
+            if($technical->hasUnlockedDeductions($this))
+                $technicals[] = $technical;
+        }
+        return $technicals;
+    }
+
+
+    /***************************************************************************
+     * Get all technicals with unlocked deductions for the event as array of arrays
+     *
+     * @return array
+     */
+    public function getRowTechnicalsWithUnlockedDeductions()
+    {
+        $technicals = [];
+        foreach($this->getAllTechnicalsWithUnlockedDeductions() as $technical) {
+            $technicals[] = $technical->toArray();
+        }
+        return $technicals;
+    }
+
+
+    /***************************************************************************
+     * Determine if this event has technicals with unlocked deductions
+     *
+     * @return bool
+     */
+    public function hasTechnicalsWithUnlockedDeductions()
+    {
+        return (sizeof($this->getAllTechnicalsWithUnlockedDeductions()) > 0);
     }
 
 
@@ -774,6 +858,21 @@ class Event extends App
 
 
     /***************************************************************************
+     * Get teams which never showed up for the event, as a result set
+     *
+     * @return array
+     */
+    private function getResultNoShowTeams()
+    {
+        $stmt = $this->conn->prepare("SELECT DISTINCT team_id FROM $this->table_noshows WHERE event_id = ? ORDER BY team_id");
+        $stmt->bind_param("i", $this->id);
+        $stmt->execute();
+
+        return $stmt->get_result();
+    }
+
+
+    /***************************************************************************
      * Get teams which never showed up for the event, as array of objects
      *
      * @return Team[]
@@ -782,17 +881,31 @@ class Event extends App
     {
         require_once 'Team.php';
 
-        $stmt = $this->conn->prepare("SELECT DISTINCT team_id FROM $this->table_noshows WHERE event_id = ? ORDER BY team_id");
-        $stmt->bind_param("i", $this->id);
-        $stmt->execute();
-
-        $result = $stmt->get_result();
+        $result = $this->getResultNoShowTeams();
         $teams = [];
         while($row = $result->fetch_assoc()) {
             $teams[] = new Team($row['team_id']);
         }
 
         return $teams;
+    }
+
+
+    /***************************************************************************
+     * Get id's of teams which never showed up for the event
+     *
+     * @return array
+     */
+    public function getRowNoShowTeamIds()
+    {
+        $result = $this->getResultNoShowTeams();
+
+        $team_ids = [];
+        while($row = $result->fetch_assoc()) {
+            $team_ids[] = $row['team_id'];
+        }
+
+        return $team_ids;
     }
 
 
@@ -883,8 +996,6 @@ class Event extends App
      */
     private function getResultEliminatedTeams()
     {
-        require_once 'Team.php';
-
         $stmt = $this->conn->prepare("SELECT DISTINCT team_id FROM $this->table_eliminations WHERE event_id = ? ORDER BY team_id");
         $stmt->bind_param("i", $this->id);
         $stmt->execute();

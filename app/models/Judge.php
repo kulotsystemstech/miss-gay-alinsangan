@@ -228,7 +228,7 @@ class Judge extends User
     /***************************************************************************
      * Get is_chairman
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsChairman()
     {
@@ -268,17 +268,24 @@ class Judge extends User
     public function assignEvent($event, $is_chairman = false)
     {
         require_once 'Event.php';
+        require_once 'Team.php';
 
         // check event id
         $event_id = $event->getId();
         if(!Event::exists($event_id))
             App::returnError('HTTP/1.1 404', 'Event Assignment Error: event [id = ' . $event_id . '] does not exist.');
 
+        // check first team
+        $first_team = Team::first_record();
+        if(!$first_team)
+            App::returnError('HTTP/1.1 403', 'Event Assignment Error: There must be at least one team record.');
+
         // proceed with assignment
         if(!$this->hasEvent($event)) {
-            $stmt = $this->conn->prepare("INSERT INTO $this->table_events(judge_id, event_id, is_chairman) VALUES(?, ?, ?)");
-            $is_chairman = $is_chairman ? 1 : 0;
-            $stmt->bind_param("iii", $this->id, $event_id, $is_chairman);
+            $stmt = $this->conn->prepare("INSERT INTO $this->table_events(judge_id, event_id, is_chairman, active_team_id) VALUES(?, ?, ?, ?)");
+            $is_chairman    = $is_chairman ? 1 : 0;
+            $active_team_id = $first_team->getId();
+            $stmt->bind_param("iiii", $this->id, $event_id, $is_chairman, $active_team_id);
             $stmt->execute();
         }
     }
@@ -430,6 +437,57 @@ class Judge extends User
         $result = $stmt->get_result();
 
         return ($result->num_rows > 0);
+    }
+
+
+    /***************************************************************************
+     * Set the judge's active team in an event
+     *
+     * @param Event $event
+     * @param Team  $team
+     */
+    public function setActiveTeamInEvent($event, $team) {
+        $stmt = $this->conn->prepare("UPDATE $this->table_events SET active_team_id = ?, has_active_team = 1 WHERE judge_id = ? AND event_id = ?");
+        $event_id = $event->getId();
+        $team_id  = $team->getId();
+        $stmt->bind_param("iii", $team_id, $this->id, $event_id);
+        $stmt->execute();
+    }
+
+
+    /***************************************************************************
+     * Get the judge's active team in an event
+     *
+     * @param Event $event
+     * @return Team|boolean
+     */
+    public function getActiveTeamInEvent($event) {
+        $active_team = false;
+        $stmt = $this->conn->prepare("SELECT active_team_id, has_active_team FROM $this->table_events WHERE judge_id = ? AND event_id = ?");
+        $event_id = $event->getId();
+        $stmt->bind_param("ii", $this->id, $event_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while($row = $result->fetch_assoc()) {
+            if(intval($row['has_active_team']) == 1) {
+                require_once 'Team.php';
+                $active_team = new Team($row['active_team_id']);
+            }
+        }
+        return $active_team;
+    }
+
+
+    /***************************************************************************
+     * Remove the judge's active team in an event
+     *
+     * @param Event $event
+     */
+    public function removeActiveTeamInEvent($event) {
+        $stmt = $this->conn->prepare("UPDATE $this->table_events SET has_active_team = 0 WHERE judge_id = ? AND event_id = ?");
+        $event_id = $event->getId();
+        $stmt->bind_param("ii", $this->id, $event_id);
+        $stmt->execute();
     }
 
 
@@ -711,5 +769,39 @@ class Judge extends User
                 $rating->lock(false);
             }
         }
+    }
+
+
+    /***************************************************************************
+     * Determine whether the judge has any unlocked ratings for a given event or criterion
+     *
+     * @param Event|Criterion $entity
+     * @return bool
+     */
+    public function hasUnlockedRatings($entity)
+    {
+        require_once 'Event.php';
+        require_once 'Criterion.php';
+        require_once 'Rating.php';
+
+        $bool     = false;
+        $criteria = [];
+        if($entity instanceof Event)
+            $criteria = $entity->getAllCriteria();
+        else if($entity instanceof Criterion)
+            $criteria = [$entity];
+        $rating = new Rating();
+        $table_ratings = $rating->getTable();
+        foreach($criteria as $criterion) {
+            $criterion_id = $criterion->getId();
+            $stmt = $this->conn->prepare("SELECT criteria_id FROM $table_ratings WHERE judge_id = ? AND criteria_id = ? AND is_locked = 0 LIMIT 1");
+            $stmt->bind_param("ii", $this->id, $criterion_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $bool   = $result->num_rows > 0;
+            if($bool)
+                break;
+        }
+        return $bool;
     }
 }
