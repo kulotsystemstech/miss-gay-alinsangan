@@ -64,6 +64,7 @@ $routes = [
     [ "name" => "User Assignments", "route" => "crud/assignment"       ],
     [ "name" => "Eliminations"    , "route" => "crud/eliminations"     ],
     [ "name" => "Arrangements"    , "route" => "crud/orders"           ],
+    [ "name" => "Titles"          , "route" => "crud/titles"           ],
     [ "name" => "Rating Sheets"   , "route" => "papers/rating-sheets"  ],
     [ "name" => "Top 5 Winners"   , "route" => "results"               ]
 ];

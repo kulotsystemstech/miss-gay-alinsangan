@@ -9,6 +9,22 @@ input[type=number] {
     text-align: center !important;
 }
 
+.v-input-total-error .v-label {
+    animation: shake-repeat 4.72s ease infinite;
+}
+
+/* https://codepen.io/dmytrous/pen/vgoWxY */
+@keyframes shake-repeat {
+    0% { transform:translate(0, -8px) }
+    1.78571% { transform:translate(5px, -8px) }
+    3.57143% { transform:translate(0, -8px) }
+    5.35714% { transform:translate(5px, -8px) }
+    7.14286% { transform:translate(0, -8px) }
+    8.92857% { transform:translate(5px, -8px) }
+    10.71429% { transform:translate(0, -8px) }
+    100% { transform:translate(0, -8px) }
+}
+
 @font-face {
     font-family: 'Roboto';
     font-style: normal;
