@@ -160,7 +160,7 @@ require_once '../../models/Event.php';
 
                         <div class="col-md-2">
                             <div class="h-100 d-flex justify-content-center align-items-center">
-                                <img src="/miss-aclc-iriga/aclc-iriga.png" alt="ACLC College of Iriga (Official Tabulator)" style="width: 156px;"/>
+                                <img src="/miss-gay-alinsangan/aclc-iriga.png" alt="ACLC College of Iriga (Official Tabulator)" style="width: 156px;"/>
                             </div>
                         </div>
                     </div>
