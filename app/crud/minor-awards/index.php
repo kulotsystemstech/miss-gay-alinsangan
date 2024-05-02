@@ -36,7 +36,7 @@
 </head>
 <body>
     <div class="container py-5">
-        <h2 class="fw-bolder">Miss ACLC Iriga Campus Face  2023</h2>
+        <h2 class="fw-bolder">Miss Gay Alinsangan  2023</h2>
     </div>
     <div>
         <table>

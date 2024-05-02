@@ -134,7 +134,7 @@ class Team extends App
         if(sizeof($eliminated_team_ids) > 0) {
             $sql .= "WHERE id NOT IN (" . implode(', ', $eliminated_team_ids) . ") ";
         }
-        $sql .= "ORDER BY number";
+        $sql .= "ORDER BY number, id";
         $stmt = $team->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -568,5 +568,26 @@ class Team extends App
     public function hasBeenEliminatedFromEvent($event)
     {
         return $event->hasTeamBeenEliminated($this);
+    }
+
+
+    /***************************************************************************
+     * Determine if the team is a local resident
+     * according to organizers
+     *
+     * @return bool
+     */
+    public function isLocal()
+    {
+        $bool = false;
+        $haystack = strtolower($this->location);
+        $needles  = ['nabua'];
+        foreach($needles as $needle) {
+            if(strpos($haystack, $needle) !== false) {
+                $bool = true;
+                break;
+            }
+        }
+        return $bool;
     }
 }

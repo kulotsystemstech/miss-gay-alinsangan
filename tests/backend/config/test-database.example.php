@@ -17,7 +17,7 @@ $config = [
     'host'   => 'localhost',
     'user'   => 'root',
     'pass'   => '',
-    'dbname' => 'test-miss-aclc-iriga'
+    'dbname' => 'test-miss-gay-alinsangan'
 ];
 
 $conn = new mysqli($config['host'], $config['user'], $config['pass'], $config['dbname']);
